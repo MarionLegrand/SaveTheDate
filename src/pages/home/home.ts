@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Test } from '../pages/test/test';
 
 @Component({
   selector: 'page-home',
@@ -10,5 +11,11 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
 
   }
+
+  // Redirection sur la page d'acceuil après connexion 
+  connexion(){
+    this.navCtrl.push(Test);
+  }
+
 
 }
