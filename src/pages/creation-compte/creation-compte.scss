@@ -1,0 +1,41 @@
+/* IMAGE */
+
+/* STRUCTURE */
+
+.base{
+    background-color: darkred;
+}
+
+.div2{
+    position: fixed;
+    height: 68% !important;
+    width: 80% !important;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    background-color: white;
+    opacity: 0.8;
+}
+
+.nav{
+    color: black;
+    background-color: black !important;
+    position: inherit !important;
+}
+
+/* ECRITURE */
+
+.h3{
+    text-align: center;
+    color: black;
+}
+
+.label{
+    color: darkred ;
+    font-size: medium;
+}
+
+.Titre{
+    text-align: center;
+    color: white;
+}

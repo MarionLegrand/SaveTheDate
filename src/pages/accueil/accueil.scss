@@ -1,0 +1,128 @@
+/* IMAGE */
+
+.icone{
+    font-size: 30px !important;
+    color : white !important;
+    margin-left: 8px;
+    margin-top: 5px;
+}
+
+/* STRUCTURE */
+
+.alerte{
+    text-align: left;
+    margin-left: 3%;
+    line-height: 25px;
+    color: black !important;
+    border-bottom-color: white;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin-bottom: 1px;
+    margin-top: 1px;
+}
+
+.base{
+   background-color: darkred;
+   margin-bottom: 0px !important;
+}
+
+.div3{
+    background-color: #f44336;
+    width: 100%;
+    margin-left: 0px !important;
+    font-size: large;
+    border-style: double;
+    border-color: #f44336;
+    border-width: 10px;
+}
+
+.div4{
+    background-color: lightgrey;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top:5px;
+}
+
+.div5{
+    background-color: white;
+    border-color: lightgrey;
+    border-style: solid;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 1px !important;
+}
+
+.element{
+    display: inline-block;
+    width: 30%;
+    text-align: right;
+    float: left;
+}
+
+.entete{
+    width: 70% !important;
+    height: 70px;
+    display: inline-block;
+}
+
+.fond{
+    background-color: white;
+}
+
+.rond{
+    border-style: solid;
+    background-color: black;
+    border-color: transparent !important;
+    border-radius: 45px !important;
+    width: 45px !important;
+    height: 45px !important;
+    display: inline-block;
+}
+
+/* ECRITURE */
+
+.message{
+    font-size: small !important;
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 2%;
+    line-height: 14px;
+    border-radius: 4px;
+    color: black !important;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    background-color: lightgray;
+}
+
+.msg{
+    display: inline-block;
+    float: right;
+    font-size: small;
+    height: 25px !important;
+    width: 40px !important;
+    border-radius: 10px;
+    background-color: darkred !important;
+    margin-top:2%;
+    margin-left: 10% !important;
+}
+
+.resultat{
+    display: inline-block;
+    width: 60%;
+    margin-left: 1%;
+}
+
+.textePrincipal{
+    text-align: center;
+    line-height: 35px;
+    color: black !important;
+    margin-bottom: 0px !important;
+}
+
+.texte{
+    display: inline-block;
+    font-size: small !important;
+    color: black !important;
+    margin-left: 10px;
+    width: 70%;
+}

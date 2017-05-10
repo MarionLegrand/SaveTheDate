@@ -1,0 +1,60 @@
+<ion-header padding class="base">
+  <div class="rond"> 
+    <ion-icon name="settings" class="icone"></ion-icon>
+  </div>
+  <div class="entete">
+    <h2 class="Titre">Save THE Date</h2>
+    <h3 class="Titre">Alexandre Bertrand</h3>
+  </div>
+  <div class="rond">
+    <ion-icon name="menu" icon-only (click)="presentPopover($event)" class="icone"></ion-icon>
+  </div>
+</ion-header>
+  
+<ion-content class="fond">
+  <div>
+    <div class="div3">
+      Evènements à venir
+    </div>
+    <div class="div4">
+      <ion-label class="textePrincipal">Anniversaire Christophe</ion-label>
+    </div>
+    <div class="div5">
+      <div class="element">
+        <ion-label class="texte">Date :<br/><br/>Adresse :</ion-label>
+      </div>
+      <div class="resultat">
+        <ion-label class="texte">
+          Le 08/03/2017 à 20h30<br/><br/>30 rue des capucines<br/>31000 TOULOUSE
+        </ion-label>
+      </div>
+    </div>
+    <br/>
+    <div class="div3">
+      Alertes
+    </div>
+    <div class="div4">
+      <ion-label class="alerte">Ramener 3 chaises</ion-label>
+      <ion-label class="alerte">5 réponses sur 12 invités</ion-label>
+    </div>
+    <div class="div5">
+      <ion-label class="texte">Anniversaire Christophe</ion-label>
+    </div>
+    <br/>
+    <div class="div3">
+      Messages non lus
+    </div>
+    <div class="message">
+      <ion-label class="texte">Anniversaire Christophe</ion-label>
+      <button ion-button class="msg">42</button>
+    </div>
+    <div class="message">
+      <ion-label class="texte">Quentin Maraval</ion-label>
+      <button ion-button class="msg">3</button>
+    </div>
+    <div class="message">
+      <ion-label class="texte">Martin Pot</ion-label>
+      <button ion-button class="msg">7</button>
+    </div>
+  </div>
+</ion-content>

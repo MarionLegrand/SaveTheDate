@@ -1,3 +1,62 @@
-page-home {
+/* IMAGE */
 
+.image{
+    width: 100% ;
+}
+
+/* STRUCTURE */
+
+.base{
+   background-color: darkred;
+   margin-bottom: 0px !important;
+}
+
+.basPage{
+    font-size: x-small;
+    text-align: center;
+    -webkit-text-fill-color: white;
+    -moz-text-decoration-color: white;
+    margin-left: 35%;
+    margin-right: 35%;
+}
+
+.bouton{
+    margin-top: 15%;
+    margin-left: 25%;
+    width: 50%;
+}
+
+.div{
+    position: fixed;
+    height: 40% !important;
+    width: 80% !important;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 20%;
+    background-color: white;
+    opacity: 0.8;
+}
+
+/* ECRITURE */
+
+.info{
+    font-size: x-small;
+    color: dodgerblue !important;
+    margin-left: 17%;
+    width : 80% !important;
+    text-align: center;
+}
+
+.info:hover{
+    text-decoration: underline;
+}
+
+.label{
+    color: darkred ;
+    font-size: medium;
+}
+
+.Titre{
+    text-align: center;
+    color: white;
 }
