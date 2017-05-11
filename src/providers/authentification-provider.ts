@@ -18,7 +18,7 @@ export class AuthentificationProvider {
 
 login(mail:string, mdp:string) : Observable<number> {
                         /*Hary-Marion remplacer 192.168.1.25 par al2c.dtdns.net*/
- return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/utilisateur/authentification?mail='+mail+'&mdp='+mdp)
+ return this.http.get('http://192.168.1.25/Al2cServer-war/webresources/utilisateur/authentification?mail='+mail+'&mdp='+mdp)
   .map(res=> res.json().token
   , err => console.error(err))
 }

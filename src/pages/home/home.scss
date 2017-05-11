@@ -2,7 +2,8 @@
 
 .image{
     width: 100% ;
-     -webkit-background-size: 100%;
+    background-image: url('../../assets/img/logo.png');
+    -webkit-background-size: 100%;
     -moz-background-size: 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -15,7 +16,13 @@
 .base{
    background-color: white;
    margin-bottom: 0px !important;  
-  
+   
+   background-image: url('../../assets/img/logo.png');
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .basPage{

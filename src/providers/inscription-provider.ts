@@ -33,8 +33,8 @@ export class InscriptionProvider {
     let header = new Headers();
     header.append('Content-Type', 'application/json');
 
-                                /*192.168.1.25*/
-    return this.http.post('http://al2c.dtdns.net/Al2cServer-war/webresources/utilisateur/inscription', user, header)
+                                /*al2c.dtdns.net*/
+    return this.http.post('http://192.168.1.25/Al2cServer-war/webresources/utilisateur/inscription', user, header)
       .map(res => {
         // si le code http est 200 => ok
         if (res.status == 200)

@@ -46,8 +46,8 @@ export class HomePage {
         console.log(res);
 
         if ((res != 0) && (res != undefined)) {
-             this.navCtrl.push(Accueil);
              localStorage.setItem('token',res.toString()); // on set une variable sessions avec le token 
+             this.navCtrl.push(Accueil);
              // dans notre cas le id du user 
         }
          
