@@ -20,7 +20,6 @@ import { ListeGroupes } from '../liste-groupes/liste-groupes';
       <button ion-item (click)="events()">Liste des évènements</button>
       <button ion-item (click)="contacts()">Liste des contacts</button>
       <button ion-item (click)="groups()">Liste des groupes</button>
-      <button ion-item (click)="close()">Messagerie</button>
       <button ion-item (click)="deconnexion()">Déconnexion</button>
     </ion-list>
   `
@@ -36,9 +35,10 @@ export class MenuDeroulant1 {
   }
 
   // fermer le menu déroulant 
+  /*
   close() {
     this.viewCtrl.dismiss();
-  }
+  }*/
 
   // redirection sur la liste des évènements 
   events(){
@@ -55,10 +55,8 @@ export class MenuDeroulant1 {
     this.navCtrl.push(ListeGroupes);
   }
 
-  // ***********
-  // * A VIRER *
-  // ***********
   deconnexion(){
+    localStorage.removeItem('token'); // on nettoie le token
     this.navCtrl.push(HomePage);
   }
 

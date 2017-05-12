@@ -16,12 +16,29 @@ export class AuthentificationProvider {
   constructor(public http: Http)  {
   }
 
+/**
+ * Authentifie un utilisateur et renvoi son token si les datas sont en bdd
+ */
 login(mail:string, mdp:string) : Observable<number> {
                         /*Hary-Marion remplacer 192.168.1.25 par al2c.dtdns.net*/
  return this.http.get('http://192.168.1.25/Al2cServer-war/webresources/utilisateur/authentification?mail='+mail+'&mdp='+mdp)
   .map(res=> res.json().token
   , err => console.error(err))
 }
+
+/**
+ * Retourne si l'utilisateur à des contacts en base de données.
+ * True si il en a, false sinon 
+ * TODO
+ */
+hasContacts() : Observable<boolean>{
+
+return this.http.get('http://192.168.1.25/Al2cServer-war/webresources/utilisateur/' +'token='+Number(localStorage.getItem('token')))
+  .map( res => res.json()
+  , err => console.log(err))
+}
+
+
 
 
 }

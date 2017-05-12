@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController} from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms'; // besoin de ça pour récupèrer infos formulaires
 // Page de redirection 
 import { Accueil } from '../accueil/accueil';
 import { CreationCompte } from '../creation-compte/creation-compte';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms'; // besoin de ça pour récupèrer infos formulaires
+// REST 
 import { AuthentificationProvider } from '../../providers/authentification-provider';
-
+import { SynchroContact } from '../synchro-contact/synchro-contact'; // page affiché quand l'utilisateur n'a pas de contact => première connexion 
 
 @Component({
   selector: 'page-home',

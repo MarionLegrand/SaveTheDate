@@ -3,13 +3,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
 // Pages de redirection 
 import { MenuDeroulant1 } from '../menu-deroulant1/menu-deroulant1';
+import { Evenement } from '../evenement/evenement';
 
 //REST 
 import { AccueilProvider } from '../../providers/accueil-provider';
 
 // structure data
 import { userAccueil } from '../../dataStructure/userAccueil';
-
+import { EventsAVenir } from '../../dataStructure/eventsAccueil';
 
 @IonicPage()
 @Component({
@@ -20,10 +21,13 @@ import { userAccueil } from '../../dataStructure/userAccueil';
 export class Accueil {
 
   private user: userAccueil;
+  private events: EventsAVenir[];
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController
     , private provider: AccueilProvider) {
       this.user = new userAccueil();
+     // this.events = new Array<EventsAVenir>();
   }
 
   ionViewDidLoad() {
@@ -33,16 +37,22 @@ export class Accueil {
   ngOnInit() {
 
     // on récupère les infos de l'utilisateur grâce à son id 
-    this.provider.getUserData(Number(localStorage.getItem('token')))
+    this.provider.getUserData()
       .subscribe(res => this.user = res,
       err => console.log(err)
       );
 
     // puis on récupère les évenements à venir 
-
+    this.provider.getEventsAVenirData()
+    .subscribe(res => this.events = res,
+    err => {console.log(err); console.log(this.events)}
+    );
 
   }
 
+openEventPage(id:number){
+    this.navCtrl.push(Evenement,{paramId:id}); // on passe en parametre l'id de l'event afin de pouvoir requêter le serveur sur cet evenement 
+}
 
 
 

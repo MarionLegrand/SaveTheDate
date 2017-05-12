@@ -14,7 +14,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class Evenement {
 
+  private idEvent:number
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.idEvent = this.navParams.get('paramId'); // on récupère l'id de l'évenement 
   }
 
   ionViewDidLoad() {
