@@ -7,12 +7,42 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>listeEvenements</ion-title>
+    <ion-title>Historique de mes Evenements</ion-title>
   </ion-navbar>
-
+<!--on peut juste consulter les évenements passés -->
 </ion-header>
 
 
-<ion-content padding>
 
-</ion-content>
+<ion-content class="fond">
+  <div>
+
+    <div class="div3">
+      Evènements à venir
+    </div>
+    <!-- boucle quand l'utilisateur à des évenements à venir -->
+    <div *ngFor="let event of events" (click)="openEventPage(event.id)">
+
+      <div class="div4">
+        <ion-label class="textePrincipal">Anniversaire {{event.intitule}}</ion-label>
+      </div>
+
+      <div class="div5">
+        <div class="element">
+          <ion-label class="texte">Date :<br/><br/>Adresse :</ion-label>
+        </div>
+        <div class="resultat">
+          <ion-label class="texte">
+            Le {{event.dateDebut}} <br/><br/>{{event.lieu}}
+          </ion-label>
+        </div>
+      </div>
+    </div>
+    <!-- quand l'utilisateur n'a pas d'évenements à venir -->
+    <div *ngIf="events === undefined" class="resultat">
+
+        Vous n'avez aucun évenement !
+   
+    </div>
+
+<ion-content padding>

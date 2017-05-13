@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
-import { HttpModule } from '@angular/http';//test
+import { HttpModule } from '@angular/http';
 // Pages de l'application 
 import { Accueil } from '../pages/accueil/accueil';
 import { Contact } from '../pages/contact/contact';
@@ -20,6 +20,7 @@ import { ModifContact } from '../pages/modif-contact/modif-contact';
 import { ModifEvenement } from '../pages/modif-evenement/modif-evenement';
 import { ModifGroupe } from '../pages/modif-groupe/modif-groupe';
 import { Parametrage } from '../pages/parametrage/parametrage';
+import { SynchroContact } from '../pages/synchro-contact/synchro-contact';
 
 @NgModule({
   declarations: [
@@ -38,11 +39,12 @@ import { Parametrage } from '../pages/parametrage/parametrage';
     ModifContact,
     ModifEvenement,
     ModifGroupe,
-    Parametrage
+    Parametrage,
+    SynchroContact
   ],
   imports: [
     BrowserModule,
-    HttpModule,//test
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -62,12 +64,13 @@ import { Parametrage } from '../pages/parametrage/parametrage';
     ModifContact,
     ModifEvenement,
     ModifGroupe,
-    Parametrage
+    Parametrage,
+    SynchroContact
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }

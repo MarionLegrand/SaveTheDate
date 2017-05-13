@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Contacts, Contact  } from 'ionic-native';
+import { Contacts/*, Contact*/ } from '@ionic-native/contacts';
 // REST
-import {SynchroContactProvider} from '../../providers/synchro-contact-provider';
-
+import { SynchroContactProvider } from '../../providers/synchro-contact-provider';
+import { Accueil } from '../accueil/accueil';
 
 /**
  * Generated class for the SynchroContact page.
@@ -15,45 +15,48 @@ import {SynchroContactProvider} from '../../providers/synchro-contact-provider';
 @Component({
   selector: 'page-synchro-contact',
   templateUrl: 'synchro-contact.html',
-  providers: []
+  providers: [SynchroContactProvider, Contacts]
 })
 export class SynchroContact {
 
-  constructor(private navCtrl: NavController, public navParams: NavParams) {
-    
+  constructor(private navCtrl: NavController, public navParams: NavParams, private contacts: Contacts) {
+
   }
-  
-// les contactes trouvés
-//public  allContacts:Contact[];
+
+  // les contactes trouvés
+  //public allContacts: Contact[];
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SynchroContact');
   }
 
-/**
- * Cette méthode récupère les datas à propos des contacts du client
- * et les envois au serveur afin de facilement les invités aux évenements
- * et de collecter leurs réponses
- * Elle nécéssite le plugin cordova qui permet de récupèrer les contacts du téléphones 
+  /**
+   * Cette méthode récupère les datas à propos des contacts du client
+   * et les envois au serveur afin de facilement les invités aux évenements
+   * et de collecter leurs réponses
+   * Elle nécéssite le plugin cordova qui permet de récupèrer les contacts du téléphones 
+  */
+  getUserPhoneContacts(value: any) {
+    // on récupère les contacts du téléphone
+    this.contacts.find(['displayName', 'name', 'nickname'], { filter: '' })
+      .then(
+      cont => { /*this.allContacts = cont*/alert(cont[0].name); })
+    //this.navCtrl.push(Accueil);
 
-getUserPhoneContacts(value:any){
-  // on récupère les contacts du téléphone
- let fn = value === undefined ? '' :value;
-    Contacts.find(['displayName', 'phoneNumbers'], {
-      filter:fn,
-      hasPhoneNumber:true
-    }).then(data => {
-      this.allContacts = data;      
-});
-  // on regarde si il y a plusieurs numéro
+    // boucle sur le tableau
 
-  // on regarde si il y a des mails 
+    // on regarde si il y a plusieurs numéro dont un en 06
+    // on renvoi le premier 06 
 
-  // Si il y a au moins 1 numéro en 06 ou un mail ou les 2 
+    // on regarde si il y a des mails 
+
+    // on créer la structure du contact pour notre tableau en json 
+
+    // on l'ajoute à notre tableau 
 
 
+    // on passe le tableau des contacts au provider pour qu'il les envoi au serveur 
+  }
 
-}
- */
 
 }
