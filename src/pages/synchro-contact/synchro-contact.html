@@ -14,8 +14,23 @@
 
 
 <ion-content padding>
+
+  
   <h3>Bonjour et bienvenu dans Save the date ! </h3>
   Dans l'optique de pouvoir joindre facilement vos invités,
-  nous avons besoins de vos contacts ! 
-  <button (click)="getUserPhoneContacts()"> ok, j'ai compris ! </button>
+  nous avons besoins de vos contacts !
+  <button (click)="getUserPhoneContacts()"> ok, j'ai compris ! </button>   
+  <button (click)="Asupprimer()"> Pour nous => aller vers accueil </button>   
+<!--
+  <div *ngFor="let c of contactToSend" >
+    <p> {{c.nom}} {{c.prenom}}</p>
+     <div *ngFor="let tel of c.canaux">
+      {{tel.values}}
+      {{tel.type}}
+    </div> 
+  </div>
+
+-->
+
+
 </ion-content>

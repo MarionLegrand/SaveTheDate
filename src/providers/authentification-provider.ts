@@ -30,15 +30,12 @@ export class AuthentificationProvider {
    * Retourne si l'utilisateur à des contacts en base de données.
    * True si il en a, false sinon 
    */
-  hasContacts(): Observable<boolean> {
+  synchroniserContacts(): Observable<boolean> {
 
-    return this.http.get('http://192.168.1.25/Al2cServer-war/webresources/contacts/getContactsList?token=' + Number(localStorage.getItem('token')))
+    return this.http.get('http://192.168.1.25/Al2cServer-war/webresources/utilisateur/synchroniserContacts?token=' + Number(localStorage.getItem('token')))
       .map(res => {
-        if (res.status != 404)
-          return true;
-
-        return false;
-
+        console.log(res.json().statut);
+        return res.json().statut;
       }
       , err => { return false;})
   }

@@ -51,15 +51,16 @@ export class HomePage {
 
           // cas de la première connection ou 'utilisateur n'a pas de contacts en bdd
           // on le redirige vers la page de synchronisation 
-         // this.provider.hasContacts().subscribe(
-         //   res => {   this.navCtrl.push(Accueil); }, // retour true il y a des contact
-         //   res => {  this.navCtrl.push(SynchroContact);} // err pas de contact => go synchro        
-         // )
-           //this.navCtrl.push(SynchroContact); //TEST    
+          this.provider.synchroniserContacts().subscribe(
+            res => {
+              if (res == true)
+                this.navCtrl.push(SynchroContact);
 
-           this.navCtrl.push(Accueil);
+            //  this.navCtrl.push(Accueil);
+            }, // retour true il y a des contact
+            res => { this.navCtrl.push(Accueil); } // err pas de contact => go synchro        
+          )
         }
-
 
       }, err => {
         /*

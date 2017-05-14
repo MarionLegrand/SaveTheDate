@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Contacts/*, Contact*/ } from '@ionic-native/contacts';
+import { Contacts, Contact } from '@ionic-native/contacts';
 // REST
 import { SynchroContactProvider } from '../../providers/synchro-contact-provider';
 import { Accueil } from '../accueil/accueil';
+
+// dataStructure
+import { canal } from '../../dataStructure/canal';
+import { contactData } from '../../dataStructure/contactData';
+
 
 /**
  * Generated class for the SynchroContact page.
@@ -19,15 +24,17 @@ import { Accueil } from '../accueil/accueil';
 })
 export class SynchroContact {
 
-  constructor(private navCtrl: NavController, public navParams: NavParams, private contacts: Contacts) {
-
+  constructor(private navCtrl: NavController, public navParams: NavParams, private contacts: Contacts, private provider: SynchroContactProvider) {
+    this.contactToSend = new Array<contactData>();
   }
 
   // les contactes trouvés
-  //public allContacts: Contact[];
+  public allContacts: Contact[];
+
+  private contactToSend: contactData[];
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SynchroContact');
+
   }
 
   /**
@@ -36,26 +43,66 @@ export class SynchroContact {
    * et de collecter leurs réponses
    * Elle nécéssite le plugin cordova qui permet de récupèrer les contacts du téléphones 
   */
-  getUserPhoneContacts(value: any) {
+  getUserPhoneContacts() {
     // on récupère les contacts du téléphone
-    this.contacts.find(['displayName', 'name', 'nickname'], { filter: '' })
+
+    this.contacts.find(['*'], { filter: '' })
       .then(
-      cont => { /*this.allContacts = cont*/alert(cont[0].name); })
-    //this.navCtrl.push(Accueil);
+      cont => {
+        this.allContacts = cont;
 
-    // boucle sur le tableau
+        // boucle sur le tableau
+        for (let c of this.allContacts) {
+          var cd = new contactData;
+          var tabCanaux = new Array<canal>();
+          var currentPhone = new canal();
 
-    // on regarde si il y a plusieurs numéro dont un en 06
-    // on renvoi le premier 06 
+          // on regarde si il y a plusieurs
+          if (c.phoneNumbers != null)
+            if (c.phoneNumbers.length > 0) {
+              for (let tel of c.phoneNumbers)
+                // numéro dont un en 06 ou 07 ou +33 06 ou 07 
+                if ((tel.value.startsWith("06") || tel.value.startsWith("07")) || (tel.value.startsWith("+33 6") || tel.value.startsWith("+33 7"))) {
+                  currentPhone.type = "SMS";
+                  currentPhone.values = tel.value;
+                  tabCanaux.push(currentPhone);// ajout au tableau  
 
-    // on regarde si il y a des mails 
+                  break; // on sort de la boucle
+                }
+            }
 
-    // on créer la structure du contact pour notre tableau en json 
+          // on regarde si il y a des mails 
+          if (c.emails != null)
+            if (c.emails.length > 0) {
+              for (let mail of c.emails) {
+                var currentMail = new canal();
+                currentMail.type = "MAIL";
+                currentMail.values = mail.value;
+                tabCanaux.push(currentMail); // ajout au tableau 
+                break; // on sort 
+              }
+            }
 
-    // on l'ajoute à notre tableau 
+          // on créer la structure du contact pour notre tableau en json 
+          cd.nom = c.name.familyName;
+          cd.prenom = c.name.givenName;
+          cd.canaux = tabCanaux;
+
+          // on l'ajoute à notre tableau
+          if (cd.canaux.length > 0 && (c.name.familyName != undefined || c.name.givenName != undefined))
+            this.contactToSend.push(cd);
+        }
+
+        // on envoi le tableau qui l'enverra au provider
+        this.provider.sendContactsDataToserver(this.contactToSend).subscribe();
+        this.navCtrl.setRoot(Accueil);
+      })
+
+  }
 
 
-    // on passe le tableau des contacts au provider pour qu'il les envoi au serveur 
+  Asupprimer() {
+    this.navCtrl.setRoot(Accueil);
   }
 
 

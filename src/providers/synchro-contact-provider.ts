@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
+
+// dataStructure
+import { canal } from '../dataStructure/canal';
+import { contactData } from '../dataStructure/contactData';
 /*
   Generated class for the SynchroContactProvider provider.
 
@@ -15,12 +19,16 @@ export class SynchroContactProvider {
   constructor(public http: Http) {
   }
 
-/*
- Todo a voir si on envoi un array ou une boucle contact par contact 
-*/
-sendContactsDataToserver() {
-
-}
+  /*
+   Todo a voir si on envoi un array ou une boucle contact par contact 
+  */
+  sendContactsDataToserver(tab: contactData[]): Observable<boolean> {
+    let header = new Headers();
+    header.append('Content-Type', 'application/json');
+    return this.http.post('http://192.168.1.25/Al2cServer-war/webresources/utilisateur/AFAIRE?token=' + Number(localStorage.getItem('token')), tab, header)
+      .map(res => { alert("Vos contacts sont maintenant enregistrés"); return true;},
+      res => {alert(res); return false;});
+  }
 
 
 }
