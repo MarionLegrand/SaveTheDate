@@ -9,5 +9,13 @@
 
 <ion-content padding>
 <button ion-item (click)="profil()">Hariniony</button>
-<button ion-item (click)="retour()">Retour</button>
+
+
+  <div *ngFor="let contact of lesContacts">
+
+    <ion-item (click)="profil(contact.id)">
+      {{contact.nom}} {{contact.prenom}}
+    </ion-item>
+
+  </div>
 </ion-content>

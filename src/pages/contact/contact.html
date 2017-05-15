@@ -14,7 +14,8 @@
               </ion-avatar>
            
           <ion-item class ="information">
-              <h2>Hariniony Andriamananarivo</h2>
+            <!--  <h2>Hariniony Andriamananarivo</h2> -->
+            <h2> {{currentContact.nom}} {{currentContact.prenom}} </h2>
           </ion-item>
       </ion-card>
 
@@ -25,13 +26,13 @@
                </ion-item>
               
         <ion-item>
-           <ion-label>Telephone</ion-label>
+           <ion-label>Telephone : {{currentContact.canaux[0].values}}</ion-label>
         </ion-item>
         <ion-item>
             <ion-label>Facebook</ion-label>
         </ion-item>
         <ion-item>
-            <ion-label>Mail</ion-label>
+            <ion-label>Mail : {{currentContact.canaux[1].values}}</ion-label>
         </ion-item>
       </ion-list>
       </ion-card>
