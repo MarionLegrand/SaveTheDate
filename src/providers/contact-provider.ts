@@ -5,9 +5,9 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 
 // DataStructure 
-import { contactData } from '../datastructure/contactData';
-import { canal } from '../datastructure/canal';
-import { Tag } from '../datastructure/tag';
+import { contactData } from '../dataStructure/contactData';
+import { canal } from '../dataStructure/canal';
+import { Tag } from '../dataStructure/tag';
 
 /*
   Generated class for the ContactProvider provider.
@@ -26,8 +26,16 @@ export class ContactProvider {
   renvoi les information relative à un contact de l'utilisateur via son id 
 */
   getContact(id: number): Observable<contactData> {
-    return this.http.get('http://192.168.1.25/Al2cServer-war/webresources/utilisateur/' + id + '/getContact?token=' + Number(localStorage.getItem('token')))
-      .map(res => { return res.json() })
+    let ct = new contactData();
+
+    return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/contacts/' + id + '/getContact?token=' + Number(localStorage.getItem('token')))
+      .map(res => { 
+        ct.id = res.json().id;
+        ct.nom = res.json().nom;
+        ct.prenom = res.json().prenom;  
+        ct.canaux = res.json().canaux;      
+        return ct;
+      })
   }
 
   /*
@@ -35,8 +43,8 @@ export class ContactProvider {
       cependant à réléfchir de la couplé directement dans getContact afin d'avoir toutes les 
      informations d'un seul coup ? 
   */
-  getContactTags(id: number): Observable<Tag[]> {
-    return this.http.get('http://192.168.1.25/Al2cServer-war/webresources/tag/' + id + '/getListTagByContact?token=' + Number(localStorage.getItem('token')))
+  getContactTags(id: number): Observable<[Tag]> {
+    return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/tags/' + id + '/getListTagsByContact?token=' + Number(localStorage.getItem('token')))
       .map(res => { return res.json() })
   }
 

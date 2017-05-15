@@ -24,7 +24,7 @@ export class GroupeProvider {
 */
   afficherListeTags() : Observable<Tag[]> {
 
-     return this.http.get('http://192.168.1.25/Al2cServer-war/webresources/tags/creerTag?token='+localStorage.getItem('token'))
+     return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/tags/creerTag?token='+localStorage.getItem('token'))
       .map(res => {
         // si le code http est 200 => ok
         if (res.status == 200)
@@ -43,7 +43,7 @@ export class GroupeProvider {
     header.append('Content-Type', 'application/json');
 
     /*al2c.dtdns.net*/
-    return this.http.post('http://192.168.1.25/Al2cServer-war/webresources/tags/creerTag?token='+localStorage.getItem('token'), 
+    return this.http.post('http://al2c.dtdns.net/Al2cServer-war/webresources/tags/creerTag?token='+localStorage.getItem('token'), 
     tag, header)
       .map(res => {
         // si le code http est 200 => ok
@@ -64,7 +64,7 @@ updateTag(tag:Tag) : Observable<boolean> {
     header.append('Content-Type', 'application/json');
 
     /*al2c.dtdns.net*/
-    return this.http.put('http://192.168.1.25/Al2cServer-war/webresources/tags/'+tag.id+'/modifierTag?token='+localStorage.getItem('token'), 
+    return this.http.put('http://al2c.dtdns.net/Al2cServer-war/webresources/tags/'+tag.id+'/modifierTag?token='+localStorage.getItem('token'), 
     tag, header)
       .map(res => {
         // si le code http est 200 => ok
@@ -84,7 +84,7 @@ affecterTag(idContact:number, tag:Tag): Observable<boolean> {
     header.append('Content-Type', 'application/json');
 
     /*al2c.dtdns.net*/
-    return this.http.post('http://192.168.1.25/Al2cServer-war/webresources/tags/'+tag.id+'/'+idContact+'/affecterTag?token='+localStorage.getItem('token'), 
+    return this.http.post('http://al2c.dtdns.net/Al2cServer-war/webresources/tags/'+tag.id+'/'+idContact+'/affecterTag?token='+localStorage.getItem('token'), 
     tag, header)
       .map(res => {
         // si le code http est 200 => ok
@@ -104,7 +104,7 @@ desaffecterTag(idContact:number, tag:Tag): Observable<boolean> {
     header.append('Content-Type', 'application/json');
 
     /*al2c.dtdns.net*/
-    return this.http.get('http://192.168.1.25/Al2cServer-war/webresources/tags/'+tag.id+'/'+idContact+'/desaffecterTag?token='+localStorage.getItem('token'))
+    return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/tags/'+tag.id+'/'+idContact+'/desaffecterTag?token='+localStorage.getItem('token'))
       .map(res => {
         // si le code http est 200 => ok
         if (res.status == 200)

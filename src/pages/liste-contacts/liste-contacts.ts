@@ -9,8 +9,8 @@ import { Contact } from '../contact/contact';
 import { ListeContactsProvider } from '../../providers/liste-contacts-provider';
 
 // DataStructure 
-import { contactData } from '../../datastructure/contactData';
-import { canal } from '../../datastructure/canal';
+import { contactData } from '../../dataStructure/contactData';
+//import { canal } from '../../dataStructure/canal';
 
 /**
  * Generated class for the ListeContacts page.
@@ -22,10 +22,11 @@ import { canal } from '../../datastructure/canal';
 @Component({
   selector: 'page-liste-contacts',
   templateUrl: 'liste-contacts.html',
+  providers: [ListeContactsProvider]
 })
 export class ListeContacts implements OnInit {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private provider:ListeContactsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private provider: ListeContactsProvider) {
   }
 
   lesContacts: contactData[];
@@ -35,14 +36,14 @@ export class ListeContacts implements OnInit {
     console.log('ionViewDidLoad ListeContacts');
   }
 
-/*
-  A l'initialisation de cette page, on appelle le provider afin qu'il nous fournisse
-  tous les contacts qu'il à pour cet utilisateur 
-*/
+  /*
+    A l'initialisation de cette page, on appelle le provider afin qu'il nous fournisse
+    tous les contacts qu'il à pour cet utilisateur 
+  */
   ngOnInit() {
     // appel au serveur par le biais du provider
     this.provider.getUserContacts().subscribe(
-      res => { this.lesContacts = res}
+      res => { this.lesContacts = res }
     )
   }
 
@@ -52,8 +53,8 @@ export class ListeContacts implements OnInit {
     this.navCtrl.push(Accueil);
   }
 
-  profil(id:number) {
-    this.navCtrl.push(Contact,{param1:id}); 
+  profil(id: number) {
+    this.navCtrl.push(Contact, { param1: id });
   }
 
 }

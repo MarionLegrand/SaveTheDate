@@ -22,6 +22,7 @@ import { ModifGroupe } from '../pages/modif-groupe/modif-groupe';
 import { Parametrage } from '../pages/parametrage/parametrage';
 import { SynchroContact } from '../pages/synchro-contact/synchro-contact';
 
+
 @NgModule({
   declarations: [
     MyApp,

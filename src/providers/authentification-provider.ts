@@ -20,8 +20,8 @@ export class AuthentificationProvider {
    * Authentifie un utilisateur et renvoi son token si les datas sont en bdd
    */
   login(mail: string, mdp: string): Observable<number> {
-    /*Hary-Marion remplacer 192.168.1.25 par al2c.dtdns.net*/
-    return this.http.get('http://192.168.1.25/Al2cServer-war/webresources/utilisateur/authentification?mail=' + mail + '&mdp=' + mdp)
+    /*Hary-Marion remplacer al2c.dtdns.net par al2c.dtdns.net*/
+    return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/utilisateur/authentification?mail=' + mail + '&mdp=' + mdp)
       .map(res => res.json().token
       , err => console.error(err))
   }
@@ -32,7 +32,7 @@ export class AuthentificationProvider {
    */
   synchroniserContacts(): Observable<boolean> {
 
-    return this.http.get('http://192.168.1.25/Al2cServer-war/webresources/utilisateur/synchroniserContacts?token=' + Number(localStorage.getItem('token')))
+    return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/utilisateur/synchroniserContacts?token=' + Number(localStorage.getItem('token')))
       .map(res => {
         console.log(res.json().statut);
         return res.json().statut;

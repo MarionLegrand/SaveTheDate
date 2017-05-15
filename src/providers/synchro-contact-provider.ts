@@ -25,7 +25,7 @@ export class SynchroContactProvider {
   sendContactsDataToserver(tab: contactData[]): Observable<boolean> {
     let header = new Headers();
     header.append('Content-Type', 'application/json');
-    return this.http.post('http://192.168.1.25/Al2cServer-war/webresources/utilisateur/AFAIRE?token=' + Number(localStorage.getItem('token')), tab, header)
+    return this.http.post('http://al2c.dtdns.net/Al2cServer-war/webresources/contacts/creerContacts?token=' + Number(localStorage.getItem('token')), tab, header)
       .map(res => { alert("Vos contacts sont maintenant enregistrés"); return true;},
       res => {alert(res); return false;});
   }

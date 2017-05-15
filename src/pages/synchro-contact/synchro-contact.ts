@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Contacts, Contact } from '@ionic-native/contacts';
+// Pages
+import { Accueil } from '../accueil/accueil';
+
+
 // REST
 import { SynchroContactProvider } from '../../providers/synchro-contact-provider';
-import { Accueil } from '../accueil/accueil';
 
 // dataStructure
 import { canal } from '../../dataStructure/canal';
@@ -63,8 +66,8 @@ export class SynchroContact {
               for (let tel of c.phoneNumbers)
                 // numéro dont un en 06 ou 07 ou +33 06 ou 07 
                 if ((tel.value.startsWith("06") || tel.value.startsWith("07")) || (tel.value.startsWith("+33 6") || tel.value.startsWith("+33 7"))) {
-                  currentPhone.type = "SMS";
-                  currentPhone.values = tel.value;
+                  currentPhone.typeCanal = "SMS";
+                  currentPhone.valeur = tel.value;
                   tabCanaux.push(currentPhone);// ajout au tableau  
 
                   break; // on sort de la boucle
@@ -76,8 +79,8 @@ export class SynchroContact {
             if (c.emails.length > 0) {
               for (let mail of c.emails) {
                 var currentMail = new canal();
-                currentMail.type = "MAIL";
-                currentMail.values = mail.value;
+                currentMail.typeCanal = "MAIL";
+                currentMail.valeur = mail.value;
                 tabCanaux.push(currentMail); // ajout au tableau 
                 break; // on sort 
               }
@@ -89,7 +92,7 @@ export class SynchroContact {
           cd.canaux = tabCanaux;
 
           // on l'ajoute à notre tableau
-          if (cd.canaux.length > 0 && (c.name.familyName != undefined || c.name.givenName != undefined))
+          if (cd.canaux.length > 0 && (c.name.familyName != undefined && c.name.givenName != undefined))
             this.contactToSend.push(cd);
         }
 
