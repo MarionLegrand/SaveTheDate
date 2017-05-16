@@ -21,6 +21,8 @@ import { ModifEvenement } from '../pages/modif-evenement/modif-evenement';
 import { ModifGroupe } from '../pages/modif-groupe/modif-groupe';
 import { Parametrage } from '../pages/parametrage/parametrage';
 import { SynchroContact } from '../pages/synchro-contact/synchro-contact';
+import { ModalContactAjoutTags } from '../pages/modal-contact-ajout-tags/modal-contact-ajout-tags';
+import { CreationTag } from '../pages/creation-tag/creation-tag';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { SynchroContact } from '../pages/synchro-contact/synchro-contact';
     ModifEvenement,
     ModifGroupe,
     Parametrage,
-    SynchroContact
+    SynchroContact,
+    ModalContactAjoutTags,
+    CreationTag
   ],
   imports: [
     BrowserModule,
@@ -66,7 +70,9 @@ import { SynchroContact } from '../pages/synchro-contact/synchro-contact';
     ModifEvenement,
     ModifGroupe,
     Parametrage,
-    SynchroContact
+    SynchroContact,
+    ModalContactAjoutTags,
+    CreationTag
   ],
   providers: [
     StatusBar,

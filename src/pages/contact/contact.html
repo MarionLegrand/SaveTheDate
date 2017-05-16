@@ -5,53 +5,52 @@
     </ion-navbar>
 
 </ion-header>
-<ion-content padding class="bg" *ngIf="currentContact != undefined">
+<ion-content *ngIf="currentContact != undefined">
 
     <ion-card>
 
-        <ion-avatar class="avatar">
-          <!--  <img src="assets/img/hary.jpg" class="photo">-->
+        <ion-avatar>
+            < <img src="assets/img/hary.jpg" class="photo">
         </ion-avatar>
 
-        <ion-item class="information">
+        <ion-item>
             <!--  <h2>Hariniony Andriamananarivo</h2> -->
             <h2> {{currentContact.nom}} {{currentContact.prenom}} </h2>
         </ion-item>
     </ion-card>
 
-    <ion-card>
+    <ion-card *ngIf="currentContact.canaux != undefined">
         <ion-list>
-            <ion-item class="div2">
+            <ion-item>
                 COORDONNEES
             </ion-item>
 
             <div>
 
-           <!--     <ion-item *ngFor="let can of canaux">
-                    <ion-label>{{can.type}} : {{can.values}}</ion-label>
+                <ion-item *ngFor="let can of currentContact.canaux">
+                    <ion-label>{{can.typeCanal}} : {{can.valeur}}</ion-label>
                 </ion-item>
-                <ion-item>
-                    <ion-label>Facebook</ion-label>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Mail : {{currentContact.canaux[1].values}}</ion-label>
-                </ion-item>
-                -->
+
             </div>
         </ion-list>
+    </ion-card>
 
-  
 
 
     <ion-card>
         <ion-list>
-            <ion-item class="div2">
+            <ion-item class>
                 TAGS du contact
             </ion-item>
-            <div *ngFor="let tag of tagsContact">
-                <ion-item>
-                    <p>{{tag.libelle}}</p>
-                </ion-item>
+            <button ion-button color="secondary" (click)="ajouterTag()">Ajouter un tag à ce contact</button>
+
+            <div *ngIf="tagsContact != undefined">
+                <div *ngFor="let tag of tagsContact">
+                    <ion-item>
+                        {{tag.libelle}}
+                    </ion-item>
+                    <button ion-button color="danger" (click)="supprimerTag(tag.id)"> Retirer le tag </button>
+                </div>
             </div>
         </ion-list>
     </ion-card>

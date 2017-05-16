@@ -7,12 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>groupe</ion-title>
+    <ion-title>Vos Tags ! </ion-title>
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
 
+  <!-- bouton ajouter ici -->
+  <button (click)="creerTag()"> Creer un nouveau Tag </button>
+
+  <!-- liste des tags ici avec bouton modifier ou supprimer à coté -->
+  <div *ngIf="lesTags == undefined">
+    <ion-label> Vous n'avez aucun tag</ion-label>
+  </div>
+
+  <div *ngIf="lesTags != undefined">
+    <ion-list *ngFor="let tag of lesTags">
+      <ion-item >
+        <ion-label> {{tag.libelle }} </ion-label> 
+        <button (click)="supprimerTag()"> supprimer </button>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

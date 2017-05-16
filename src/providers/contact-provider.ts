@@ -29,29 +29,29 @@ export class ContactProvider {
     let ct = new contactData();
 
     return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/contacts/' + id + '/getContact?token=' + Number(localStorage.getItem('token')))
-      .map(res => { 
+      .map(res => {
         ct.id = res.json().id;
         ct.nom = res.json().nom;
-        ct.prenom = res.json().prenom;  
-        ct.canaux = res.json().canaux;      
+        ct.prenom = res.json().prenom;
+        ct.canaux =  res.json().canaux;
         return ct;
       })
   }
 
-  /*
-   A VOIR cette fonction renvoie les tags relatifs à un contacts 
-      cependant à réléfchir de la couplé directement dans getContact afin d'avoir toutes les 
-     informations d'un seul coup ? 
-  */
+
   getContactTags(id: number): Observable<[Tag]> {
     return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/tags/' + id + '/getListTagsByContact?token=' + Number(localStorage.getItem('token')))
       .map(res => { return res.json() })
   }
 
 
-  modifierContact() {
-
+  getCanalsContact(id: number) : Observable<[canal]>{
+    return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/contact/' + id + '/getCanaux?token=' + Number(localStorage.getItem('token')))
+      .map(res => { return res.json() })
   }
 
-
+desaffecterTagUser(idTag: number, idContact: number) : Observable<any>{
+    return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/tags/' + idTag + '/' + idContact + '/desaffecterTag?token=' + Number(localStorage.getItem('token')))
+      .map(res => { console.log(res) });
+  }
 }

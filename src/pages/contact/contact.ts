@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 // DataStructure 
 import { contactData } from '../../dataStructure/contactData';
@@ -8,6 +8,9 @@ import { Tag } from '../../dataStructure/tag';
 
 // rest 
 import { ContactProvider } from '../../providers/contact-provider'
+
+//pages
+import { ModalContactAjoutTags } from '../modal-contact-ajout-tags/modal-contact-ajout-tags';
 
 /**
  * Generated class for the Contact page.
@@ -24,11 +27,12 @@ import { ContactProvider } from '../../providers/contact-provider'
 export class Contact implements OnInit {
 
   currentContact: contactData;
-  tagsContact: any =[];//Tag[];
+  tagsContact: Tag[];
   canaux: canal[];
-  test:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private provider: ContactProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private provider: ContactProvider
+    , private modalCtrl: ModalController) {
+
     this.canaux = new Array<canal>();
   }
 
@@ -37,30 +41,46 @@ export class Contact implements OnInit {
   }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+
+  ajouterTag() {
+    let modal = this.modalCtrl.create(ModalContactAjoutTags, { id: this.currentContact.id, idTags: this.tagsContact});
+    modal.onDidDismiss(
+      () => {
+        this.tagsContact = null;
+        this.loadData();
+      }
+    )
+    modal.present();
+  }
+
+  /*
+   Supprime l'association entre le contact et le tag 
+  */
+  supprimerTag(id: number) {
+    this.provider.desaffecterTagUser(id, this.currentContact.id).subscribe(
+      () => {
+        this.tagsContact = null;
+        this.loadData();
+      }
+    );
+  }
+
+  loadData() {
     // récupération des données du contact
     this.provider.getContact(this.navParams.get('param1')).subscribe(res => {
       this.currentContact = res;
-
-      for (let can of this.currentContact.canaux as Array<canal>) {
-        this.canaux.push(can);
-       
-      }
-
-      this.provider.getContactTags(this.navParams.get('param1')).subscribe(
-        res => {this.tagsContact = res;}
-      )
-
-
-   //   for (let t of this.currentContact.tags as Array<Tag>) {
-    //    this.tagsContact.push(t);
-     // }
     })
 
-    // récupération des tags de ce contact
-     this.provider.getContactTags(this.navParams.get('param1')).subscribe(res => { 
-       this.tagsContact = res;console.log(res);
-       this.test = Object.keys(this.tagsContact);
-      })
+    this.provider.getContactTags(this.navParams.get('param1')).subscribe(
+      res => { this.tagsContact = res; }
+    )
+
+    this.provider.getCanalsContact(this.navParams.get('param1')).subscribe(
+      res => { this.canaux = res }
+    )
   }
 
 

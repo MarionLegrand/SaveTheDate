@@ -5,7 +5,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ListeContacts } from '../liste-contacts/liste-contacts';
 import { ListeEvenements } from '../liste-evenements/liste-evenements';
-import { ListeGroupes } from '../liste-groupes/liste-groupes';
+import { Groupe } from '../groupe/groupe';
 
 /**
  * Generated class for the MenuDeroulant1 page.
@@ -52,7 +52,7 @@ export class MenuDeroulant1 {
 
   // redirection sur la liste des groupes 
   groups(){
-    this.navCtrl.push(ListeGroupes);
+    this.navCtrl.push(Groupe);
   }
 
   deconnexion(){
