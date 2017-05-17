@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
+// data Structure
+import { EventAbstract } from '../dataStructure/eventList';
 /*
   Generated class for the ListeEvenementProvider provider.
 
@@ -14,5 +18,15 @@ export class ListeEvenementProvider {
   constructor(public http: Http) {
     console.log('Hello ListeEvenementProvider Provider');
   }
+
+/*
+  Renvoi la liste des événements passées ou annulés 
+*/
+getListeEvenementPasser() : Observable<[EventAbstract]>{
+   return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/evenements/getListeEvenements?token=' + Number(localStorage.getItem('token')))
+      .map( res => { return res.json();}
+      , err => console.log(err)
+      )
+}
 
 }

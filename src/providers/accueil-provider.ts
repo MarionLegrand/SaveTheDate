@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 
 import { userAccueil } from '../dataStructure/userAccueil';
-import { EventsAVenir } from '../dataStructure/eventsAccueil';
+import { EventAbstract } from '../dataStructure/eventList';
 /*
   Generated class for the AccueilProvider provider.
 
@@ -39,7 +39,7 @@ export class AccueilProvider {
  * Retourne les évenements à venir ou une erreur 
  * Prends en paramètres le token de l'utilisateur courant
  */
-  getEventsAVenirData(): Observable<[EventsAVenir]> {
+  getEventsAVenirData(): Observable<[EventAbstract]> {
     return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/evenements/getListeEvenementsA_Venir?token=' + Number(localStorage.getItem('token')))
       .map( res => { return res.json();}
       , err => console.log(err)

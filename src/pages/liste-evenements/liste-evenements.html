@@ -18,13 +18,13 @@
   <div>
 
     <div class="div3">
-      Evènements à venir
+      Evènements Passés ou annulés
     </div>
     <!-- boucle quand l'utilisateur à des évenements à venir -->
-    <div *ngFor="let event of events" (click)="openEventPage(event.id)">
+    <div *ngFor="let event of lesEvents" (click)="openEventPage(event.id)">
 
       <div class="div4">
-        <ion-label class="textePrincipal">Anniversaire {{event.intitule}}</ion-label>
+        <ion-label class="textePrincipal">{{event.intitule}}  </ion-label>      {{event.etat}}
       </div>
 
       <div class="div5">
@@ -33,13 +33,15 @@
         </div>
         <div class="resultat">
           <ion-label class="texte">
-            Le {{event.dateDebut}} <br/><br/>{{event.lieu}}
+            Le {{event.dateDebut}} <br/><br/>{{event.complement}} {{event.ville}} {{event.codePostal}} {{event.complement}}
           </ion-label>
+      
+         
         </div>
       </div>
     </div>
     <!-- quand l'utilisateur n'a pas d'évenements à venir -->
-    <div *ngIf="events === undefined" class="resultat">
+    <div *ngIf="lesEvents === undefined" class="resultat">
 
         Vous n'avez aucun évenement !
    

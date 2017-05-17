@@ -1,0 +1,67 @@
+<!--
+  Generated template for the CreationEvenement page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Création d'un Evenement</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <div>
+    <div>
+      <form [formGroup]="fg" (ngSubmit)="valider()">
+
+        <h3> Informations Générales </h3>
+
+        <ion-item>
+          <ion-label stacked>Intitulé :</ion-label>
+          <ion-input type="text" formControlName="intitule"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked class="label">Description :</ion-label>
+          <ion-input type="text" formControlName="description"></ion-input>
+        </ion-item>
+
+        <h3> Lieu </h3>
+
+        <ion-item>
+          <ion-label stacked>Adresse :</ion-label>
+          <ion-input type="text" formControlName="adresse"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Complément :</ion-label>
+          <ion-input type="text" formControlName="complement"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Ville :</ion-label>
+          <ion-input type="text" formControlName="ville"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Cp :</ion-label>
+          <ion-input type="text" formControlName="cp"></ion-input>
+        </ion-item>
+
+        <h3> Date </h3>
+
+        <ion-item>
+          <ion-label>Date</ion-label>
+          <ion-datetime formControlName="date" displayFormat="DD/MM/YYYY HH:mm" ></ion-datetime>
+        </ion-item>
+
+        <button ion-button type="submit"  [disabled]="!fg.valid"> Créer votre Evenement !</button>
+        <button ion-button type="reset" (click)="annuler()">Annuler</button>
+
+      </form>
+    </div>
+  </div>
+
+</ion-content>

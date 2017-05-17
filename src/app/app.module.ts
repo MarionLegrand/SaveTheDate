@@ -23,7 +23,9 @@ import { Parametrage } from '../pages/parametrage/parametrage';
 import { SynchroContact } from '../pages/synchro-contact/synchro-contact';
 import { ModalContactAjoutTags } from '../pages/modal-contact-ajout-tags/modal-contact-ajout-tags';
 import { CreationTag } from '../pages/creation-tag/creation-tag';
-
+import { CreationEvenement } from '../pages/creation-evenement-total/creation-evenement/creation-evenement';
+import { CreationEvenementModule } from '../pages/creation-evenement-total/creation-evenement-module/creation-evenement-module';
+import { CreationEvenementInvitation } from '../pages/creation-evenement-total/creation-evenement-invitation/creation-evenement-invitation';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,10 @@ import { CreationTag } from '../pages/creation-tag/creation-tag';
     Parametrage,
     SynchroContact,
     ModalContactAjoutTags,
-    CreationTag
+    CreationTag,
+    CreationEvenement,
+    CreationEvenementModule,
+    CreationEvenementInvitation
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,10 @@ import { CreationTag } from '../pages/creation-tag/creation-tag';
     Parametrage,
     SynchroContact,
     ModalContactAjoutTags,
-    CreationTag
+    CreationTag,
+    CreationEvenement,
+     CreationEvenementModule,
+    CreationEvenementInvitation
   ],
   providers: [
     StatusBar,

@@ -4,13 +4,14 @@ import { PopoverController } from 'ionic-angular';
 // Pages de redirection 
 import { MenuDeroulant1 } from '../menu-deroulant1/menu-deroulant1';
 import { Evenement } from '../evenement/evenement';
+import { CreationEvenement } from '../creation-evenement-total/creation-evenement/creation-evenement';
 
 //REST 
 import { AccueilProvider } from '../../providers/accueil-provider';
 
 // structure data
 import { userAccueil } from '../../dataStructure/userAccueil';
-import { EventsAVenir } from '../../dataStructure/eventsAccueil';
+import { EventAbstract } from '../../dataStructure/eventList';
 
 @IonicPage()
 @Component({
@@ -21,7 +22,7 @@ import { EventsAVenir } from '../../dataStructure/eventsAccueil';
 export class Accueil {
 
   private user: userAccueil;
-  private events: EventsAVenir[];
+  private events: EventAbstract[];
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController
@@ -54,7 +55,9 @@ openEventPage(id:number){
     this.navCtrl.push(Evenement,{paramId:id}); // on passe en parametre l'id de l'event afin de pouvoir requêter le serveur sur cet evenement 
 }
 
-
+CreerEvenement(){
+  this.navCtrl.push(CreationEvenement);
+}
 
 
   // Ouverture menu déroulant (Popover)

@@ -6,6 +6,7 @@ import { HomePage } from '../home/home';
 import { ListeContacts } from '../liste-contacts/liste-contacts';
 import { ListeEvenements } from '../liste-evenements/liste-evenements';
 import { Groupe } from '../groupe/groupe';
+import { CreationEvenement } from '../creation-evenement-total/creation-evenement/creation-evenement';
 
 /**
  * Generated class for the MenuDeroulant1 page.
@@ -17,6 +18,7 @@ import { Groupe } from '../groupe/groupe';
 @Component({
   template: `
     <ion-list>
+     <button ion-item (click)="creerEvenement()">Créer un événement</button>
       <button ion-item (click)="events()">Liste des évènements</button>
       <button ion-item (click)="contacts()">Liste des contacts</button>
       <button ion-item (click)="groups()">Liste des groupes</button>
@@ -58,6 +60,11 @@ export class MenuDeroulant1 {
   deconnexion(){
     localStorage.removeItem('token'); // on nettoie le token
     this.navCtrl.push(HomePage);
+  }
+
+
+  creerEvenement(){
+    this.navCtrl.push(CreationEvenement);
   }
 
 }

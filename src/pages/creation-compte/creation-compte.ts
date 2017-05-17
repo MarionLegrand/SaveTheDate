@@ -58,13 +58,6 @@ export class CreationCompte {
       })
     };
 
-    
-
-  
-
-
-
-
   showAlertErreurMdpDifferent() {
     let alert = this.alertCtrl.create({
       title: 'Erreur !',

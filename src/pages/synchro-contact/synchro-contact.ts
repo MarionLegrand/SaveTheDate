@@ -98,13 +98,18 @@ export class SynchroContact {
 
         // on envoi le tableau qui l'enverra au provider
         this.provider.sendContactsDataToserver(this.contactToSend).subscribe();
+        this.navCtrl.pop(); //test
         this.navCtrl.setRoot(Accueil);
       })
 
   }
 
-
+/*
+  a supprimer quand on aura terminé pour forcer le passage dans 
+  la synchro
+*/
   Asupprimer() {
+    this.navCtrl.pop(); //test
     this.navCtrl.setRoot(Accueil);
   }
 
