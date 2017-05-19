@@ -7,14 +7,15 @@ import { CreationEvenementModule } from '../creation-evenement-module/creation-e
 import { CreationEvenementProvider } from '../../../providers/creation-evenement-provider';
 
 // DataStrucutre 
-
+import { EvenementData } from '../../../dataStructure/evenement';
 
 /**
  * Generated class for the CreationEvenement page.
- *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+
+
 @IonicPage()
 @Component({
   selector: 'page-creation-evenement',
@@ -34,7 +35,8 @@ export class CreationEvenement {
       complement: ['', Validators.required],
       ville: ['', Validators.required],
       cp: ['', Validators.maxLength(5)], // TODO géré minimun 5 cracatères code postal 
-      date: ['', Validators.required]
+      date: ['', Validators.required],
+      nombrePlace: ['', Validators.required]
     })
   }
 
@@ -45,22 +47,45 @@ export class CreationEvenement {
 
   valider() {
     var s = this.fg.get('date').value;
-    var date =  new Date(Date.parse(s)).valueOf();
+    var date = new Date(Date.parse(s)).valueOf();
     var dateNow = new Date().valueOf();
-    console.log(date+" "+dateNow);
-    if (date < dateNow) {  
-      console.log(date+" okok "+dateNow);
+
+    if (date < dateNow) {
+      console.log(date + " okok " + dateNow);
       this.showAlertDate();
     } else {
-      // on envoi au provider qui créer l'événement 
-      //this.provider ... 
+      let event = new EvenementData();
+      var dateEnvoi = new Date(Date.parse(this.fg.get('date').value)).valueOf();
 
+      console.log(dateEnvoi);
+
+      event.intitule = this.fg.get('intitule').value;
+      event.dateDebut = dateEnvoi.toString();
+      event.description = this.fg.get('description').value;
+      event.nbPlaces = Number(this.fg.get('nombrePlace').value);
+
+      if (this.fg.get('complement').value != '')
+        event.complement = this.fg.get('complement').value;
+
+      event.ville = this.fg.get('ville').value;
+      event.codePostal = this.fg.get('cp').value;
+      event.adresse = this.fg.get('adresse').value;
+      event.nombreInvite = 0;
+
+      // on envoi au provider qui créer l'événement 
+      this.provider.creerEvenement(event).subscribe(
+        () => { },
+        err => {
+          alert("erreur ! ");
+          return;
+        }
+      )
       // on envoi sur la vue suivante creationEvenementModule
       this.navCtrl.setRoot(CreationEvenementModule);
     }
   }
 
-  annuler(){
+  annuler() {
     this.navCtrl.pop();
   }
 

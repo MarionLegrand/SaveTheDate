@@ -39,10 +39,11 @@
       Evènements à venir
     </div>
     <!-- boucle quand l'utilisateur à des évenements à venir -->
+    <div *ngIf="events != undefined">
     <div *ngFor="let event of events" (click)="openEventPage(event.id)">
 
       <div class="div4">
-        <ion-label class="textePrincipal">Anniversaire {{event.intitule}}</ion-label>
+        <ion-label class="textePrincipal"> {{event.intitule}}</ion-label>
       </div>
 
       <div class="div5">
@@ -51,10 +52,11 @@
         </div>
         <div class="resultat">
           <ion-label class="texte">
-            Le {{event.dateDebut}} <br/><br/>{{event.lieu}}
+            Le {{event.dateDebut |  date:'dd/MM/y hh:mm'}} <br/><br/>{{event.lieu}}
           </ion-label>
         </div>
       </div>
+    </div>
     </div>
     <!-- quand l'utilisateur n'a pas d'évenements à venir -->
     <div *ngIf="events === undefined" class="resultat">

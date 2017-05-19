@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 
 //Datastructure 
-import { Tag } from '../dataStructure/tag';
+import { EvenementData } from '../dataStructure/evenement';
 /*
 /*
   Generated class for the EvenementProvider provider.
@@ -15,13 +15,16 @@ import { Tag } from '../dataStructure/tag';
 @Injectable()
 export class EvenementProvider {
 
+
+
   constructor(public http: Http) {
     console.log('Hello EvenementProvider Provider');
   }
 
 
-  getEvenement(id:number){
-    return this.http.get('evenements/{idEvenement}?token=4568ddzda')
+  getEvenement(id:number) : Observable<EvenementData>{
+    return this.http.get('http://192.168.1.10/Al2cServer-war/webresources/evenements/'+id+'/getEvenement?token='+ Number(localStorage.getItem('token')))
+    .map( res => {return res.json() })
   }
 
 

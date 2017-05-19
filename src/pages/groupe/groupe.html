@@ -14,8 +14,14 @@
 <ion-content padding>
 
   <!-- bouton ajouter ici -->
-  <button (click)="creerTag()"> Creer un nouveau Tag </button>
+  <h3> Creer un tag </h3>
+  <ion-item>
+    <ion-label> libelle : </ion-label>
+    <ion-input type="text" #libelle > </ion-input>
+  </ion-item>
 
+  <button (click)="creerTag(libelle.value)" > Creer un nouveau Tag </button>
+  
   <!-- liste des tags ici avec bouton modifier ou supprimer à coté -->
   <div *ngIf="lesTags == undefined">
     <ion-label> Vous n'avez aucun tag</ion-label>
@@ -25,7 +31,7 @@
     <ion-list *ngFor="let tag of lesTags">
       <ion-item >
         <ion-label> {{tag.libelle }} </ion-label> 
-        <button (click)="supprimerTag()"> supprimer </button>
+       
       </ion-item>
     </ion-list>
   </div>

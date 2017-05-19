@@ -54,7 +54,7 @@ export class MenuDeroulant1 {
 
   // redirection sur la liste des groupes 
   groups(){
-    this.navCtrl.push(Groupe);
+    this.navCtrl.setRoot(Groupe);
   }
 
   deconnexion(){

@@ -74,7 +74,6 @@ export class ModalContactAjoutTags implements OnInit {
     for (let id of this.lesTagsSelection) {
       this.provider.affecterTagUser(id, this.navParams.get('id')).subscribe();
     }
-  
     this.viewCtrl.dismiss(); // ferme le modal
   }
 

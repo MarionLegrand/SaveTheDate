@@ -25,7 +25,7 @@ export class ListeContactsProvider {
   renvoi la liste des contacts de cet utilisateur dans un tableau de type contactData
 */
 getUserContacts() : Observable<contactData[]>{
-  return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/contacts/getContactsList?token=' + Number(localStorage.getItem('token')))
+  return this.http.get('http://192.168.1.10/Al2cServer-war/webresources/contacts/getContactsList?token=' + Number(localStorage.getItem('token')))
   .map( res => {return res.json()})
 }
 

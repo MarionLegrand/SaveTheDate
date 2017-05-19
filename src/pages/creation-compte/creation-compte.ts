@@ -18,7 +18,7 @@ export class CreationCompte {
   private fg: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public provider: InscriptionProvider, private fb: FormBuilder, public alertCtrl: AlertController) {
+    public provider: InscriptionProvider, private fb: FormBuilder, private alertCtrl: AlertController) {
     this.fg = fb.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required],

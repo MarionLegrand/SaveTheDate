@@ -19,17 +19,16 @@ export class GroupeProvider {
   }
 
     getTags(): Observable<[Tag]> {
-    return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/tags/afficherTags?token=' + Number(localStorage.getItem('token')))
+    return this.http.get('http://192.168.1.10/Al2cServer-war/webresources/tags/afficherTags?token=' + Number(localStorage.getItem('token')))
       .map(res => { return res.json() })
   }
 
+ creerTag(tag: Tag): Observable<any> {
 
+    let header = new Headers();
+    header.append('Content-Type', 'application/json');
+    return this.http.post('http://192.168.1.10/Al2cServer-war/webresources/tags/creerTag?token=' + Number(localStorage.getItem('token')), tag,header)
+      .map(res => res)
+  }
   
-
-    /*
-    TODO
-    */
-    supprimerTag(){
-
-    }
 }

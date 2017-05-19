@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController} from 'ionic-angular';
+import { Component, OnInit, OnDestroy} from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 // rest
 import { GroupeProvider } from '../../providers/groupe-provider';
 //dataStrucuture
 import { Tag } from '../../dataStructure/tag';
 //page 
-import {CreationTag} from '../creation-tag/creation-tag';
+import { CreationTag } from '../creation-tag/creation-tag';
 
 /**
  * Generated class for the Groupe page.
@@ -20,10 +20,9 @@ import {CreationTag} from '../creation-tag/creation-tag';
   templateUrl: 'groupe.html',
   providers: [GroupeProvider]
 })
-export class Groupe implements OnInit {
+export class Groupe implements OnInit, OnDestroy {
 
   lesTags: Tag[];
-
   constructor(public navCtrl: NavController, public navParams: NavParams, private provider: GroupeProvider, private modalCtrl: ModalController) {
     this.lesTags = new Array<Tag>();
   }
@@ -36,19 +35,34 @@ export class Groupe implements OnInit {
     this.loadData();
   }
 
-creerTag(){
-let modal = this.modalCtrl.create(CreationTag);
-    modal.onDidDismiss(
-      () => {
+  ngOnDestroy(){
+    // TODO voir pour les unsubscribe
+  }
+
+/*
+  To TEST 
+  AJoute le tag directement depuis cette page plutot que de passer par une modale 
+*/
+  creerTag(lib:string) {
+    let tag = new Tag();
+    tag.libelle = lib;
+
+    if(tag.libelle.length == 0){
+      alert("Vous n'avez rien saisi !!");
+      return;
+    }
+    
+    this.provider.creerTag(tag).subscribe(
+      res => {
         this.lesTags = null;
         this.loadData();
-      }
-    )
-    modal.present();
+      })
 }
 
+
+
 loadData(){
-this.provider.getTags().subscribe( res => {this.lesTags = res})
+  this.provider.getTags().subscribe(res => { this.lesTags = res })
 }
 
 /*

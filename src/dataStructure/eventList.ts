@@ -4,7 +4,7 @@
 export class EventAbstract{
     id:number;
     intitule:string;
-    lieu:string;
+   // lieu:string;
     dateDebut:string;
     etat:string;
     codePostal:string;
