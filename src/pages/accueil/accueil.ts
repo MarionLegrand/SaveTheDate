@@ -68,4 +68,8 @@ CreerEvenement(){
     });
   }
 
+  public coucou(){
+    console.log("coucou");
+  }
+
 }

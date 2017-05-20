@@ -20,14 +20,15 @@ export class CreationEvenementProvider {
     console.log('Hello CreationEvenementProvider Provider');
   }
 
-  creerEvenement(event: EvenementData): Observable<boolean> {
+  creerEvenement(event: EvenementData): Observable<any> {
     let header = new Headers();
     header.append('Content-Type', 'application/json');
 
     return this.http.post('http://192.168.1.10/Al2cServer-war/webresources/evenements/creerEvenement?token=' + Number(localStorage.getItem('token')), event, header)
       .map(
         res => {
-        return true;
+          console.log(res.json().id)
+        return res.json().id;
       }, 
       err => { return false; })
   }

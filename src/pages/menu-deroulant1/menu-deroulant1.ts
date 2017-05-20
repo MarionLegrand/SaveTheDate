@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController} from 'ionic-angular';
+import { ViewController } from 'ionic-angular';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 // Pages de redirection 
 import { HomePage } from '../home/home';
@@ -43,27 +43,27 @@ export class MenuDeroulant1 {
   }*/
 
   // redirection sur la liste des évènements 
-  events(){
+  events() {
     this.navCtrl.push(ListeEvenements);
   }
 
   // redirection sur la liste des contacts 
-  contacts(){
+  contacts() {
     this.navCtrl.push(ListeContacts);
   }
 
   // redirection sur la liste des groupes 
-  groups(){
-    this.navCtrl.setRoot(Groupe);
+  groups() {
+    this.navCtrl.push(Groupe);
   }
 
-  deconnexion(){
+  deconnexion() {
     localStorage.removeItem('token'); // on nettoie le token
     this.navCtrl.push(HomePage);
   }
 
 
-  creerEvenement(){
+  creerEvenement() {
     this.navCtrl.push(CreationEvenement);
   }
 

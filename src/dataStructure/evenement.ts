@@ -1,14 +1,14 @@
 export class EvenementData{
     id:number;
     intitule:string;
-    nombreInvite: number;
+    nombreInvite?: number;
     dateDebut:string;
     dateFin?:string;
     nbPlaces:number;
     description:string;
     message:string;
     etat:string;
-    nbPresents:number;
+    nbPresents?:number;
     codePostal:string;
     complement?:string;
     adresse:string;

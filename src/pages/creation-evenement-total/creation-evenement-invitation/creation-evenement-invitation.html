@@ -7,17 +7,51 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>gestion des Invitation</ion-title>
+    <ion-title>Gestion des invitations</ion-title>
   </ion-navbar>
 
+<button (click)="validerInvitation()"> Inviter les contacts </button>
+ <button (click)="valider()">Terminer la création !</button>
 </ion-header>
 <ion-content padding>
-<button (click)="valider()">Inviter les contacts d'un tag</button>
-<button (click)="valider()">Inviter en séléctionnant les contacts </button>
+  <!-- <button (click)="modaleInviterContact()">Inviter des contacts</button>
+  <button (click)="modaleInviterTag()">Inviter des contacts dans vos tags</button> -->
 
-<!-- 3 listes , tag contact invité et non invité -->
+  <!-- 3 listes , tag contact invité et non invité -->
+  <div *ngIf="invite != undefined">
+    <h3> Liste des invités </h3>
+    <div *ngFor="let contact of invite">
+       {{contact?.nom}} {{contact?.prenom}}
+      <ion-item>
+         <ion-checkbox item-end (click)="retirerContact(contact)" >{{contact?.nom}} {{contact?.prenom}}</ion-checkbox>
+        {{contact?.nom}} {{contact?.prenom}}
+      </ion-item>
+    </div>
+  </div>
+
+  <div *ngIf="tagNonInvite != undefined">
+    <h3> Liste tags non invités </h3>
+    <div *ngFor="let tag of tagNonInvite">
+       {{tag.libelle}}
+      <ion-item>
+           {{tag.libelle}}
+         <ion-checkbox item-end (click)="ajouterTag(tag)" ></ion-checkbox>    
+      </ion-item>
+    </div>
+  </div>
+
+  <div *ngIf="contactNonInvite != undefined">
+    <h3> Liste des contacts non Invités </h3>
+    <div *ngFor="let contact of contactNonInvite">
+        {{contact?.nom}} {{contact?.prenom}}
+      <ion-item>
+        {{contact?.nom}} {{contact?.prenom}}
+        <ion-checkbox item-end (click)="inviterContact(contact)" >{{contact?.nom}} {{contact?.prenom}}</ion-checkbox>
+        
+      </ion-item>
+    </div>
+  </div>
 
 
-
-<button (click)="valider()">Terminer la création !</button>
+ 
 </ion-content>

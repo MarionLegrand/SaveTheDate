@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 // rest
@@ -18,7 +18,9 @@ import { CreationEvenementInvitation } from '../creation-evenement-invitation/cr
   selector: 'page-creation-evenement-module',
   templateUrl: 'creation-evenement-module.html',
 })
-export class CreationEvenementModule {
+export class CreationEvenementModule implements OnInit {
+
+  private id:number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -27,7 +29,14 @@ export class CreationEvenementModule {
     console.log('ionViewDidLoad CreationEvenementModule');
   }
 
+  ngOnInit(){
+    this.id = Number(this.navParams.get('id'));
+    console.log(this.navParams.get('id'));
+  }
+
+
   valider(){
-    this.navCtrl.setRoot(CreationEvenementInvitation);
+    console.log(this.navParams.data.id);
+    this.navCtrl.setRoot(CreationEvenementInvitation,{id:this.navParams.get('id')});
   }
 }

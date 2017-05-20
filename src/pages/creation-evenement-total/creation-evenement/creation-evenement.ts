@@ -25,6 +25,7 @@ import { EvenementData } from '../../../dataStructure/evenement';
 export class CreationEvenement {
 
   private fg: FormGroup;
+  private idEvent:number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FormBuilder
     , private provider: CreationEvenementProvider, public alertCtrl: AlertController) {
@@ -32,7 +33,7 @@ export class CreationEvenement {
       intitule: ['', Validators.required],
       description: ['', Validators.required],
       adresse: ['', Validators.required],
-      complement: ['', Validators.required],
+      complement: [''],
       ville: ['', Validators.required],
       cp: ['', Validators.maxLength(5)], // TODO géré minimun 5 cracatères code postal 
       date: ['', Validators.required],
@@ -57,8 +58,6 @@ export class CreationEvenement {
       let event = new EvenementData();
       var dateEnvoi = new Date(Date.parse(this.fg.get('date').value)).valueOf();
 
-      console.log(dateEnvoi);
-
       event.intitule = this.fg.get('intitule').value;
       event.dateDebut = dateEnvoi.toString();
       event.description = this.fg.get('description').value;
@@ -70,18 +69,15 @@ export class CreationEvenement {
       event.ville = this.fg.get('ville').value;
       event.codePostal = this.fg.get('cp').value;
       event.adresse = this.fg.get('adresse').value;
-      event.nombreInvite = 0;
 
       // on envoi au provider qui créer l'événement 
       this.provider.creerEvenement(event).subscribe(
-        () => { },
+        res => { this.idEvent = res, this.navCtrl.setRoot(CreationEvenementModule,{id:this.idEvent});},
         err => {
           alert("erreur ! ");
           return;
         }
-      )
-      // on envoi sur la vue suivante creationEvenementModule
-      this.navCtrl.setRoot(CreationEvenementModule);
+      )     
     }
   }
 
