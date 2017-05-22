@@ -24,7 +24,7 @@ export class CreationEvenementProvider {
     let header = new Headers();
     header.append('Content-Type', 'application/json');
 
-    return this.http.post('http://192.168.1.10/Al2cServer-war/webresources/evenements/creerEvenement?token=' + Number(localStorage.getItem('token')), event, header)
+    return this.http.post('http://al2c.dtdns.net/Al2cServer-war/webresources/evenements/creerEvenement?token=' + Number(localStorage.getItem('token')), event, header)
       .map(
         res => {
           console.log(res.json().id)

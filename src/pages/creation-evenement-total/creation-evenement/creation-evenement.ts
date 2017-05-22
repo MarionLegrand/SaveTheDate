@@ -35,7 +35,7 @@ export class CreationEvenement {
       adresse: ['', Validators.required],
       complement: [''],
       ville: ['', Validators.required],
-      cp: ['', Validators.maxLength(5)], // TODO géré minimun 5 cracatères code postal 
+      cp: ['', Validators.compose([Validators.maxLength(5),Validators.minLength(5)])], // TODO géré minimun 5 cracatères code postal 
       date: ['', Validators.required],
       nombrePlace: ['', Validators.required]
     })
@@ -65,6 +65,8 @@ export class CreationEvenement {
 
       if (this.fg.get('complement').value != '')
         event.complement = this.fg.get('complement').value;
+        else
+        event.complement = " ";
 
       event.ville = this.fg.get('ville').value;
       event.codePostal = this.fg.get('cp').value;

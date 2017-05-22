@@ -3,17 +3,13 @@ import { IonicPage, NavController, NavParams, AlertController, ModalController }
 
 import { Accueil } from '../../accueil/accueil';
 
-// Pages modales
-//import { ModalInvitationContact } from '../modal-invitation-contact/modale-invitation-contact';
-//import { ModalInvitationTag } from '../modal-invitation-contact/modale-invitation-contact';
-
 // REST
 import { CreationEvenementInvitationProvider } from '../../../providers/creation-evenement-invitation-provider';
 
 // DataStructure
 import { contactData } from '../../../dataStructure/contactData';
 import { Tag } from '../../../dataStructure/tag';
-
+import { EvenementData } from '../../../dataStructure/evenement';
 /**
  * Generated class for the CreationEvenementInvitation page.
  * See http://ionicframework.com/docs/components/#navigation for more info
@@ -36,9 +32,14 @@ export class CreationEvenementInvitation implements OnInit {
   removePostContact: contactData[];
   removePostTags: Tag[];
 
+  evenement: EvenementData;
+
+  private msg: String;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private modalCtrl: ModalController,
     private provider: CreationEvenementInvitationProvider) {
 
+    this.evenement = new EvenementData();
     this.contactNonInvite = new Array<contactData>();
     this.invite = new Array<contactData>();
     this.tagNonInvite = new Array<Tag>();
@@ -47,6 +48,8 @@ export class CreationEvenementInvitation implements OnInit {
     this.addPostTags = new Array<Tag>();
     this.removePostContact = new Array<contactData>();
     this.removePostTags = new Array<Tag>();
+
+    this.msg = '';
   }
 
   ionViewDidLoad() {
@@ -56,6 +59,10 @@ export class CreationEvenementInvitation implements OnInit {
 
   ngOnInit() {
     this.loadData();
+
+    // récupération pour le messages
+    this.provider.getMessage(this.navParams.get('id')).subscribe(
+    res => { this.evenement = res })
   }
 
   valider() {
@@ -64,26 +71,8 @@ export class CreationEvenementInvitation implements OnInit {
   }
 
   validerInvitation() {
-  /*  this.provider.inviterContacts(this.navParams.get('id'), this.addPostContacts).subscribe();
-    this.provider.inviterTags(this.navParams.get('id'), this.addPostTags).subscribe();
-    this.provider.retirerContacts(this.navParams.get('id'), this.removePostContact).subscribe();
-    this.provider.retirerTags(this.navParams.get('id'), this.removePostTags).subscribe();
-    this.loadData();*/
-
- this.provider.inviterContacts(this.navParams.get('id'), this.addPostContacts).subscribe(
-  ()=>{this.provider.inviterTags(this.navParams.get('id'), this.addPostTags).subscribe(
-    ()=>{this.provider.retirerContacts(this.navParams.get('id'), this.removePostContact).subscribe(
-      ()=>{ this.provider.retirerTags(this.navParams.get('id'), this.removePostTags).subscribe(
-          () => { this.loadData();}
-        )
-      }
-    )}
-  )}
-
-
- );
-
-
+    this.provider.setActionInvitation(this.navParams.get('id'), this.addPostContacts, this.addPostTags, this.removePostContact, this.removePostTags,this.evenement)
+      .subscribe(res => { this.loadData(); })
   }
 
 
@@ -127,7 +116,7 @@ export class CreationEvenementInvitation implements OnInit {
     Load data depuis le serveur
   */
   loadData() {
-
+    console.log(this.evenement.message);
     this.contactNonInvite = new Array<contactData>();
     this.invite = new Array<contactData>();
     this.tagNonInvite = new Array<Tag>();
@@ -137,9 +126,13 @@ export class CreationEvenementInvitation implements OnInit {
     this.removePostContact = new Array<contactData>();
     this.removePostTags = new Array<Tag>();
 
-    this.provider.getListeInvites(this.navParams.get('id')).subscribe(res => { this.invite = res });
-    this.provider.getListeNonInvites(this.navParams.get('id')).subscribe(res => { this.contactNonInvite = res });
-    this.provider.getListeTagNonInvites(this.navParams.get('id')).subscribe(res => { this.tagNonInvite = res });
+    this.provider.getDifferentListeInvite(this.navParams.get('id')).subscribe(
+      data => {
+        this.invite = data[0];
+        this.contactNonInvite = data[1];
+        this.tagNonInvite = data[2];
+        console.log(this.evenement.message);
+      })
   }
 
   /*
@@ -154,7 +147,7 @@ export class CreationEvenementInvitation implements OnInit {
         text: 'OK',
         role: null,
         handler: () => {
-          this.navCtrl.setRoot(Accueil);
+          this.navCtrl.push(Accueil);
           return false;
         }
       }

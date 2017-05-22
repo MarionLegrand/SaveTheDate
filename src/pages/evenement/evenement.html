@@ -19,94 +19,150 @@
 
       <h3> Informations Générales </h3>
 
-      <div *ngIf="modifier == true">
-        <button (click)="activerModification()">Activer la modification</button>
-      </div>
-      <div *ngIf="modifier == false">
-        <button (click)="desactiverModification()">Desactiver la modification</button>
-      </div>
+      <form [formGroup]="fg" (ngSubmit)="validerModification()">
 
 
-      <ion-item>
-        <ion-label stacked>Intitulé :</ion-label>
-        <ion-input type="text" disabled="{{modifier}}" value="{{event.intitule}}"></ion-input>
+        <div *ngIf="modifier == true">
+          <button ion-button color="secondary" (click)="activerModification()">Activer la modification</button>
+        </div>
+        <div *ngIf="modifier == false">
+          <button ion-button color="secondary" (click)="desactiverModification()">Desactiver la modification</button>
+        </div>
 
-      </ion-item>
-
-      <ion-item>
-        <ion-label stacked>Description :</ion-label>
-        <ion-input type="text" disabled="{{modifier}}" value="{{event.description}}"></ion-input>
-      </ion-item>
-
-      <h3> Lieu </h3>
-
-      <ion-item>
-        <ion-label stacked>Adresse :</ion-label>
-        <ion-input type="text" value="" disabled="{{modifier}}"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label stacked>Complément :</ion-label>
-        <ion-input type="text" value="" disabled="{{modifier}}"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label stacked>Ville :</ion-label>
-        <ion-input type="text" value="" disabled="{{modifier}}"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label stacked>Cp :</ion-label>
-        <ion-input type="text" value="" disabled="{{modifier}}"></ion-input>
-      </ion-item>
-
-      <h3> Date </h3>
-      <!-- cas ou on est pas en modification on met la date en dur -->
-
-      <div *ngIf="modifier == true">
         <ion-item>
-          <ion-label>Date</ion-label>
-          <ion-label>{{event.dateDebut |  date:'dd/MM/y hh:mm' }}</ion-label>
+          <ion-label stacked>Intitulé :</ion-label>
+          <ion-input type="text" disabled="{{modifier}}" value="{{event.intitule}}" formControlName="intitule"></ion-input>
         </ion-item>
-      </div>
-      <!-- cas ou on est en modification on met la date en dateTimePicker -->
-      <div *ngIf="modifier == false">
+
         <ion-item>
-          <ion-label>Date</ion-label>
-          <ion-datetime displayFormat="DD/MM/YYYY HH:mm"></ion-datetime>
+          <ion-label stacked>Description :</ion-label>
+          <ion-input type="text" disabled="{{modifier}}" value="{{event.description}}" formControlName="description"></ion-input>
         </ion-item>
+
+        <h3> Lieu </h3>
+
+        <ion-item>
+          <ion-label stacked>Adresse :</ion-label>
+          <ion-input type="text" value="{{event.adresse}}" disabled="{{modifier}}" formControlName="adresse"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Complément :</ion-label>
+          <ion-input type="text" value="{{event.complement}}" disabled="{{modifier}}" formControlName="complement"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Ville :</ion-label>
+          <ion-input type="text" value="{{event.ville}}" disabled="{{modifier}}" formControlName="ville"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Cp :</ion-label>
+          <ion-input type="text" value="{{event.codePostal}}" disabled="{{modifier}}" formControlName="cp"></ion-input>
+        </ion-item>
+
+        <h3> Date </h3>
+        <!-- cas ou on est pas en modification on met la date en dur -->
+
+        <div *ngIf="modifier == true || event.etat == 'A_VENIR'">
+          <ion-item>
+            <ion-label>Date</ion-label>
+            <ion-label>{{event.dateDebut | date:'dd/MM/y hh:mm' }}</ion-label>
+          </ion-item>
+        </div>
+        <!-- cas ou on est en modification et que l'évenement n'est pas encore validé on met la date en dateTimePicker -->
+        <div *ngIf="modifier == false && event.etat == 'EN_PREPARATION'">
+          <ion-item>
+            <ion-label>Date</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY HH:mm" formControlName="date"></ion-datetime>
+          </ion-item>
+        </div>
+
+
+
+        <h3> Invitation </h3>
+        <ion-item>
+          <ion-label>Nombre de places : </ion-label>
+          <ion-input type="text" value="{{event.nbPlaces}}" disabled="true"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Nombre de d'invités : </ion-label>
+          <ion-input type="text" value="{{event.nbInvites}}" disabled="true"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Nombre de réponses : </ion-label>
+          <ion-input type="text" value="{{event.nbPresents}}" disabled="true"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Message d'invitations' : </ion-label>
+          <ion-input type="text" value="{{event.message}}" disabled="true" formControlName="message"></ion-input>
+        </ion-item>
+
+
+        <div *ngIf="modifier== false">
+          <button class="bouton" type="submit"> Valider les modifications </button>
+        </div>
+      </form>
+
+      <h3> Liste des Invitations </h3>
+      <div *ngIf="event.etat !='EN_PREPARATION'">
+
+        <h4> Presents </h4>
+        <div *ngFor="let contact of presents">
+          <ion-item>
+            <ion-label>{{contact?.nom}} {{contact?.prenom}}</ion-label>
+          </ion-item>
+        </div>
+
+        <h4> Absents </h4>
+        <div *ngFor="let contact of absents">
+          <ion-item>
+            <ion-label>{{contact?.nom}} {{contact?.prenom}}</ion-label>
+          </ion-item>
+        </div>
       </div>
 
-      <h3> Invitation </h3>
-      <ion-item>
-        <ion-label>Nombre de places : </ion-label>
-        <ion-input type="text" value="{{event.nbPlaces}}" disabled="{{modifier}}"></ion-input>
-      </ion-item>
+      <!-- si on est en préparation, les contacts n'ont pas encore répondu donc c'est la liste des invités -->
+      <div *ngIf="event.etat =='EN_PREPARATION'">
+        <h4> Liste des Invités</h4>
+      </div>
+      <div *ngIf="event.etat !='EN_PREPARATION'">
+        <h4> N'ayant pas répondu </h4>
+      </div>
+      <div *ngFor="let contact of sansReponses">
+        <ion-row>
+          <ion-col col-8>
+            <ion-item>
+              <ion-label>{{contact?.nom}} {{contact?.prenom}}</ion-label>
+            </ion-item>
+          </ion-col>
+          <div *ngIf="event.etat =='EN_PREPARATION'">
+            <ion-col>
+              <button ion-button color="danger" small (click)="annulerInvitation(contact)"> Retirer </button>
+            </ion-col>
+          </div>
+        </ion-row>
+      </div>
 
-      <ion-item>
-        <ion-label>Nombre de d'invités : </ion-label>
-        <ion-input type="text" value="{{event.nbInvites}}" disabled="{{modifier}}"></ion-input>
-      </ion-item>
 
-      <ion-item>
-        <ion-label>Nombre de réponses : </ion-label>
-        <ion-input type="text" value="{{event.nbPresents}}" disabled="{{modifier}}"></ion-input>
-      </ion-item>
+      <div *ngIf="event.etat != 'ANNULER'">
+        <button ion-button color="secondary" (click)="ajouterInvitations()"> Ajouter des invités </button>
+      </div>
 
-
-      <ion-item>
-        <ion-label>Message d'invitations' : </ion-label>
-        <ion-input type="text" value="{{event.message}}" disabled="{{modifier}}"></ion-input>
-      </ion-item>
 
       <!-- cas evenement en préparation => on lui propose un bouton qui lui permettra de valider et de passer
       dans l'état & venir -->
-      {{event.etat}}
       <div *ngIf="event.etat == 'EN_PREPARATION'">
-        <button (click)="passerEvenementEtatAVenir()"> Valider votre évènement afin de lancer les invitations</button>
+        <button ion-button color="secondary" (click)="passerEvenementEtatAVenir()"> Valider votre évènement afin de lancer les invitations</button>
+      </div>
+      <div *ngIf="event.etat == 'A_VENIR'">
+        <button ion-button color="danger" (click)="passerEvenementEtatAnnuler()"> Annuler l'événement</button>
       </div>
 
-    <!--  TODO rajouter heure et lieux + modules et liste des invités et tag etcc..-->
+      <!--  TODO modules -->
 
     </div>
   </div>

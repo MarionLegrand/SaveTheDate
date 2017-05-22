@@ -14,9 +14,13 @@
  <button (click)="valider()">Terminer la création !</button>
 </ion-header>
 <ion-content padding>
-  <!-- <button (click)="modaleInviterContact()">Inviter des contacts</button>
-  <button (click)="modaleInviterTag()">Inviter des contacts dans vos tags</button> -->
 
+<div *ngIf="evenement != null">
+  <ion-item>
+    <ion-label> Message d'invitation: </ion-label>
+    <ion-textarea type="text" [(ngModel)]="evenement.message"  >{{evenement.message}}</ion-textarea>
+  </ion-item>
+</div>
   <!-- 3 listes , tag contact invité et non invité -->
   <div *ngIf="invite != undefined">
     <h3> Liste des invités </h3>

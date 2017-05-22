@@ -92,7 +92,7 @@ export class SynchroContact {
           cd.canaux = tabCanaux;
 
           // on l'ajoute à notre tableau
-          if (cd.canaux.length > 0 && (c.name.familyName != undefined && c.name.givenName != undefined))
+          if (cd.canaux.length > 0 && (c.name.familyName != undefined || c.name.givenName != undefined))
             this.contactToSend.push(cd);
         }
 

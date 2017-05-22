@@ -16,12 +16,11 @@ import { ListeContacts } from '../pages/liste-contacts/liste-contacts';
 import { ListeEvenements } from '../pages/liste-evenements/liste-evenements';
 import { ListeGroupes } from '../pages/liste-groupes/liste-groupes';
 import { MenuDeroulant1 } from '../pages/menu-deroulant1/menu-deroulant1';
-import { ModifContact } from '../pages/modif-contact/modif-contact';
-import { ModifEvenement } from '../pages/modif-evenement/modif-evenement';
 import { ModifGroupe } from '../pages/modif-groupe/modif-groupe';
 import { Parametrage } from '../pages/parametrage/parametrage';
 import { SynchroContact } from '../pages/synchro-contact/synchro-contact';
 import { ModalContactAjoutTags } from '../pages/modal-contact-ajout-tags/modal-contact-ajout-tags';
+import { ModalAjoutInvitation } from '../pages/modal-ajout-invitation/modal-ajout-invitation';
 // création d'èvenement
 import { CreationEvenement } from '../pages/creation-evenement-total/creation-evenement/creation-evenement';
 import { CreationEvenementModule } from '../pages/creation-evenement-total/creation-evenement-module/creation-evenement-module';
@@ -43,8 +42,6 @@ import { CreationEvenementInvitation } from '../pages/creation-evenement-total/c
     ListeEvenements,
     ListeGroupes,
     MenuDeroulant1,
-    ModifContact,
-    ModifEvenement,
     ModifGroupe,
     Parametrage,
     SynchroContact,
@@ -52,6 +49,7 @@ import { CreationEvenementInvitation } from '../pages/creation-evenement-total/c
     CreationEvenement,
     CreationEvenementModule,
     CreationEvenementInvitation,
+    ModalAjoutInvitation
   ],
   imports: [
     BrowserModule,
@@ -72,8 +70,6 @@ import { CreationEvenementInvitation } from '../pages/creation-evenement-total/c
     ListeEvenements,
     ListeGroupes,
     MenuDeroulant1,
-    ModifContact,
-    ModifEvenement,
     ModifGroupe,
     Parametrage,
     SynchroContact,
@@ -81,6 +77,7 @@ import { CreationEvenementInvitation } from '../pages/creation-evenement-total/c
     CreationEvenement,
     CreationEvenementModule,
     CreationEvenementInvitation,
+    ModalAjoutInvitation
   ],
   providers: [
     StatusBar,

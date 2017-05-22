@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms'; // besoin de ça pour récupèrer infos formulaires
+//pages
+import { ModalAjoutInvitation } from '../modal-ajout-invitation/modal-ajout-invitation';
+import { Accueil } from '../accueil/accueil';
 // DataStructure
 import { EvenementData } from '../../dataStructure/evenement';
 //REST
 import { EvenementProvider } from '../../providers/evenement-provider';
+import { contactData } from '../../dataStructure/contactData';
+import { Observable } from 'rxjs/Observable';
 
 
 /**
@@ -24,9 +29,33 @@ export class Evenement implements OnInit {
   private event: EvenementData;
   private modifier: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private provider: EvenementProvider, private alertCtrl: AlertController) {
+  private presents: contactData[];
+  private absents: contactData[];
+  private sansReponses: contactData[];
+
+  private fg: FormGroup;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private provider: EvenementProvider, private alertCtrl: AlertController, private fb: FormBuilder
+    , private modal: ModalController) {
     this.modifier = true; // car disabled = true dans le template pour dire que c'est pas modifiable 
+
+    this.absents = new Array<contactData>();
+    this.presents = new Array<contactData>();
+    this.sansReponses = new Array<contactData>();
+
+    // mise en place du form builder
+    this.fg = fb.group({
+      intitule: ['', Validators.required],
+      description: ['', Validators.required],
+      adresse: ['', Validators.required],
+      complement: ['', Validators.required],
+      ville: ['', Validators.required],
+      cp: ['', Validators.compose([Validators.maxLength(5), Validators.minLength(5)])],
+      message: ['', Validators.required],
+      date: ['', Validators.required]
+    })
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Evenement');
@@ -45,37 +74,120 @@ export class Evenement implements OnInit {
 
   desactiverModification() {
     this.modifier = true;
-    this.event = null;
     this.loadData();
   }
+
+  ajouterInvitations() {
+    let modal = this.modal.create(ModalAjoutInvitation, { id: this.navParams.get('paramId') });
+    modal.onDidDismiss(() => {
+      this.loadData();
+    })
+    modal.present();
+  }
+
+  annulerInvitation(c: contactData) {
+    this.provider.annulerInvitation(this.navParams.get('paramId'), c).subscribe(
+      res => { this.loadData(); }
+    )
+  }
+
 
   /*
     Todo passe évenement en A venir lorsque celui-ci est "en préparation"
   */
   passerEvenementEtatAVenir() {
-
-
-      var s = this.event.dateDebut;
-      
-      var dateNow = new Date().valueOf();
-
+    var s = this.event.dateDebut
+    var dateNow = new Date().valueOf();
 
     if (Number(s) < dateNow) {
       this.showAlertErreurDateImpossible();
-      console.log('okok');
       return;
+    } 
+    this.provider.validerEvenement(this.navParams.get('paramId')).subscribe(() => {
+      this.loadData();
+    });
+  }
+
+  passerEvenementEtatAnnuler() {
+    this.showAlertAnnulerEvenement();
+  }
+
+  validerModification() {
+    let newEvent = this.event;
+    console.log(newEvent);
+
+    newEvent.id = this.event.id;
+    newEvent.intitule = this.fg.get('intitule').value;
+    newEvent.description = this.fg.get('description').value;
+    newEvent.adresse = this.fg.get('adresse').value;
+    newEvent.codePostal = this.fg.get('cp').value;
+    newEvent.complement = this.fg.get('complement').value;
+    newEvent.message = this.fg.get('message').value;
+    newEvent.ville = this.fg.get('ville').value;
+    newEvent.nbPlaces = this.event.nbPlaces; // A voir 
+    if (this.event.etat == 'EN_PREPARATION') {
+      newEvent.dateDebut = this.fg.get('date').value;
+    } else {
+      newEvent.dateDebut = this.event.dateDebut;
     }
-    console.log('!okok');
-    // ici mettre provider 
+
+    // test sur la date 
+    var s = this.fg.get('date').value;
+    var date = new Date(Date.parse(s)).valueOf();
+    var dateNow = new Date().valueOf();
+
+    if (date < dateNow) {
+      this.showAlertDate();
+    } else {
+      this.provider.modifierEvenement(this.navParams.get('paramId'), newEvent).subscribe(() => { }, err => { alert('Erreur') });
+      this.loadData();
+    }
+  }
+
+
+  /*
+     Montre une alerte lorsque la date est inférieure ou égale à celle du jours
+   */
+  showAlertDate() {
+
+    let alert = this.alertCtrl.create({
+      title: 'Erreur !',
+      subTitle: 'La date doit être dans le futur ! ',
+      buttons: ['OK']
+    });
+    alert.present();
 
   }
 
   loadData() {
-    this.provider.getEvenement(this.navParams.get('paramId')).subscribe(res => {
-      this.event = res; console
-        .log(this.event)
-    });
+    this.provider.getDatasEvent(this.navParams.get('paramId')).subscribe(
+      data => {
+        this.event = null;
+        this.absents = new Array<contactData>();
+        this.presents = new Array<contactData>();
+        this.sansReponses = new Array<contactData>();
+        this.event = data[0];
+        this.presents = data[1];
+        this.absents = data[2];
+        this.sansReponses = data[3];
+        this.setValuesForm();
+      }
+    )
   }
+
+
+  setValuesForm() {
+    this.fg.get('intitule').setValue(this.event.intitule);
+    this.fg.get('description').setValue(this.event.description);
+    this.fg.get('adresse').setValue(this.event.adresse);
+    this.fg.get('cp').setValue(this.event.codePostal);
+    this.fg.get('complement').setValue(this.event.complement);
+    this.fg.get('message').setValue(this.event.message);
+    this.fg.get('ville').setValue(this.event.ville);
+  }
+
+
+
 
   /*
     cas ou la date de l'evenement en préparation est antérieure au jour j
@@ -90,5 +202,27 @@ export class Evenement implements OnInit {
   }
 
 
+  showAlertAnnulerEvenement() {
+    let alert = this.alertCtrl.create({
+      title: 'Attention',
+      subTitle: 'Annuler cet evenement enverra un message a vos invités, êtes vous sur de vouloir annuler ?',
+      buttons: [{
+        text: 'Oui',
+        role: null,
+        handler: () => {
+          this.provider.annulerEvenement(this.navParams.get('paramId')).subscribe(() => {
+            // retour à l'accueil
+            this.navCtrl.push(Accueil);
+
+            return false;
+          });
+        }
+      }, {
+        text: 'Non',
+        role: 'cancel'
+      }]
+    });
+    alert.present();
+  }
 
 }
