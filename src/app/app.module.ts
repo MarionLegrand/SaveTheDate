@@ -14,7 +14,6 @@ import { Groupe } from '../pages/groupe/groupe';
 import { HomePage } from '../pages/home/home';
 import { ListeContacts } from '../pages/liste-contacts/liste-contacts';
 import { ListeEvenements } from '../pages/liste-evenements/liste-evenements';
-import { ListeGroupes } from '../pages/liste-groupes/liste-groupes';
 import { MenuDeroulant1 } from '../pages/menu-deroulant1/menu-deroulant1';
 import { ModifGroupe } from '../pages/modif-groupe/modif-groupe';
 import { Parametrage } from '../pages/parametrage/parametrage';
@@ -25,7 +24,8 @@ import { ModalAjoutInvitation } from '../pages/modal-ajout-invitation/modal-ajou
 import { CreationEvenement } from '../pages/creation-evenement-total/creation-evenement/creation-evenement';
 import { CreationEvenementModule } from '../pages/creation-evenement-total/creation-evenement-module/creation-evenement-module';
 import { CreationEvenementInvitation } from '../pages/creation-evenement-total/creation-evenement-invitation/creation-evenement-invitation';
-
+// Ajout contact
+import {CreerContact } from '../pages/creer-contact/creer-contact';
 
 
 @NgModule({
@@ -40,7 +40,6 @@ import { CreationEvenementInvitation } from '../pages/creation-evenement-total/c
     HomePage,
     ListeContacts,
     ListeEvenements,
-    ListeGroupes,
     MenuDeroulant1,
     ModifGroupe,
     Parametrage,
@@ -49,7 +48,8 @@ import { CreationEvenementInvitation } from '../pages/creation-evenement-total/c
     CreationEvenement,
     CreationEvenementModule,
     CreationEvenementInvitation,
-    ModalAjoutInvitation
+    ModalAjoutInvitation,
+    CreerContact
   ],
   imports: [
     BrowserModule,
@@ -68,7 +68,6 @@ import { CreationEvenementInvitation } from '../pages/creation-evenement-total/c
     HomePage,
     ListeContacts,
     ListeEvenements,
-    ListeGroupes,
     MenuDeroulant1,
     ModifGroupe,
     Parametrage,
@@ -77,7 +76,8 @@ import { CreationEvenementInvitation } from '../pages/creation-evenement-total/c
     CreationEvenement,
     CreationEvenementModule,
     CreationEvenementInvitation,
-    ModalAjoutInvitation
+    ModalAjoutInvitation,
+    CreerContact
   ],
   providers: [
     StatusBar,

@@ -1,13 +1,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>listContacts</ion-title>
+    <ion-title>Liste des contacts</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="base">
   <div *ngFor="let contact of lesContacts">
 
     <ion-item (click)="profil(contact.id)">

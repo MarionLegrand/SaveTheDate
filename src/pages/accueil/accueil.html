@@ -4,16 +4,19 @@
     <ion-row responsive-sm>
 
       <ion-col>
-        <div class="rond" col-sm-4 offset-sm-4>
+        <div class="rond">
+          <!--col-sm-4 offset-sm-4 -->
           <ion-icon name="settings" class="icone"></ion-icon>
         </div>
       </ion-col>
 
-      <ion-col col-sm-6 push-sm-2>
+      <ion-col col-auto >
+        <!--  col-sm-6 push-sm-2 -->
         <h2>Save THE Date</h2>
       </ion-col>
 
-      <ion-col col-sm-4>
+      <ion-col>
+        <!--  col-sm-4 -->
         <div class="rond">
           <ion-icon name="menu" icon-only (click)="presentPopover($event)" class="icone"></ion-icon>
         </div>
@@ -21,9 +24,13 @@
 
     </ion-row>
 
-    <ion-row responsive-sm>
-      <ion-col col-sm-12 offset-sm-4 centred>
+    <ion-row>
+      <ion-col>
+      </ion-col>
+      <ion-col col-auto>
         <h3>{{user.nom}} {{user.prenom}}</h3>
+      </ion-col>
+      <ion-col>
       </ion-col>
     </ion-row>
 
@@ -32,7 +39,7 @@
 </ion-header>
 
 <ion-content class="fond">
-  
+
   <div>
 
     <div class="div3">
@@ -40,29 +47,30 @@
     </div>
     <!-- boucle quand l'utilisateur à des évenements à venir -->
     <div *ngIf="events != undefined">
-    <div *ngFor="let event of events" (click)="openEventPage(event.id)">
+      <div *ngFor="let event of events" (click)="openEventPage(event.id)">
 
-      <div class="div4">
-        <ion-label class="textePrincipal"> {{event.intitule}}</ion-label>
-      </div>
+        <div class="div4">
+          <ion-label class="textePrincipal"> {{event.intitule}}</ion-label>
+        </div>
 
-      <div class="div5">
-        <div class="element">
-          <ion-label class="texte">Date :<br/><br/>Adresse :</ion-label>
-        </div>
-        <div class="resultat">
-          <ion-label class="texte">
-            Le {{event.dateDebut |  date:'dd/MM/y hh:mm'}} <br/><br/>{{event.adresse}} {{event.ville}} {{event.codePostal}} {{event.complement}}
-          </ion-label>
+        <div class="div5">
+          <div class="element">
+            <ion-label class="texte">Date :<br/><br/>Adresse :</ion-label>
+          </div>
+          <div class="resultat">
+            <ion-label class="texte">
+              Le {{event.dateDebut | date:'dd/MM/y hh:mm'}} <br/><br/>{{event.adresse}} {{event.ville}} {{event.codePostal}}
+              {{event.complement}}
+            </ion-label>
+          </div>
         </div>
       </div>
-    </div>
     </div>
     <!-- quand l'utilisateur n'a pas d'évenements à venir -->
     <div *ngIf="events === undefined" class="resultat">
 
-        Vous n'avez aucun évenement à venir !
-   
+      Vous n'avez aucun évenement à venir !
+
     </div>
 
   </div>

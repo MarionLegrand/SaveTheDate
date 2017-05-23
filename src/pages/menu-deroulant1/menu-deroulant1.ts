@@ -7,7 +7,7 @@ import { ListeContacts } from '../liste-contacts/liste-contacts';
 import { ListeEvenements } from '../liste-evenements/liste-evenements';
 import { Groupe } from '../groupe/groupe';
 import { CreationEvenement } from '../creation-evenement-total/creation-evenement/creation-evenement';
-
+import { CreerContact } from '../creer-contact/creer-contact'; 
 /**
  * Generated class for the MenuDeroulant1 page.
  *
@@ -19,6 +19,7 @@ import { CreationEvenement } from '../creation-evenement-total/creation-evenemen
   template: `
     <ion-list>
      <button ion-item (click)="creerEvenement()">Créer un événement</button>
+      <button ion-item (click)="ajouterContact()">Créer un nouveau contact</button>
       <button ion-item (click)="events()">Liste des évènements</button>
       <button ion-item (click)="contacts()">Liste des contacts</button>
       <button ion-item (click)="groups()">Liste des groupes</button>
@@ -36,11 +37,7 @@ export class MenuDeroulant1 {
     console.log('ionViewDidLoad MenuDeroulant1');
   }
 
-  // fermer le menu déroulant 
-  /*
-  close() {
-    this.viewCtrl.dismiss();
-  }*/
+ 
 
   // redirection sur la liste des évènements 
   events() {
@@ -62,9 +59,12 @@ export class MenuDeroulant1 {
     this.navCtrl.push(HomePage);
   }
 
-
   creerEvenement() {
     this.navCtrl.push(CreationEvenement);
+  }
+
+  ajouterContact(){
+     this.navCtrl.push(CreerContact);
   }
 
 }

@@ -2,26 +2,26 @@
   <h2 class="Titre">Save THE Date</h2>
   <h3 class="h3">Création d'un compte</h3>
   <div>
-    <div class="div2">
+    <div >
        <form [formGroup]="fg" (ngSubmit)="validerCreationCompte()">
       <ion-item>
-        <ion-label stacked class="label">Prénom * :</ion-label>
-        <ion-input type="text" class="entree" formControlName="prenom"></ion-input>
+        <ion-label >Prénom * :</ion-label>
+        <ion-input type="text" formControlName="prenom"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked class="label">Nom * :</ion-label>
-        <ion-input type="text" class="entree" formControlName="nom"></ion-input>
+        <ion-label >Nom * :</ion-label>
+        <ion-input type="text"  formControlName="nom"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked class="label">Adresse mail * :</ion-label>
-        <ion-input type="text" class="entree" formControlName="mail"></ion-input>
+        <ion-label >Adresse mail * :</ion-label>
+        <ion-input type="text"  formControlName="mail"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked class="label">Mot de passe * :</ion-label>
+        <ion-label >Mot de passe * :</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked class="label">Confirmer le mot de passe * :</ion-label>
+        <ion-label >Confirmer le mot de passe * :</ion-label>
         <ion-input type="password" formControlName="passwordBis"></ion-input>
       </ion-item>
       <button ion-button class="bouton" type="submit" [disabled]="!fg.valid"> Créer votre compte</button>
@@ -30,7 +30,7 @@
     </div>
   </div>
 </ion-content>
-
+<!--
 <ion-footer>
     <ion-label class="basPage" fixed>Mentions légales</ion-label>
-</ion-footer>  
+</ion-footer>  -->

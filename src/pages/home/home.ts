@@ -56,7 +56,7 @@ export class HomePage {
               if (res == true)
                 this.navCtrl.push(SynchroContact);
                 else
-                this.navCtrl.push(Accueil)
+                this.navCtrl.setRoot(Accueil)
             //  this.navCtrl.push(Accueil);
             }, // retour true il y a des contact
             res => { alert(res) } // err pas de contact => go synchro        

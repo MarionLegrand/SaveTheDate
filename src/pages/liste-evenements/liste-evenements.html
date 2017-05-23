@@ -21,7 +21,7 @@
       Evènements Passés ou annulés
     </div>
     <!-- boucle quand l'utilisateur à des évenements à venir -->
-    <div *ngFor="let event of lesEvents" (click)="openEventPage(event.id)">
+    <div *ngFor="let event of lesEvents" > <!--(click)="openEventPage(event.id) -->
 
       <div class="div4">
         <ion-label class="textePrincipal">{{event.intitule}}  </ion-label>      {{event.etat}}
