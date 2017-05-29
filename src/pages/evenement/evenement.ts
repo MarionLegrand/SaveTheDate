@@ -9,8 +9,10 @@ import { EvenementData } from '../../dataStructure/evenement';
 //REST
 import { EvenementProvider } from '../../providers/evenement-provider';
 import { contactData } from '../../dataStructure/contactData';
+import { messageInvitation } from '../../dataStructure/messageInvitation';
 import { Observable } from 'rxjs/Observable';
-
+// Pour les sms
+import { SMS } from '@ionic-native/sms';
 
 /**
  * Generated class for the Evenement page.
@@ -32,16 +34,18 @@ export class Evenement implements OnInit {
   private presents: contactData[];
   private absents: contactData[];
   private sansReponses: contactData[];
+  private messages: messageInvitation[];
 
   private fg: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private provider: EvenementProvider, private alertCtrl: AlertController, private fb: FormBuilder
-    , private modal: ModalController) {
+    , private modal: ModalController, private smsVar: SMS) {
     this.modifier = true; // car disabled = true dans le template pour dire que c'est pas modifiable 
 
     this.absents = new Array<contactData>();
     this.presents = new Array<contactData>();
     this.sansReponses = new Array<contactData>();
+    this.messages = new Array<messageInvitation>();
 
     // mise en place du form builder
     this.fg = fb.group({
@@ -105,7 +109,25 @@ export class Evenement implements OnInit {
     } 
     this.provider.validerEvenement(this.navParams.get('paramId')).subscribe(() => {
       this.loadData();
+      this.provider.getListeAInviter(this.navParams.get('paramId')).subscribe(res => {
+        this.messages = new Array<messageInvitation>();
+        this.messages = res;
+        for(var i = 0; i < this.messages.length; i++) {
+          var message = this.messages[i];
+          this.sendSMS(message.message, message.numero);
+        }
+      });
     });
+  }
+
+  sendSMS(message: string, numero: string){
+    var options={
+      replaceLineBreaks: true, // true to replace \n by a new line, false by default
+      android: {
+        intent: '' // Sends sms without opening default sms app
+      }
+    }
+    this.smsVar.send(numero, message, options);
   }
 
   passerEvenementEtatAnnuler() {

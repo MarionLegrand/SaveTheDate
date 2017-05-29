@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Rx';
 //Datastructure 
 import { EvenementData } from '../dataStructure/evenement';
 import { contactData } from '../dataStructure/contactData';
+import { messageInvitation } from '../dataStructure/messageInvitation';
 /*
 /*
   Generated class for the EvenementProvider provider.
@@ -56,6 +57,11 @@ export class EvenementProvider {
       this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/evenements/' + id + '/getListeSansReponse?token=' + Number(localStorage.getItem('token')))
         .map(res => { return res.json() })
     )
+  }
+
+  getListeAInviter(id: number): Observable<[messageInvitation]> {
+    return this.http.get('http://al2c.dtdns.net/Al2cServer-war/webresources/evenements/' + id + '/getMessagesInvitation?token=' + Number(localStorage.getItem('token')))
+      .map(res => { return res.json() })
   }
 
   validerEvenement(id: number): Observable<void> {

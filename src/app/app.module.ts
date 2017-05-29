@@ -26,7 +26,8 @@ import { CreationEvenementModule } from '../pages/creation-evenement-total/creat
 import { CreationEvenementInvitation } from '../pages/creation-evenement-total/creation-evenement-invitation/creation-evenement-invitation';
 // Ajout contact
 import {CreerContact } from '../pages/creer-contact/creer-contact';
-
+// Pour l'envoie de sms
+import { SMS } from '@ionic-native/sms';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import {CreerContact } from '../pages/creer-contact/creer-contact';
   providers: [
     StatusBar,
     SplashScreen,
+    SMS,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
