@@ -74,7 +74,7 @@
         <ion-card>
           <ion-item>
             <!--<ion-label stacked class="label">Date</ion-label>-->
-            <h3 class="title">{{event.dateDebut | date:'dd/MM/y hh:mm' }}</h3>
+            <h3 >{{event.dateDebut | date:'dd/MM/y hh:mm' }}</h3>
           </ion-item>
         </ion-card>
         </div>
@@ -123,13 +123,13 @@
        </ion-card>
 
         <div *ngIf="modifier== false">
-          <button class="boutonaddtag"  type="submit"> Valider les modifications </button>
+          <button ion-button  class="boutonaddtag"  type="submit"> Valider les modifications </button>
         </div>
       </form>
 
       <h3 class="blanc"> Liste des Invitations </h3>
       <div *ngIf="event.etat !='EN_PREPARATION'">
-        <h4> Presents </h4>
+        <h4 class="gris"> Presents </h4>
         <div *ngFor="let contact of presents">
           <ion-card>
             <ion-item>
@@ -138,7 +138,7 @@
           </ion-card>
         </div>
 
-        <h4> Absents </h4>
+        <h4 class="gris"> Absents </h4>
         <div *ngFor="let contact of absents">
           <ion-card>
             <ion-item>
@@ -154,14 +154,14 @@
         <h4 class="gris"> Liste des Invités</h4>
       </div>
       <div *ngIf="event.etat !='EN_PREPARATION'">
-        <h4> N'ayant pas répondu </h4>
+        <h4 class="gris"> N'ayant pas répondu </h4>
       </div>
       <div *ngFor="let contact of sansReponses">
       <ion-card>
         <ion-row>
           <ion-col col-8>
             <ion-item>
-              <ion-label class="title" ><h3>{{contact?.nom}} {{contact?.prenom}}</h3></ion-label>
+              <ion-label><h3>{{contact?.nom}} {{contact?.prenom}}</h3></ion-label>
             </ion-item>
           </ion-col>
           <div *ngIf="event.etat =='EN_PREPARATION'">
