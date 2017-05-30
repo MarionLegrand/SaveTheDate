@@ -10,7 +10,7 @@
         </div>
       </ion-col>
 
-      <ion-col col-auto >
+      <ion-col col-auto class="blanc" >
         <!--  col-sm-6 push-sm-2 -->
         <h2>Save THE Date</h2>
       </ion-col>
@@ -27,7 +27,7 @@
     <ion-row>
       <ion-col>
       </ion-col>
-      <ion-col col-auto>
+      <ion-col col-auto class="blanc">
         <h3>{{user.nom}} {{user.prenom}}</h3>
       </ion-col>
       <ion-col>
@@ -47,8 +47,9 @@
     </div>
     <!-- boucle quand l'utilisateur à des évenements à venir -->
     <div *ngIf="events != undefined">
-      <div *ngFor="let event of events" (click)="openEventPage(event.id)">
+      <div *ngFor="let event of events" (click)="openEventPage(event.id)" >
 
+     
         <div class="div4">
           <ion-label class="textePrincipal"> {{event.intitule}}</ion-label>
         </div>
@@ -64,6 +65,7 @@
             </ion-label>
           </div>
         </div>
+     
       </div>
     </div>
     <!-- quand l'utilisateur n'a pas d'évenements à venir -->

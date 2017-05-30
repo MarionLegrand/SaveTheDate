@@ -31,6 +31,6 @@
       <ion-input type="text" formControlName="tel"></ion-input>
     </ion-item>
     <button ion-button class="bouton" type="submit" [disabled]="!fg.valid"> Valider </button>
-    <button ion-button class="bouton" type="reset" (click)="annuler()">Annuler</button>
+    <ion-label fixed class="info" (click)="annuler()" > Annuler</ion-label>     
   </form>
 </ion-content>
