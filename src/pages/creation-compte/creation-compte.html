@@ -2,7 +2,7 @@
   <h2 class="Titre">Save THE Date</h2>
   <h3 class="h3">Création d'un compte</h3>
   <div>
-    <div >
+    <div class="div2">
        <form [formGroup]="fg" (ngSubmit)="validerCreationCompte()">
       <ion-item>
         <ion-label >Prénom * :</ion-label>
@@ -24,8 +24,8 @@
         <ion-label >Confirmer le mot de passe * :</ion-label>
         <ion-input type="password" formControlName="passwordBis"></ion-input>
       </ion-item>
-      <button ion-button class="bouton" type="submit" [disabled]="!fg.valid"> Créer votre compte</button>
-      <button ion-button class="bouton" type="reset" (click)="annuler()" >Annuler</button>
+      <button ion-button class="bouton2" type="submit" [disabled]="!fg.valid"> Créer votre compte</button>
+      <ion-label fixed class="info" (click)="annuler()" >Annuler</ion-label>
        </form>
     </div>
   </div>

@@ -6,19 +6,36 @@
 
 </ion-header>
 <ion-content *ngIf="currentContact != undefined">
+<div class="div1">
+    <img src="assets/icon/list.jpg" class="photo">
+      <!--  <h2>Hariniony Andriamananarivo</h2> -->
+     <h2> {{currentContact.nom}} {{currentContact.prenom}} </h2>
+</div>
 
-    <ion-card>
+<ion-list *ngIf="currentContact.canaux != undefined" padding class="list">
+        <ion-list-header class="header">
+            <h5 class="title">Coordonnées</h5>
+        </ion-list-header>
+        <ion-item *ngFor="let can of currentContact.canaux">
+             <ion-label class="title"><h3>{{can.typeCanal}} : {{can.valeur}}</h3></ion-label>
+        </ion-item>      
+</ion-list>
+<ion-list padding class="list1">
+        <ion-list-header class="header">
+             <h5 class="title">TAGS du contact</h5>
+        </ion-list-header>
+        <button ion-button class="boutonaddtag" (click)="ajouterTag()">Ajouter un tag à ce contact</button>
+        <div *ngIf="tagsContact != undefined">
+            <div *ngFor="let tag of tagsContact">
+            <ion-item>
+                   <ion-label class="title"><h3>{{tag.libelle}}</h3></ion-label>
+            </ion-item>
+                <button ion-button class="boutondeletetag" (click)="supprimerTag(tag.id)"> Retirer le tag </button>
+            </div>
+        </div>
+</ion-list>
 
-        <ion-avatar>
-            < <img src="assets/img/hary.jpg" class="photo">
-        </ion-avatar>
-
-        <ion-item>
-            <!--  <h2>Hariniony Andriamananarivo</h2> -->
-            <h2> {{currentContact.nom}} {{currentContact.prenom}} </h2>
-        </ion-item>
-    </ion-card>
-
+<!--
     <ion-card *ngIf="currentContact.canaux != undefined">
         <ion-list>
             <ion-item>
@@ -26,14 +43,13 @@
             </ion-item>
 
             <div>
-
                 <ion-item *ngFor="let can of currentContact.canaux">
                     <ion-label>{{can.typeCanal}} : {{can.valeur}}</ion-label>
                 </ion-item>
 
             </div>
         </ion-list>
-    </ion-card>
+    </ion-card>!
 
 
 
@@ -53,5 +69,5 @@
                 </div>
             </div>
         </ion-list>
-    </ion-card>
+    </ion-card>-->
 </ion-content>

@@ -1,29 +1,18 @@
 /* IMAGE */
 
+
 .image{
     width: 100% ;
-    background-image: url('../../www/assets/img/logo.png');
-    -webkit-background-size: 100%;
-    -moz-background-size: 100%;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  background-position: center center;
-   background-color: white;
 }
 
 /* STRUCTURE */
 
 .base{
-   background-color: white;
-   margin-bottom: 0px !important;  
-   
-   background-image: url('../assets/img/logo.png');
-    -webkit-background-size: 100%;
-    -moz-background-size: 100%;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: center center;
+   background-color: darkred;
+   margin-bottom: 0px !important;
 }
+
+
 
 .basPage{
     font-size: x-small;
@@ -40,9 +29,10 @@
     width: 50%;
 }
 
+
 .div{
     position: fixed;
-    height: 40% !important;
+    height: 45% !important;
     width: 80% !important;
     margin-left: 10%;
     margin-right: 10%;
@@ -52,11 +42,10 @@
 }
 
 /* ECRITURE */
-
 .info{
     font-size: x-small;
     color: dodgerblue !important;
-    margin-left: 17%;
+    margin-left: 13%;
     width : 80% !important;
     text-align: center;
 }
@@ -69,6 +58,7 @@
     color: darkred ;
     font-size: x-small;
 }
+
 
 .Titre{
     text-align: center;

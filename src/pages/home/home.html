@@ -1,40 +1,27 @@
 <ion-content class="base">
-  <!-- <img src="assets/img/logo.png" class='image'>-->
+  <img src="assets/img/logo.png" class='image'>
   <div>
     <div class="div">
-
-      <h1> Save The Date </h1>
       <form [formGroup]="monFormGroup" (ngSubmit)="connexion()">
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label stacked >Adresse mail :</ion-label>
+              <ion-label stacked class="label">Adresse mail :</ion-label>
               <ion-input type="text" formControlName="mail"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label stacked >Mot de passe :</ion-label>
+              <ion-label stacked class="label">Mot de passe :</ion-label>
               <ion-input type="password" formControlName="password"></ion-input>
             </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-12>
-            <button ion-button  type="Submit" [disabled]="!monFormGroup.valid">Connexion</button>
+            <button ion-button  class="bouton" type="Submit" [disabled]="!monFormGroup.valid">Connexion</button>
+            <ion-label fixed class="info" (click)="creerCompte()" >Pas de compte ? Créez un compte !</ion-label>
           </ion-col>
         </ion-row>
       </form>
-      <ion-row>
-        <ion-col col-12>
-          <button ion-button (click)="creerCompte()"> Créez un compte !</button>
-        </ion-col>
-      </ion-row>
-
-
-
     </div>
   </div>
 </ion-content>
 <!--
 <ion-footer>
-  <ion-label class="basPage" fixed>Mentions légales</ion-label>
+  <ion-label class="basPage" fixed> Mentions légales</ion-label>
 </ion-footer>-->
