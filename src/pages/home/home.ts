@@ -53,9 +53,9 @@ export class HomePage {
           // on le redirige vers la page de synchronisation 
           this.provider.synchroniserContacts().subscribe(
             res => {
-              if (res == true)
-                this.navCtrl.push(SynchroContact);
-                else
+             // if (res == true)
+             //   this.navCtrl.push(SynchroContact);
+             //   else
                 this.navCtrl.setRoot(Accueil)
             //  this.navCtrl.push(Accueil);
             }, // retour true il y a des contact

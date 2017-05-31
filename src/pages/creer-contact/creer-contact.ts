@@ -70,7 +70,7 @@ export class CreerContact {
 
     this.provider.creerContact(contact).subscribe(
       res => {
-        alert("Contact créer ! ");
+        alert("Contact créé !");
         this.navCtrl.push(Accueil);
       },
       err => {
