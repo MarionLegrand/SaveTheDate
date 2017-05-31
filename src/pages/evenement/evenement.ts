@@ -85,6 +85,14 @@ export class Evenement implements OnInit {
     let modal = this.modal.create(ModalAjoutInvitation, { id: this.navParams.get('paramId') });
     modal.onDidDismiss(() => {
       this.loadData();
+      this.provider.getListeAInviter(this.navParams.get('paramId')).subscribe(res => {
+        this.messages = new Array<messageInvitation>();
+        this.messages = res;
+        for(var i = 0; i < this.messages.length; i++) {
+          var message = this.messages[i];
+          this.sendSMS(message.message, message.numero);
+        }
+      });
     })
     modal.present();
   }
