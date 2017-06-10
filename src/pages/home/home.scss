@@ -12,8 +12,6 @@
    margin-bottom: 0px !important;
 }
 
-
-
 .basPage{
     font-size: x-small;
     text-align: center;
@@ -23,42 +21,30 @@
     margin-right: 35%;
 }
 
-.bouton{
-    margin-top: 15%;
+.bouton1{
+    margin-top: 10%;
     margin-left: 25%;
     width: 50%;
 }
 
+.bouton2{
+    margin-top: 5%;
+    margin-left: 25%;
+    width: 50%;
+}
 
 .div{
     position: fixed;
-    height: 45% !important;
+    height: 50% !important;
     width: 80% !important;
     margin-left: 10%;
     margin-right: 10%;
-    margin-top: 20%;
+    margin-top: 15%;
     background-color: white;
     opacity: 0.8;
 }
 
 /* ECRITURE */
-.info{
-    font-size: x-small;
-    color: dodgerblue !important;
-    margin-left: 13%;
-    width : 80% !important;
-    text-align: center;
-}
-
-.info:hover{
-    text-decoration: underline;
-}
-
-.label{
-    color: darkred ;
-    font-size: x-small;
-}
-
 
 .Titre{
     text-align: center;

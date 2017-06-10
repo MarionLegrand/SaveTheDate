@@ -8,11 +8,11 @@
 <ion-content padding >
   <div *ngFor="let contact of lesContacts">
 
-    <ion-item (click)="profil(contact.id)" class="prof">
-       <ion-avatar item-left class="bord">
+    <ion-item (click)="profil(contact.id)" class="liste-contacts-prof">
+       <ion-avatar item-left class="liste-contacts-bord">
          <img src="assets/icon/list.jpg">
         </ion-avatar>
-       <p class="nom">{{contact.nom}} {{contact.prenom}}</p>
+       <p class="liste-contacts-nom">{{contact.nom}} {{contact.prenom}}</p>
     </ion-item>
 
   </div>

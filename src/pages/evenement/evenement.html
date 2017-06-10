@@ -23,10 +23,10 @@
 
         
         <div *ngIf="modifier == true">
-          <button ion-button  class="boutonaddtag" (click)="activerModification()">Activer la modification</button>
+          <button ion-button  class="evenement-bouton-add-tag" (click)="activerModification()">Activer la modification</button>
         </div>
         <div *ngIf="modifier == false">
-          <button ion-button  class="boutondesactivate" (click)="desactiverModification()">Desactiver la modification</button>
+          <button ion-button  class="evenement-bouton-desactivate" (click)="desactiverModification()">Desactiver la modification</button>
         </div>
 
         <ion-card>
@@ -123,7 +123,7 @@
        </ion-card>
 
         <div *ngIf="modifier== false">
-          <button ion-button  class="boutonaddtag"  type="submit"> Valider les modifications </button>
+          <button ion-button  class="evenement-bouton-add-tag"  type="submit"> Valider les modifications </button>
         </div>
       </form>
 
@@ -146,7 +146,6 @@
             </ion-item>
           </ion-card>
         </div>
-  
       </div>
 
       <!-- si on est en préparation, les contacts n'ont pas encore répondu donc c'est la liste des invités -->
@@ -166,7 +165,7 @@
           </ion-col>
           <div *ngIf="event.etat =='EN_PREPARATION'">
             <ion-col>
-              <button ion-button  class="boutonanulinvit" small (click)="annulerInvitation(contact)"> Retirer </button>
+              <button ion-button  class="evenement-bouton-anul-invit" small (click)="annulerInvitation(contact)"> Retirer </button>
             </ion-col>
           </div>
         </ion-row>
@@ -175,17 +174,17 @@
 
 
       <div *ngIf="event.etat != 'ANNULER'">
-        <button ion-button   class="boutonaddtag"  (click)="ajouterInvitations()"> Ajouter des invités </button>
+        <button ion-button   class="evenement-bouton-add-tag"  (click)="ajouterInvitations()"> Ajouter des invités </button>
       </div>
 
 
       <!-- cas evenement en préparation => on lui propose un bouton qui lui permettra de valider et de passer
       dans l'état & venir -->
       <div *ngIf="event.etat == 'EN_PREPARATION'">
-        <button ion-button  class="boutonvalid"  (click)="passerEvenementEtatAVenir()"> Valider votre évènement afin de lancer les invitations</button>
+        <button ion-button  class="evenement-bouton-valid"  (click)="passerEvenementEtatAVenir()"> Valider votre évènement afin de lancer les invitations</button>
       </div>
       <div *ngIf="event.etat == 'A_VENIR'">
-        <button ion-button class="boutonanulinvit"  (click)="passerEvenementEtatAnnuler()"> Annuler l'événement</button>
+        <button ion-button class="evenement-bouton-anul-invit"  (click)="passerEvenementEtatAnnuler()"> Annuler l'événement</button>
       </div>
 
       <!--  TODO modules -->

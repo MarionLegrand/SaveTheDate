@@ -1,9 +1,11 @@
-.icone-right{
+/*
+.icone-right {
       font-size: 30px !important;
       margin-left : 200px !important;
 }
+*/
 
-.photo{
+.contact-photo {
     width:125px !important;
     height : 125px!important;
     display: block;
@@ -11,63 +13,66 @@
     border-color: black;
     border-width : 2px; 
     border-style : solid;
-    
 }
 
-.div1{
+.contact-div {
       background-color: lightgrey;
       text-align :center;
       padding-top : 70px;
       padding-bottom: 20px!important;
 }
 
-.navbar2{
+/*
+.navbar2 {
     padding-top : 0px;
 }
+*/
 
-.header{
+.contact-header {
     text-align : left;
     background-color: #F0F0F0;
 }
 
-.title{
+.contact-title {
     color : black  !important;
 }
 
-.list{
+.contact-list {
     display :block;
     padding : 0px !important;
     margin-bottom: 10px !important; 
     margin-top: 0px !important;
 }
 
-
-.list1{
+/*
+.list1 {
     display :block;
     padding : 0px !important;
     margin-bottom: 15px !important; 
     margin-top: 0px !important;
 }
-.icone-right2{
+
+.icone-right2 {
       font-size: 30px !important;
       margin-right : 20px !important;
       color : black;
       padding-top : 0px;
 }
 
-.thumbnail{
+.thumbnail {
     border-color: black !important;
     border-width : 2px !important; 
     border-style : solid !important;
 }
+*/
 
-.boutonaddtag{
+.contact-bouton-add-tag {
     margin-left: 10%;
     width: 80%;
     background-color: mediumseagreen;
 }
 
-.boutondeletetag{
+.contact-bouton-delete-tag {
     margin-left: 25%;
     width: 50%;
     background-color:  #f44336;

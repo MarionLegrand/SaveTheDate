@@ -1,3 +1,54 @@
-page-liste-evenements {
+.liste-evenements-div1 {
+    background-color: #f44336;
+    width: 100%;
+    margin-left: 0px !important;
+    font-size: large;
+    border-style: double;
+    border-color: #f44336;
+    border-width: 10px;
+    margin-top : 22px;
+}
 
+.liste-evenements-div2 {
+    background-color: lightgrey;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top:5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.liste-evenements-div3 {
+    background-color: white;
+    border-color: lightgrey;
+    border-style: solid;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 1px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.liste-evenements-element {
+    display: inline-block;
+    width: 30%;
+    text-align: right;
+}
+
+.liste-evenements-resultat {
+    display: inline-block;
+    width: 60%;
+    margin-left: 1%;
+}
+
+.liste-evenements-texte {
+    display: inline-block;
+    font-size: small !important;
+    color: black !important;
+    margin-left: 10px;
+    width: 70%;
+}
+
+.liste-evenements-fond {
+    background-color: white;
 }

@@ -14,3 +14,33 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.base {
+    background-color: darkred;
+    margin-bottom: 0px !important;
+}
+
+.blanc {
+    color: white;
+}
+
+.gris{
+    color: grey;
+}
+
+.label {
+    color: darkred ;
+    font-size: x-small;
+}
+
+.info{
+    font-size: x-small;
+    color: dodgerblue !important;
+    margin-left: 13%;
+    width : 80% !important;
+    text-align: center;
+}
+
+.info:hover{
+    text-decoration: underline;
+}

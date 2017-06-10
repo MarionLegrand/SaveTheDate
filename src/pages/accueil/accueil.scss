@@ -1,6 +1,6 @@
 /* IMAGE */
 
-.icone{
+.accueil-icone {
     font-size: 30px !important;
     color : white !important;
     margin-left: 8px;
@@ -9,6 +9,7 @@
 
 /* STRUCTURE */
 
+/*
 .card-1 {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -18,7 +19,7 @@
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-.alerte{
+.alerte {
     text-align: left;
     margin-left: 3%;
     line-height: 25px;
@@ -29,13 +30,9 @@
     margin-bottom: 1px;
     margin-top: 1px;
 }
+*/
 
-.base{
-   background-color: darkred;
-   margin-bottom: 0px !important;
-}
-
-.div3{
+.accueil-div1 {
     background-color: #f44336;
     width: 100%;
     margin-left: 0px !important;
@@ -46,7 +43,7 @@
     margin-top : 22px;
 }
 
-.div4{
+.accueil-div2 {
     background-color: lightgrey;
     margin-left: 2%;
     margin-right: 2%;
@@ -55,7 +52,7 @@
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
-.div5{
+.accueil-div3 {
     background-color: white;
     border-color: lightgrey;
     border-style: solid;
@@ -66,28 +63,25 @@
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
-.blanc{
-    color: white;
-}
-
-.element{
+.accueil-element {
     display: inline-block;
     width: 30%;
     text-align: right;
-    float: left ;
 }
 
-.entete{
+/*
+.entete {
     width: 70% !important;
     height: 70px;
     display: inline-block;
 }
+*/
 
-.fond{
+.accueil-fond {
     background-color: white;
 }
 
-.rond{
+.accueil-rond {
     border-style: solid;
     background-color: black;
     border-color: transparent !important;
@@ -97,9 +91,20 @@
     display: inline-block;
 }
 
+.accueil-parametres {
+    position: left;
+    margin-left: 10%;
+}
+
+.accueil-menu {
+    position: right;
+    margin-right: 10%;
+}
+
 /* ECRITURE */
 
-.message{
+/*
+.message {
     font-size: small !important;
     text-align: left;
     margin-left: 10%;
@@ -112,7 +117,7 @@
     background-color: lightgray;
 }
 
-.msg{
+.msg {
     display: inline-block;
     float: right;
     font-size: small;
@@ -123,24 +128,30 @@
     margin-top:2%;
     margin-left: 10% !important;
 }
+*/
 
-.resultat{
+.accueil-resultat {
     display: inline-block;
     width: 60%;
     margin-left: 1%;
 }
 
-.textePrincipal{
+.accueil-textePrincipal {
     text-align: center;
     line-height: 35px;
     color: black !important;
     margin-bottom: 0px !important;
 }
 
-.texte{
+.accueil-texte {
     display: inline-block;
     font-size: small !important;
     color: black !important;
     margin-left: 10px;
     width: 70%;
+}
+
+.accueil-none-event {
+    text-align: center;
+    margin-top: 5%;
 }

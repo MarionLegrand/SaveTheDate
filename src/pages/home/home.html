@@ -7,14 +7,14 @@
           <ion-col>
             <ion-item>
               <ion-label stacked class="label">Adresse mail :</ion-label>
-              <ion-input type="text" formControlName="mail"></ion-input>
+              <ion-input type="email" formControlName="mail"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label stacked class="label">Mot de passe :</ion-label>
               <ion-input type="password" formControlName="password"></ion-input>
             </ion-item>
-            <button ion-button  class="bouton" type="Submit" [disabled]="!monFormGroup.valid">Connexion</button>
-            <ion-label fixed class="info" (click)="creerCompte()" >Pas de compte ? Créez un compte !</ion-label>
+            <button ion-button class="bouton1" type="Submit" [disabled]="!monFormGroup.valid">Connexion</button>
+            <button ion-button class="bouton2" type="button" (click)="creerCompte()" >Inscription</button>
           </ion-col>
         </ion-row>
       </form>

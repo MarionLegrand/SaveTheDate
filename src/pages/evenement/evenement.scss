@@ -1,29 +1,29 @@
-.boutondesactivate{
+.evenement-bouton-desactivate {
     margin-left: 10%;
     width: 80%;
     background-color:  #f44336;
 }
 
-.boutonanulinvit{
+.evenement-bouton-anul-invit {
     margin-left: 15%;
     background-color:  #f44336;
 }
 
-.gris{
-    color: grey;
-}
-
-.boutonvalid{
+.evenement-bouton-valid {
     font-size : 9px;
     width: 100%;
     background-color: mediumseagreen;
 }
 
-
-
-.message{
+.evenement-message {
     height : auto ;
     white-space: pre-wrap;
     background-color: white;
     margin-top : 0px;
-    }
+}
+
+.evenement-bouton-add-tag {
+    margin-left: 10%;
+    width: 80%;
+    background-color: mediumseagreen;
+}
