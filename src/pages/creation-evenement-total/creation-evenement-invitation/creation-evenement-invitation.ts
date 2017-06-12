@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 
 import { Accueil } from '../../accueil/accueil';
 
 // REST
 import { CreationEvenementInvitationProvider } from '../../../providers/creation-evenement-invitation-provider';
+import { ISubscription } from "rxjs/Subscription";
 
 // DataStructure
 import { contactData } from '../../../dataStructure/contactData';
@@ -21,7 +22,7 @@ import { EvenementData } from '../../../dataStructure/evenement';
   templateUrl: 'creation-evenement-invitation.html',
   providers: [CreationEvenementInvitationProvider]
 })
-export class CreationEvenementInvitation implements OnInit {
+export class CreationEvenementInvitation implements OnInit, OnDestroy {
 
   invite: contactData[];
   tagNonInvite: Tag[];
@@ -35,6 +36,8 @@ export class CreationEvenementInvitation implements OnInit {
   evenement: EvenementData;
 
   private msg: String;
+
+  private subs: ISubscription[]; // subscribption arrays 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private modalCtrl: ModalController,
     private provider: CreationEvenementInvitationProvider) {
@@ -50,6 +53,7 @@ export class CreationEvenementInvitation implements OnInit {
     this.removePostTags = new Array<Tag>();
 
     this.msg = '';
+    this.subs = new Array<ISubscription>();
   }
 
   ionViewDidLoad() {
@@ -61,8 +65,17 @@ export class CreationEvenementInvitation implements OnInit {
     this.loadData();
 
     // récupération pour le messages
-    this.provider.getMessage(this.navParams.get('id')).subscribe(
-    res => { this.evenement = res })
+    var i = this.provider.getMessage(this.navParams.get('id')).subscribe(
+      res => { this.evenement = res });
+
+    this.subs.push(i);
+  }
+
+  ngOnDestroy() {
+    this.subs.forEach(elem => {
+      if (elem != null)
+        elem.unsubscribe();
+    })
   }
 
   valider() {
@@ -71,8 +84,9 @@ export class CreationEvenementInvitation implements OnInit {
   }
 
   validerInvitation() {
-    this.provider.setActionInvitation(this.navParams.get('id'), this.addPostContacts, this.addPostTags, this.removePostContact, this.removePostTags,this.evenement)
-      .subscribe(res => { this.loadData(); })
+    var i = this.provider.setActionInvitation(this.navParams.get('id'), this.addPostContacts, this.addPostTags, this.removePostContact, this.removePostTags, this.evenement)
+      .subscribe(res => { this.loadData(); });
+    this.subs.push(i);
   }
 
 
@@ -126,13 +140,14 @@ export class CreationEvenementInvitation implements OnInit {
     this.removePostContact = new Array<contactData>();
     this.removePostTags = new Array<Tag>();
 
-    this.provider.getDifferentListeInvite(this.navParams.get('id')).subscribe(
+    var x = this.provider.getDifferentListeInvite(this.navParams.get('id')).subscribe(
       data => {
         this.invite = data[0];
         this.contactNonInvite = data[1];
         this.tagNonInvite = data[2];
         console.log(this.evenement.message);
       })
+    this.subs.push(x);
   }
 
   /*
@@ -155,6 +170,5 @@ export class CreationEvenementInvitation implements OnInit {
     });
     alert.present();
   }
-
 }
 

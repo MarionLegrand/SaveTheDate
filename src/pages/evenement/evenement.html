@@ -74,7 +74,7 @@
         <ion-card>
           <ion-item>
             <!--<ion-label stacked class="label">Date</ion-label>-->
-            <h3 >{{event.dateDebut | date:'dd/MM/y hh:mm' }}</h3>
+            <h3 >{{event.dateDebut | date:'dd/MM/yyyy H:m' }}</h3>
           </ion-item>
         </ion-card>
         </div>
@@ -85,7 +85,7 @@
         <ion-card>
           <ion-item>
             <!--<ion-label  stacked class="label">Date</ion-label>-->
-            <ion-datetime displayFormat="DD/MM/YYYY HH:mm" formControlName="date"></ion-datetime>
+            <ion-datetime displayFormat="DD/M/YYYY H:m" min="2017" max="2020-12-31" formControlName="date"></ion-datetime>
           </ion-item>
          </ion-card>
         </div>

@@ -59,7 +59,7 @@
 
         <ion-item>
           <ion-label>Date</ion-label>
-          <ion-datetime formControlName="date" displayFormat="DD/MM/YYYY HH:mm" ></ion-datetime>
+          <ion-datetime formControlName="date" displayFormat="DD/M/YYYY H:m" min="2017" max="2020-12-31"></ion-datetime>
         </ion-item>
 
         <button ion-button type="submit" class="creation-evenement-bout-on-ev"  [disabled]="!fg.valid"> Créer votre Evenement !</button>

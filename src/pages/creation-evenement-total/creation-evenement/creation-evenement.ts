@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 // pages
 import { CreationEvenementModule } from '../creation-evenement-module/creation-evenement-module';
 // REST 
 import { CreationEvenementProvider } from '../../../providers/creation-evenement-provider';
-
+import { ISubscription } from "rxjs/Subscription";
 // DataStrucutre 
 import { EvenementData } from '../../../dataStructure/evenement';
 
@@ -22,10 +22,14 @@ import { EvenementData } from '../../../dataStructure/evenement';
   templateUrl: 'creation-evenement.html',
   providers: [CreationEvenementProvider]
 })
-export class CreationEvenement {
+export class CreationEvenement implements OnDestroy {
 
   private fg: FormGroup;
-  private idEvent:number;
+  private idEvent: number;
+  private subs: ISubscription[];
+
+  // Variable de subscription
+  private subscription: ISubscription;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FormBuilder
     , private provider: CreationEvenementProvider, public alertCtrl: AlertController) {
@@ -35,22 +39,29 @@ export class CreationEvenement {
       adresse: ['', Validators.required],
       complement: [''],
       ville: ['', Validators.required],
-      cp: ['', Validators.compose([Validators.maxLength(5),Validators.minLength(5)])], // TODO géré minimun 5 cracatères code postal 
-      date: ['', Validators.required],
+      cp: ['', Validators.compose([Validators.maxLength(5), Validators.minLength(5)])], // TODO géré minimun 5 cracatères code postal 
+      date: [new Date().toISOString(), Validators.required],
       nombrePlace: ['', Validators.required]
     })
+    this.subs = new Array<ISubscription>();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreationEvenement');
   }
 
+  ngOnDestroy() {
+    this.subs.forEach(elem => {
+      if (elem != null)
+        elem.unsubscribe();
+    })
+  }
 
   valider() {
     var s = this.fg.get('date').value;
     var date = new Date(Date.parse(s)).valueOf();
     var dateNow = new Date().valueOf();
-
+    console.log(date);
     if (date < dateNow) {
       console.log(date + " okok " + dateNow);
       this.showAlertDate();
@@ -65,7 +76,7 @@ export class CreationEvenement {
 
       if (this.fg.get('complement').value != '')
         event.complement = this.fg.get('complement').value;
-        else
+      else
         event.complement = " ";
 
       event.ville = this.fg.get('ville').value;
@@ -73,13 +84,14 @@ export class CreationEvenement {
       event.adresse = this.fg.get('adresse').value;
 
       // on envoi au provider qui créer l'événement 
-      this.provider.creerEvenement(event).subscribe(
-        res => { this.idEvent = res, this.navCtrl.setRoot(CreationEvenementModule,{id:this.idEvent});},
+      var x = this.provider.creerEvenement(event).subscribe(
+        res => { this.idEvent = res, this.navCtrl.setRoot(CreationEvenementModule, { id: this.idEvent }); },
         err => {
           alert("erreur ! ");
           return;
         }
-      )     
+      )
+      this.subs.push(x);
     }
   }
 

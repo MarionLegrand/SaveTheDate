@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 // rest
 import { GroupeProvider } from '../../providers/groupe-provider';
+import { ISubscription } from "rxjs/Subscription";
 //dataStrucuture
 import { Tag } from '../../dataStructure/tag';
 //page 
@@ -22,9 +23,13 @@ import { CreationTag } from '../creation-tag/creation-tag';
 })
 export class Groupe implements OnInit, OnDestroy {
 
-  lesTags: Tag[];
+  private lesTags: Tag[];
+  private subs: ISubscription[];
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private provider: GroupeProvider, private modalCtrl: ModalController) {
     this.lesTags = new Array<Tag>();
+    this.subs = new Array<ISubscription>();
   }
 
   ionViewDidLoad() {
@@ -35,41 +40,45 @@ export class Groupe implements OnInit, OnDestroy {
     this.loadData();
   }
 
-  ngOnDestroy(){
-    // TODO voir pour les unsubscribe
+  ngOnDestroy() {
+    this.subs.forEach(elem => {
+      if (elem != null)
+        elem.unsubscribe();
+    })
   }
 
-/*
-  To TEST 
-  AJoute le tag directement depuis cette page plutot que de passer par une modale 
-*/
-  creerTag(lib:string) {
+  /*
+    AJoute le tag directement depuis cette page plutot que de passer par une modale 
+  */
+  creerTag(lib: string) {
     let tag = new Tag();
     tag.libelle = lib;
 
-    if(tag.libelle.length == 0){
+    if (tag.libelle.length == 0) {
       alert("Vous n'avez rien saisi !!");
       return;
     }
-    
-    this.provider.creerTag(tag).subscribe(
+
+    var x = this.provider.creerTag(tag).subscribe(
       res => {
         this.lesTags = null;
         this.loadData();
-      })
-}
+      });
+    this.subs.push(x);
+  }
 
 
 
-loadData(){
-  this.provider.getTags().subscribe(res => { this.lesTags = res })
-}
+  loadData() {
+    var x = this.provider.getTags().subscribe(res => { this.lesTags = res });
+    this.subs.push(x);
+  }
 
-/*
-TODO safe delete sur le serveur 
-*/
-supprimerTag(){
+  /*
+  TODO safe delete sur le serveur 
+  */
+  supprimerTag() {
 
-}
+  }
 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms'; // besoin de ça pour récupèrer infos formulaires
 // Page de redirection 
@@ -6,6 +6,7 @@ import { Accueil } from '../accueil/accueil';
 import { CreationCompte } from '../creation-compte/creation-compte';
 // REST 
 import { AuthentificationProvider } from '../../providers/authentification-provider';
+import { ISubscription } from "rxjs/Subscription";
 import { SynchroContact } from '../synchro-contact/synchro-contact'; // page affiché quand l'utilisateur n'a pas de contact => première connexion 
 
 @Component({
@@ -13,10 +14,11 @@ import { SynchroContact } from '../synchro-contact/synchro-contact'; // page aff
   templateUrl: 'home.html',
   providers: [AuthentificationProvider]
 })
-export class HomePage {
+export class HomePage implements OnDestroy {
 
   private monFormGroup: FormGroup;
   private num: number;
+  private subs: ISubscription[];
 
   constructor(public navCtrl: NavController, private fb: FormBuilder,
     private provider: AuthentificationProvider, public alertCtrl: AlertController) {
@@ -27,13 +29,21 @@ export class HomePage {
     });
 
     this.num = 0;
+    this.subs = new Array<ISubscription>();
+  }
+  
+  ngOnDestroy() {
+    this.subs.forEach(elem => {
+      if (elem != null)
+        elem.unsubscribe();
+    })
   }
 
   // Redirection sur la page d'acceuil après connexion 
   connexion() {
     console.log(this.num);
 
-    this.provider.login(this.monFormGroup.get('mail').value, this.monFormGroup.get('password').value)
+    var x = this.provider.login(this.monFormGroup.get('mail').value, this.monFormGroup.get('password').value)
       .subscribe(res => { // entre ces accolades c'est le cas optimal ou tout fonctionne
 
         /*En gros les requêtes sont asynchrones vers le serveur donc quand on se place ici
@@ -51,16 +61,17 @@ export class HomePage {
 
           // cas de la première connection ou 'utilisateur n'a pas de contacts en bdd
           // on le redirige vers la page de synchronisation 
-          this.provider.synchroniserContacts().subscribe(
+          var y = this.provider.synchroniserContacts().subscribe(
             res => {
-             // if (res == true)
-             //   this.navCtrl.push(SynchroContact);
-             //   else
-                this.navCtrl.setRoot(Accueil)
-            //  this.navCtrl.push(Accueil);
+              // if (res == true)
+              //   this.navCtrl.push(SynchroContact);
+              //   else
+              this.navCtrl.setRoot(Accueil)
+              //  this.navCtrl.push(Accueil);
             }, // retour true il y a des contact
             res => { alert(res) } // err pas de contact => go synchro        
           )
+          this.subs.push(y);
         }
 
       }, err => {
@@ -71,6 +82,7 @@ export class HomePage {
         */
         this.showAlertErreurAuthentification();
       })
+    this.subs.push(x);
   }
 
   // Redirection sur la page de création d'une page 
@@ -88,6 +100,5 @@ export class HomePage {
     });
     alert.present();
   }
-
 }
 

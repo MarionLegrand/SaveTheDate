@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms'; // besoin de ça pour récupèrer infos formulaires
 //pages
@@ -11,6 +11,7 @@ import { EvenementProvider } from '../../providers/evenement-provider';
 import { contactData } from '../../dataStructure/contactData';
 import { messageInvitation } from '../../dataStructure/messageInvitation';
 import { Observable } from 'rxjs/Observable';
+import { ISubscription } from "rxjs/Subscription";
 // Pour les sms
 import { SMS } from '@ionic-native/sms';
 
@@ -26,7 +27,7 @@ import { SMS } from '@ionic-native/sms';
   templateUrl: 'evenement.html',
   providers: [EvenementProvider]
 })
-export class Evenement implements OnInit {
+export class Evenement implements OnInit, OnDestroy {
 
   private event: EvenementData;
   private modifier: boolean;
@@ -37,6 +38,8 @@ export class Evenement implements OnInit {
   private messages: messageInvitation[];
 
   private fg: FormGroup;
+
+  private sub: ISubscription[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private provider: EvenementProvider, private alertCtrl: AlertController, private fb: FormBuilder
     , private modal: ModalController, private smsVar: SMS) {
@@ -58,6 +61,8 @@ export class Evenement implements OnInit {
       message: ['', Validators.required],
       date: ['', Validators.required]
     })
+    this.sub = new Array<ISubscription>();
+
   }
 
 
@@ -67,6 +72,14 @@ export class Evenement implements OnInit {
 
   ngOnInit() {
     this.loadData();
+  }
+
+  ngOnDestroy() {
+    console.log(this.sub);
+    this.sub.forEach(element => {   
+      if (element != null)
+        element.unsubscribe();
+    });
   }
 
   /*
@@ -85,22 +98,25 @@ export class Evenement implements OnInit {
     let modal = this.modal.create(ModalAjoutInvitation, { id: this.navParams.get('paramId') });
     modal.onDidDismiss(() => {
       this.loadData();
-      this.provider.getListeAInviter(this.navParams.get('paramId')).subscribe(res => {
+
+      var i = this.provider.getListeAInviter(this.navParams.get('paramId')).subscribe(res => {
         this.messages = new Array<messageInvitation>();
         this.messages = res;
-        for(var i = 0; i < this.messages.length; i++) {
+        for (var i = 0; i < this.messages.length; i++) {
           var message = this.messages[i];
           this.sendSMS(message.message, message.numero);
         }
       });
+      this.sub.push(i); // on rajoute la subscription au tableau 
     })
     modal.present();
   }
 
   annulerInvitation(c: contactData) {
-    this.provider.annulerInvitation(this.navParams.get('paramId'), c).subscribe(
+    var i = this.provider.annulerInvitation(this.navParams.get('paramId'), c).subscribe(
       res => { this.loadData(); }
     )
+    this.sub.push(i); // on rajoute la subscription au tableau 
   }
 
 
@@ -114,22 +130,24 @@ export class Evenement implements OnInit {
     if (Number(s) < dateNow) {
       this.showAlertErreurDateImpossible();
       return;
-    } 
-    this.provider.validerEvenement(this.navParams.get('paramId')).subscribe(() => {
+    }
+    var x = this.provider.validerEvenement(this.navParams.get('paramId')).subscribe(() => {
       this.loadData();
-      this.provider.getListeAInviter(this.navParams.get('paramId')).subscribe(res => {
+      var j = this.provider.getListeAInviter(this.navParams.get('paramId')).subscribe(res => {
         this.messages = new Array<messageInvitation>();
         this.messages = res;
-        for(var i = 0; i < this.messages.length; i++) {
+        for (var i = 0; i < this.messages.length; i++) {
           var message = this.messages[i];
           this.sendSMS(message.message, message.numero);
         }
       });
+      this.sub.push(j);
     });
+    this.sub.push(x);
   }
 
-  sendSMS(message: string, numero: string){
-    var options={
+  sendSMS(message: string, numero: string) {
+    var options = {
       replaceLineBreaks: true, // true to replace \n by a new line, false by default
       android: {
         intent: '' // Sends sms without opening default sms app
@@ -169,8 +187,9 @@ export class Evenement implements OnInit {
     if (date < dateNow) {
       this.showAlertDate();
     } else {
-      this.provider.modifierEvenement(this.navParams.get('paramId'), newEvent).subscribe(() => { }, err => { alert('Erreur') });
+      var i = this.provider.modifierEvenement(this.navParams.get('paramId'), newEvent).subscribe(() => { }, err => { alert('Erreur') });
       this.loadData();
+      this.sub.push(i);
     }
   }
 
@@ -190,7 +209,7 @@ export class Evenement implements OnInit {
   }
 
   loadData() {
-    this.provider.getDatasEvent(this.navParams.get('paramId')).subscribe(
+    var i = this.provider.getDatasEvent(this.navParams.get('paramId')).subscribe(
       data => {
         this.event = null;
         this.absents = new Array<contactData>();
@@ -203,6 +222,7 @@ export class Evenement implements OnInit {
         this.setValuesForm();
       }
     )
+    this.sub.push(i);
   }
 
 
@@ -240,12 +260,13 @@ export class Evenement implements OnInit {
         text: 'Oui',
         role: null,
         handler: () => {
-          this.provider.annulerEvenement(this.navParams.get('paramId')).subscribe(() => {
+          var i = this.provider.annulerEvenement(this.navParams.get('paramId')).subscribe(() => {
             // retour à l'accueil
             this.navCtrl.push(Accueil);
 
             return false;
           });
+          this.sub.push(i);
         }
       }, {
         text: 'Non',

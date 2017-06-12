@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 // REST
 import { CreationEvenementInvitationProvider } from '../../providers/creation-evenement-invitation-provider'; // on le réutilise car + simple
+import { ISubscription } from "rxjs/Subscription";
 // DATASTRUCTURE
 import { Tag } from '../../dataStructure/tag';
 import { contactData } from '../../dataStructure/contactData';
@@ -21,14 +22,16 @@ import { contactData } from '../../dataStructure/contactData';
   templateUrl: 'modal-ajout-invitation.html',
   providers: [CreationEvenementInvitationProvider]
 })
-export class ModalAjoutInvitation implements OnInit {
+export class ModalAjoutInvitation implements OnInit, OnDestroy {
 
   private contactsNonInvites: contactData[];
   private contactAInviter: contactData[];
+  private subs: ISubscription[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController, private provider: CreationEvenementInvitationProvider) {
     this.contactsNonInvites = new Array<contactData>();
     this.contactAInviter = new Array<contactData>();
+    this.subs = new Array<ISubscription>();
   }
 
   ionViewDidLoad() {
@@ -39,13 +42,20 @@ export class ModalAjoutInvitation implements OnInit {
     this.loadData();
   }
 
-  actionArray(contact:contactData) {
+  ngOnDestroy() {
+    this.subs.forEach(elem => {
+      if (elem != null)
+        elem.unsubscribe();
+    })
+  }
+
+  actionArray(contact: contactData) {
     let index = this.contactAInviter.indexOf(contact);
 
-    if(index > -1)
-    this.contactAInviter.splice(index);
+    if (index > -1)
+      this.contactAInviter.splice(index);
     else
-    this.contactAInviter.push(contact);
+      this.contactAInviter.push(contact);
   }
 
 
@@ -55,16 +65,18 @@ export class ModalAjoutInvitation implements OnInit {
 
   valider() {
     console.log(this.contactAInviter);
-    this.provider.inviterContacts(this.view.data.id,this.contactAInviter).subscribe(
+    var x = this.provider.inviterContacts(this.view.data.id, this.contactAInviter).subscribe(
       res => { this.retour(); }
     )
+    this.subs.push(x);
   }
 
   loadData() {
     console.log(this.view.data.id);
-    this.provider.getListeNonInvites(this.view.data.id).subscribe(
+    var x = this.provider.getListeNonInvites(this.view.data.id).subscribe(
       res => { this.contactsNonInvites = res }
     )
+    this.subs.push(x);
   }
 
 

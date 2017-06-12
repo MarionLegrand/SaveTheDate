@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 //Pages
@@ -7,6 +7,7 @@ import { Contact } from '../contact/contact';
 
 // REST 
 import { ListeContactsProvider } from '../../providers/liste-contacts-provider';
+import { ISubscription } from "rxjs/Subscription";
 
 // DataStructure 
 import { contactData } from '../../dataStructure/contactData';
@@ -24,13 +25,13 @@ import { contactData } from '../../dataStructure/contactData';
   templateUrl: 'liste-contacts.html',
   providers: [ListeContactsProvider]
 })
-export class ListeContacts implements OnInit {
+export class ListeContacts implements OnInit, OnDestroy {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private provider: ListeContactsProvider) {
   }
 
-  lesContacts: contactData[];
-
+  private lesContacts: contactData[];
+  private sub: ISubscription;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListeContacts');
@@ -42,9 +43,14 @@ export class ListeContacts implements OnInit {
   */
   ngOnInit() {
     // appel au serveur par le biais du provider
-    this.provider.getUserContacts().subscribe(
+    this.sub = this.provider.getUserContacts().subscribe(
       res => { this.lesContacts = res }
     )
+  }
+
+  ngOnDestroy() {
+    if(this.sub != null)
+    this.sub.unsubscribe();
   }
 
 

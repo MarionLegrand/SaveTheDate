@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms'; // besoin de ça pour récupèrer infos formulaires
 // Page de redirection 
@@ -6,6 +6,7 @@ import { HomePage } from '../home/home';
 import { Accueil } from '../accueil/accueil';
 // providers
 import { InscriptionProvider } from '../../providers/inscription-provider'
+import { ISubscription } from "rxjs/Subscription";
 
 @IonicPage()
 @Component({
@@ -13,9 +14,10 @@ import { InscriptionProvider } from '../../providers/inscription-provider'
   templateUrl: 'creation-compte.html',
   providers: [InscriptionProvider]
 })
-export class CreationCompte {
+export class CreationCompte implements OnDestroy {
 
   private fg: FormGroup;
+  private subs: ISubscription[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public provider: InscriptionProvider, private fb: FormBuilder, private alertCtrl: AlertController) {
@@ -26,11 +28,19 @@ export class CreationCompte {
       password: ['', Validators.required],
       passwordBis: ['', Validators.required]
     })
+    this.subs = new Array<ISubscription>();
   }
 
   // Redirection sur la page de connexion à l'abandon d'une création de compte 
   annuler() {
     this.navCtrl.push(HomePage);
+  }
+
+  ngOnDestroy() {
+    this.subs.forEach(elem => {
+      if (elem != null)
+        elem.unsubscribe();
+    })
   }
 
   // Redirection page de connexion après validation de la création d'un compte 
@@ -44,19 +54,20 @@ export class CreationCompte {
     }
 
     // on envoie les informations au provider
-    this.provider.inscription(this.fg.get('prenom').value,this.fg.get('nom').value, this.fg.get('mail').value,
-    this.fg.get('password').value).subscribe( res => {
-    
-    // si c'est ok alert succes et retour home
-      if(res == true){
-        this.showAlertSuccessCreationCompte();
-        this.navCtrl.push(HomePage);
-      }
-    },
-     err => {   // sinon alert avec erreur 
+    var x = this.provider.inscription(this.fg.get('prenom').value, this.fg.get('nom').value, this.fg.get('mail').value,
+      this.fg.get('password').value).subscribe(res => {
+
+        // si c'est ok alert succes et retour home
+        if (res == true) {
+          this.showAlertSuccessCreationCompte();
+          this.navCtrl.push(HomePage);
+        }
+      },
+      err => {   // sinon alert avec erreur 
         this.showAlertErreurCreationCompte();
       })
-    };
+    this.subs.push(x);
+  };
 
   showAlertErreurMdpDifferent() {
     let alert = this.alertCtrl.create({
@@ -66,8 +77,6 @@ export class CreationCompte {
     });
     alert.present();
   }
-
-
 
   showAlertErreurCreationCompte() {
     let alert = this.alertCtrl.create({

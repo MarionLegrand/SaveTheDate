@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 
@@ -6,6 +6,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EventAbstract } from '../../dataStructure/eventList';
 // REST
 import { ListeEvenementProvider } from '../../providers/liste-evenement-provider'
+import { ISubscription } from "rxjs/Subscription";
 
 
 /**
@@ -20,9 +21,10 @@ import { ListeEvenementProvider } from '../../providers/liste-evenement-provider
   templateUrl: 'liste-evenements.html',
   providers: [ListeEvenementProvider]
 })
-export class ListeEvenements implements OnInit {
+export class ListeEvenements implements OnInit, OnDestroy {
 
   private lesEvents: EventAbstract[];
+  private sub: ISubscription;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private provider: ListeEvenementProvider) {
     this.lesEvents = new Array<EventAbstract>();
@@ -35,10 +37,14 @@ export class ListeEvenements implements OnInit {
 
 
   ngOnInit() {
-    this.provider.getListeEvenementPasser().subscribe(
+    this.sub = this.provider.getListeEvenementPasser().subscribe(
       res => { this.lesEvents = res }
     )
   }
 
+  ngOnDestroy() {
+    if (this.sub != null)
+      this.sub.unsubscribe();
+  }
 
 }

@@ -33,7 +33,7 @@ export class InscriptionProvider {
     let header = new Headers();
     header.append('Content-Type', 'application/json');
 
-                                /*192.168.1.10*/
+                                /*www.savethedate-al2c.fr*/
     return this.http.post('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/utilisateur/inscription', user, header)
       .map(res => {
         // si le code http est 200 => ok

@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Contacts, Contact } from '@ionic-native/contacts';
 // Pages
 import { Accueil } from '../accueil/accueil';
 
-
 // REST
 import { SynchroContactProvider } from '../../providers/synchro-contact-provider';
+import { ISubscription } from "rxjs/Subscription";
 
 // dataStructure
 import { canal } from '../../dataStructure/canal';
@@ -25,20 +25,29 @@ import { contactData } from '../../dataStructure/contactData';
   templateUrl: 'synchro-contact.html',
   providers: [SynchroContactProvider, Contacts]
 })
-export class SynchroContact {
+export class SynchroContact implements OnDestroy{
 
   constructor(private navCtrl: NavController, public navParams: NavParams, private contacts: Contacts, private provider: SynchroContactProvider) {
     this.contactToSend = new Array<contactData>();
+    this.subs = new Array<ISubscription>();
   }
 
   // les contactes trouvés
   public allContacts: Contact[];
-
   private contactToSend: contactData[];
+  private subs: ISubscription[];
 
   ionViewDidLoad() {
 
   }
+
+  ngOnDestroy() {
+    this.subs.forEach(elem => {
+      if (elem != null)
+        elem.unsubscribe();
+    })
+  }
+
 
   /**
    * Cette méthode récupère les datas à propos des contacts du client
@@ -97,17 +106,19 @@ export class SynchroContact {
         }
 
         // on envoi le tableau qui l'enverra au provider
-        this.provider.sendContactsDataToserver(this.contactToSend).subscribe();
+        var x = this.provider.sendContactsDataToserver(this.contactToSend).subscribe();
+        this.subs.push(x);
+
         this.navCtrl.pop(); //test
         this.navCtrl.setRoot(Accueil);
       })
 
   }
 
-/*
-  a supprimer quand on aura terminé pour forcer le passage dans 
-  la synchro
-*/
+  /*
+    a supprimer quand on aura terminé pour forcer le passage dans 
+    la synchro
+  */
   Asupprimer() {
     this.navCtrl.pop(); //test
     this.navCtrl.setRoot(Accueil);
