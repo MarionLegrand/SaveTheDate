@@ -23,60 +23,60 @@ export class EvenementProvider {
   }
 
   getEvenement(id: number): Observable<EvenementData> {
-    return this.http.get('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getEvenement?token=' + Number(localStorage.getItem('token')))
+    return this.http.get('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getEvenement?token=' + Number(localStorage.getItem('token')))
       .map(res => { return res.json() })
   }
 
 
   getListePresent(id: number): Observable<[contactData]> {
-    return this.http.get('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListePresents?token=' + Number(localStorage.getItem('token')))
+    return this.http.get('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListePresents?token=' + Number(localStorage.getItem('token')))
       .map(res => { return res.json() })
   }
 
 
   getListeAbsent(id: number): Observable<[contactData]> {
-    return this.http.get('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListeNonPresents?token=' + Number(localStorage.getItem('token')))
+    return this.http.get('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListeNonPresents?token=' + Number(localStorage.getItem('token')))
       .map(res => { return res.json() })
   }
 
 
   getListeSansReponse(id: number): Observable<[contactData]> {
-    return this.http.get('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListeSansReponse?token=' + Number(localStorage.getItem('token')))
+    return this.http.get('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListeSansReponse?token=' + Number(localStorage.getItem('token')))
       .map(res => { return res.json() })
   }
 
 
   getDatasEvent(id: number) {
     return Observable.forkJoin<EvenementData, [contactData], [contactData], [contactData]>(
-      this.http.get('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getEvenement?token=' + Number(localStorage.getItem('token')))
+      this.http.get('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getEvenement?token=' + Number(localStorage.getItem('token')))
         .map(res => { return res.json() }),
-      this.http.get('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListePresents?token=' + Number(localStorage.getItem('token')))
+      this.http.get('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListePresents?token=' + Number(localStorage.getItem('token')))
         .map(res => { return res.json() }),
-      this.http.get('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListeNonPresents?token=' + Number(localStorage.getItem('token')))
+      this.http.get('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListeNonPresents?token=' + Number(localStorage.getItem('token')))
         .map(res => { return res.json() }),
-      this.http.get('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListeSansReponse?token=' + Number(localStorage.getItem('token')))
+      this.http.get('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListeSansReponse?token=' + Number(localStorage.getItem('token')))
         .map(res => { return res.json() })
     )
   }
 
   getListeAInviter(id: number): Observable<[messageInvitation]> {
-    return this.http.get('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getMessagesInvitation?token=' + Number(localStorage.getItem('token')))
+    return this.http.get('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getMessagesInvitation?token=' + Number(localStorage.getItem('token')))
       .map(res => { return res.json() })
   }
 
   validerEvenement(id: number): Observable<void> {
-    return this.http.put('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/validerEvenement?token=' + Number(localStorage.getItem('token')), null)
+    return this.http.put('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/validerEvenement?token=' + Number(localStorage.getItem('token')), null)
       .map(() => { })
   }
 
   annulerEvenement(id: number): Observable<void> {
-    return this.http.get('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/annulerEvenement?token=' + Number(localStorage.getItem('token')))
+    return this.http.get('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/annulerEvenement?token=' + Number(localStorage.getItem('token')))
       .map(() => { })
   }
 
 
   modifierEvenement(id: number, event: EvenementData): Observable<void> {
-    return this.http.put('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/modifierEvenement?token=' + Number(localStorage.getItem('token')), event)
+    return this.http.put('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/modifierEvenement?token=' + Number(localStorage.getItem('token')), event)
       .map(() => { })
   }
 
@@ -86,7 +86,7 @@ export class EvenementProvider {
 
     let header = new Headers();
     header.append('Content-Type', 'application/json');
-   return this.http.post('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/supprimerInvitationContacts?token=' + Number(localStorage.getItem('token')), arr, header)
+   return this.http.post('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/supprimerInvitationContacts?token=' + Number(localStorage.getItem('token')), arr, header)
       .map(() => { return }, err => alert('erreur'))
   }
 

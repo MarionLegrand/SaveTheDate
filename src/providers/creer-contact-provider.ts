@@ -22,7 +22,7 @@ export class CreerContactProvider {
   creerContact(contact: contactData): Observable<void> {
     let tab = new Array<contactData>();
     tab.push(contact);
-    return this.http.post('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/contacts/creerContacts?token=' + Number(localStorage.getItem('token')), tab)
+    return this.http.post('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/contacts/creerContacts?token=' + Number(localStorage.getItem('token')), tab)
       .map(() => { })
   }
 

@@ -33,8 +33,8 @@ export class InscriptionProvider {
     let header = new Headers();
     header.append('Content-Type', 'application/json');
 
-                                /*www.savethedate-al2c.fr*/
-    return this.http.post('http://www.savethedate-al2c.fr/Al2cServer-war/webresources/utilisateur/inscription', user, header)
+                                /*www.al2c.savethedate-al2c.fr*/
+    return this.http.post('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/utilisateur/inscription', user, header)
       .map(res => {
         // si le code http est 200 => ok
         if (res.status == 200)
