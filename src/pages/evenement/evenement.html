@@ -117,13 +117,30 @@
               <h3>{{event.message}}</h3>
             </div>
           </ion-item>
-
         </ion-card>
 
         <div *ngIf="modifier== false">
           <button ion-button class="evenement-bouton-add-tag" type="submit"> Valider les modifications </button>
         </div>
       </form>
+
+      <div *ngIf="liste.length > 0">
+        <h3>Liste de l'événement</h3>
+        <div *ngFor="let art of liste">
+          <ion-card>
+            <ion-row>
+              <ion-col col-8>
+                <ion-item>
+                  <ion-label>
+                    <h3> Produit :</h3> {{art.produit}}</ion-label>
+                  <ion-label>
+                    <h3> Quantité : </h3> {{art.quantite}}</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </div>
+      </div>
 
       <h3 class="blanc"> Liste des Invitations </h3>
       <div *ngIf="event.etat !='EN_PREPARATION'">
@@ -170,23 +187,6 @@
             </div>
           </ion-row>
         </ion-card>
-      </div>
-
-      <div *ngIf="liste.length > 0">
-        <div *ngFor="let art of liste">
-          <ion-card>
-            <ion-row>
-              <ion-col col-8>
-                <ion-item>
-                  <ion-label>
-                    <h3> Produit :</h3> {{art.produit}}</ion-label>
-                  <ion-label>
-                    <h3> Quantité : </h3> {{art.qte}}</ion-label>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-          </ion-card>
-        </div>
       </div>
 
       <!-- Button ajout d'invitation quand event différent de annulé -->

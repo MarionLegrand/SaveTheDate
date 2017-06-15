@@ -9,7 +9,7 @@ import { EvenementData } from '../../dataStructure/evenement';
 import { article } from '../../dataStructure/article';
 //REST
 import { EvenementProvider } from '../../providers/evenement-provider';
-import { CreationEvenementModuleProvider } from '../../providers/creation-evenement-module-provider'; 
+import { CreationEvenementModuleProvider } from '../../providers/creation-evenement-module-provider';
 
 import { contactData } from '../../dataStructure/contactData';
 import { messageInvitation } from '../../dataStructure/messageInvitation';
@@ -28,7 +28,7 @@ import { SMS } from '@ionic-native/sms';
 @Component({
   selector: 'page-evenement',
   templateUrl: 'evenement.html',
-  providers: [EvenementProvider,CreationEvenementModuleProvider]
+  providers: [EvenementProvider, CreationEvenementModuleProvider]
 })
 export class Evenement implements OnInit, OnDestroy {
 
@@ -40,14 +40,14 @@ export class Evenement implements OnInit, OnDestroy {
   private sansReponses: contactData[];
   private messages: messageInvitation[];
 
-  private liste: article[]; 
+  private liste: article[];
 
   private fg: FormGroup;
 
   private sub: ISubscription[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private provider: EvenementProvider, private alertCtrl: AlertController, private fb: FormBuilder
-    , private modal: ModalController, private smsVar: SMS, private providerListe:CreationEvenementModuleProvider) {
+    , private modal: ModalController, private smsVar: SMS, private providerListe: CreationEvenementModuleProvider) {
     this.modifier = true; // car disabled = true dans le template pour dire que c'est pas modifiable 
 
     this.absents = new Array<contactData>();
@@ -168,7 +168,7 @@ export class Evenement implements OnInit, OnDestroy {
 
   validerModification() {
     let newEvent = this.event;
- 
+
     newEvent.id = this.event.id;
     newEvent.intitule = this.fg.get('intitule').value;
     newEvent.description = this.fg.get('description').value;
@@ -200,7 +200,6 @@ export class Evenement implements OnInit, OnDestroy {
     }
   }
 
-
   /*
      Montre une alerte lorsque la date est inférieure ou égale à celle du jours
    */
@@ -222,10 +221,13 @@ export class Evenement implements OnInit, OnDestroy {
         this.absents = new Array<contactData>();
         this.presents = new Array<contactData>();
         this.sansReponses = new Array<contactData>();
+        this.liste = new Array<article>();
+        
         this.event = data[0];
         this.presents = data[1];
         this.absents = data[2];
         this.sansReponses = data[3];
+        this.liste = data[4];
         this.setValuesForm();
       }
     )

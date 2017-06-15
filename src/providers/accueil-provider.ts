@@ -19,9 +19,9 @@ export class AccueilProvider {
 
   }
 
-/**
- * Retourne les data des l'utilisateur courant 
- */
+  /**
+   * Retourne les data des l'utilisateur courant 
+   */
   getUserData(): Observable<userAccueil> {
     return this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/utilisateur/afficherParametres?token=' + Number(localStorage.getItem('token')))
       .map(res => {
@@ -35,15 +35,33 @@ export class AccueilProvider {
       );
   }
 
-/**
- * Retourne les évenements à venir ou une erreur 
- * Prends en paramètres le token de l'utilisateur courant
- */
+  /**
+   * Retourne les évenements à venir ou une erreur 
+   * Prends en paramètres le token de l'utilisateur courant
+   */
   getEventsAVenirData(): Observable<[EventAbstract]> {
     return this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/getListeEvenementsA_Venir?token=' + Number(localStorage.getItem('token')))
-      .map( res => { return res.json();}
+      .map(res => { return res.json(); }
       , err => console.log(err)
       )
+  }
+
+  getListeEvenementEnPreparation() {
+    return this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/getListeEvenementsEnPreparation?token=' + Number(localStorage.getItem('token')))
+      .map(res => { return res.json(); }
+      , err => console.log(err)
+      )
+  }
+
+  getDatasEvent() {
+    return Observable.forkJoin<[EventAbstract], [EventAbstract]>(
+      this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/getListeEvenementsAVenir?token=' + Number(localStorage.getItem('token')))
+        .map(res => { return res.json(); }
+        , err => console.log(err)),
+      this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/getListeEvenementsEnPreparation?token=' + Number(localStorage.getItem('token')))
+        .map(res => { return res.json(); }
+        , err => console.log(err))
+    )
   }
 
 

@@ -10,7 +10,7 @@
         </div>
       </ion-col>
 
-      <ion-col col-auto class="blanc" >
+      <ion-col col-auto class="blanc">
         <!--  col-sm-6 push-sm-2 -->
         <h2>Save THE Date</h2>
       </ion-col>
@@ -42,14 +42,14 @@
 
   <div>
 
-    <div class="accueil-div1">
-      Evènements à venir
-    </div>
-    <!-- boucle quand l'utilisateur à des évenements à venir -->
-    <div *ngIf="events != undefined">
-      <div *ngFor="let event of events" (click)="openEventPage(event.id)" >
+    <!-- boucle quand l'utilisateur à des évenements à venir  //events != undefined-->
+    <div *ngIf="events.length > 0">
 
-     
+      <div class="accueil-div1">
+        Evènements à venir
+      </div>
+      <div *ngFor="let event of events" (click)="openEventPage(event.id)">
+
         <div class="accueil-div2">
           <ion-label class="accueil-textePrincipal"> {{event.intitule}}</ion-label>
         </div>
@@ -65,13 +65,37 @@
             </ion-label>
           </div>
         </div>
-     
+
       </div>
     </div>
-    <!-- quand l'utilisateur n'a pas d'évenements à venir -->
-    <div class="accueil-none-event" *ngIf="events === undefined">
-      Vous n'avez aucun évenement à venir !
-    </div>
 
+    <div *ngIf="eventsEnPreparation.length > 0">
+      <div class="accueil-div1"> En préparation </div>
+      <div *ngFor="let event of eventsEnPreparation" (click)="openEventPage(event.id)">
+
+        <div class="accueil-div2">
+          <ion-label class="accueil-textePrincipal"> {{event.intitule}}</ion-label>
+        </div>
+
+        <div class="accueil-div3">
+          <div class="accueil-element">
+            <ion-label class="accueil-texte">Date :<br/><br/>Adresse :</ion-label>
+          </div>
+          <div class="accueil-resultat">
+            <ion-label class="accueil-texte">
+              Le {{event.dateDebut | date:'dd/MM/yyyy H:m'}} <br/><br/>{{event.adresse}} {{event.ville}} {{event.codePostal}}
+              {{event.complement}}
+            </ion-label>
+          </div>
+        </div>
+      </div>
+
+      <!-- quand l'utilisateur n'a pas d'évenements à venir -->
+      <div *ngIf="events.length == 0 && eventsEnPreparation.length == 0">
+        <div class="accueil-none-event">
+          Vous n'avez aucun évenement !
+        </div>
+      </div>
+    </div>
   </div>
 </ion-content>

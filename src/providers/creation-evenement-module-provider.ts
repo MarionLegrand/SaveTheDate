@@ -19,12 +19,18 @@ export class CreationEvenementModuleProvider {
     console.log('Hello CreationEvenementModuleProvider Provider');
   }
 
-  private addListe( articles:article[]){
-
+  public addListe(articles: article[], id: number): Observable<any> {
+    let header = new Headers();
+    header.append('Content-Type', 'application/json');
+    return this.http.post('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/creerListeArticle?token=' + Number(localStorage.getItem('token')), articles, header)
+      .map(res => { })
   }
 
-  private getListeEvent(id:number) : Observable<[article]>{
-    return null;
+  public getListeEvent(id: number): Observable<[article]> {
+    return this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListeArticles?token=' + Number(localStorage.getItem('token')))
+      .map(res => { return res.json() }
+      , err => { return new Array<article>() }
+      )
   }
 
 }

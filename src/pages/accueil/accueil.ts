@@ -24,12 +24,15 @@ export class Accueil implements OnDestroy {
 
   private user: userAccueil;
   private events: EventAbstract[];
+  private eventsEnPreparation: EventAbstract[];
   private subs: ISubscription[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController
     , private provider: AccueilProvider) {
     this.user = new userAccueil();
     // this.events = new Array<EventsAVenir>();
+    this.eventsEnPreparation = new Array<EventAbstract>();
+    this.events = new Array<EventAbstract>();
     this.subs = new Array<ISubscription>();
   }
 
@@ -38,7 +41,7 @@ export class Accueil implements OnDestroy {
 
   // à l'initialisation de la page on récupère les données utilisateur 
   ngOnInit() {
-
+    this.loadData();
     // on récupère les infos de l'utilisateur grâce à son id 
     var x = this.provider.getUserData()
       .subscribe(res => this.user = res,
@@ -47,10 +50,23 @@ export class Accueil implements OnDestroy {
     this.subs.push(x);
 
     // puis on récupère les évenements à venir 
+    /*
     var y = this.provider.getEventsAVenirData()
       .subscribe(res => this.events = res,
       err => { console.log(err); console.log(this.events) }
       );
+    this.subs.push(y);
+    */
+  }
+
+
+  loadData() {
+    var y = this.provider.getDatasEvent().subscribe(
+      data => {
+        this.events = data[0];
+        this.eventsEnPreparation = data[1];
+      }
+    )
     this.subs.push(y);
   }
 

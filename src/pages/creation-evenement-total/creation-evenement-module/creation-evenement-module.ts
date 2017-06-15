@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms'; // besoin de ça pour récupèrer infos formulaires
 // pages
@@ -8,6 +8,8 @@ import { CreationEvenementModuleProvider } from '../../../providers/creation-eve
 import { ISubscription } from "rxjs/Subscription";
 // DataStructure 
 import { article } from '../../../dataStructure/article';
+import { Observable } from 'rxjs/Observable';
+
 
 /**
  * Generated class for the CreationEvenementModule page.
@@ -19,9 +21,9 @@ import { article } from '../../../dataStructure/article';
 @Component({
   selector: 'page-creation-evenement-module',
   templateUrl: 'creation-evenement-module.html',
-  providers:[CreationEvenementModuleProvider]
+  providers: [CreationEvenementModuleProvider]
 })
-export class CreationEvenementModule implements OnInit {
+export class CreationEvenementModule implements OnInit, OnDestroy {
 
   private id: number;
   private moduleListe: boolean;
@@ -31,10 +33,11 @@ export class CreationEvenementModule implements OnInit {
 
   //Array d'article
   private liste: article[];
-  private listeIndex: number;
+  private sub: ISubscription;
+  // private listeIndex: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FormBuilder,
-   private provider:CreationEvenementModuleProvider) {
+    private provider: CreationEvenementModuleProvider) {
     this.moduleListe = false;
 
     this.fg = this.fb.group({
@@ -43,7 +46,7 @@ export class CreationEvenementModule implements OnInit {
     });
 
     this.liste = new Array<article>();
-    this.listeIndex = 0;
+    // this.listeIndex = 0;
   }
 
   ionViewDidLoad() {
@@ -55,17 +58,21 @@ export class CreationEvenementModule implements OnInit {
     console.log(this.navParams.get('id'));
   }
 
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
   activerModuleListe() {
     this.moduleListe = !this.moduleListe;
   }
 
   ajouterArticle() {
     var art = new article();
-    art.id = this.listeIndex;
+    //art.id = this.listeIndex;
     art.produit = this.fg.get('produit').value;
-    art.qte = Number(this.fg.get('qte').value);
+    art.quantite = Number(this.fg.get('qte').value);
 
-    this.listeIndex++;
+    //this.listeIndex++;
 
     this.liste.push(art);
 
@@ -82,6 +89,8 @@ export class CreationEvenementModule implements OnInit {
 
   valider() {
     console.log(this.navParams.data.id);
-    this.navCtrl.setRoot(CreationEvenementInvitation, { id: this.navParams.get('id') });
+    this.sub = this.provider.addListe(this.liste, this.navParams.data.id).subscribe(
+      res => { this.navCtrl.setRoot(CreationEvenementInvitation, { id: this.navParams.get('id') }); }
+    )
   }
 }

@@ -20,7 +20,7 @@ import { CreerContact } from '../creer-contact/creer-contact';
     <ion-list>
      <button ion-item (click)="creerEvenement()">Créer un événement</button>
       <button ion-item (click)="ajouterContact()">Créer un nouveau contact</button>
-      <button ion-item (click)="events()">Liste des évènements</button>
+      <button ion-item (click)="events()">Liste des évènements annulés et passés</button>
       <button ion-item (click)="contacts()">Liste des contacts</button>
       <button ion-item (click)="groups()">Liste des groupes</button>
       <button ion-item (click)="deconnexion()">Déconnexion</button>

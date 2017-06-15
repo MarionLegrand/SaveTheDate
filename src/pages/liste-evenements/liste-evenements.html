@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title>Historique de mes Evenements</ion-title>
   </ion-navbar>
-<!--on peut juste consulter les évenements passés -->
+  <!--on peut juste consulter les évenements passés -->
 </ion-header>
 
 
@@ -20,11 +20,19 @@
     <div class="liste-evenements-div1">
       Evènements Passés ou annulés
     </div>
+
+    <div *ngIf="lesEvents.length == 0">
+      <div class="accueil-none-event">
+        Vous n'avez aucun évenement !
+      </div>
+    </div>
+
     <!-- boucle quand l'utilisateur à des évenements à venir -->
-    <div *ngFor="let event of lesEvents" > <!--(click)="openEventPage(event.id) -->
+    <div *ngFor="let event of lesEvents">
+      <!--(click)="openEventPage(event.id) -->
 
       <div class="liste-evenements-div2">
-        <ion-label class="textePrincipal">{{event.intitule}}  </ion-label>      {{event.etat}}
+        <ion-label class="textePrincipal">{{event.intitule}} </ion-label> {{event.etat}}
       </div>
 
       <div class="liste-evenements-div3">
@@ -33,18 +41,19 @@
         </div>
         <div class="liste-evenements-resultat">
           <ion-label class="liste-evenements-texte">
-            Le {{event.dateDebut |  date:'dd/MM/yyyy H:m'}} <br/><br/>{{event.complement}} {{event.ville}} {{event.codePostal}} {{event.complement}}
+            Le {{event.dateDebut | date:'dd/MM/yyyy H:m'}} <br/><br/>{{event.complement}} {{event.ville}} {{event.codePostal}}
+            {{event.complement}}
           </ion-label>
-      
-         
+
+
         </div>
       </div>
     </div>
     <!-- quand l'utilisateur n'a pas d'évenements à venir -->
     <div *ngIf="lesEvents === undefined" class="liste-evenements-resultat">
 
-        Vous n'avez aucun évenement !
-   
+      Vous n'avez aucun évenement !
+
     </div>
 
-<ion-content padding>
+    <ion-content padding>

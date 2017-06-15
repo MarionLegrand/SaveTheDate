@@ -48,7 +48,7 @@ export class EvenementProvider {
 
 
   getDatasEvent(id: number) {
-    return Observable.forkJoin<EvenementData, [contactData], [contactData], [contactData]>(
+    return Observable.forkJoin<EvenementData, [contactData], [contactData], [contactData], [article]>(
       this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getEvenement?token=' + Number(localStorage.getItem('token')))
         .map(res => { return res.json() }),
       this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListePresents?token=' + Number(localStorage.getItem('token')))
@@ -56,7 +56,10 @@ export class EvenementProvider {
       this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListeNonPresents?token=' + Number(localStorage.getItem('token')))
         .map(res => { return res.json() }),
       this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListeSansReponse?token=' + Number(localStorage.getItem('token')))
-        .map(res => { return res.json() })
+        .map(res => { return res.json() }),
+      this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/getListeArticles?token=' + Number(localStorage.getItem('token')))
+        .map(res => { return res.json() }
+        , err => { return new Array<article>() })
     )
   }
 
@@ -86,13 +89,13 @@ export class EvenementProvider {
       .map(() => { })
   }
 
-  annulerInvitation(id: number, removeContacts: contactData) : Observable<void> {
+  annulerInvitation(id: number, removeContacts: contactData): Observable<void> {
     let arr = new Array<contactData>();
     arr.push(removeContacts);
 
     let header = new Headers();
     header.append('Content-Type', 'application/json');
-   return this.http.post('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/supprimerInvitationContacts?token=' + Number(localStorage.getItem('token')), arr, header)
+    return this.http.post('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/' + id + '/supprimerInvitationContacts?token=' + Number(localStorage.getItem('token')), arr, header)
       .map(() => { return }, err => alert('erreur'))
   }
 
