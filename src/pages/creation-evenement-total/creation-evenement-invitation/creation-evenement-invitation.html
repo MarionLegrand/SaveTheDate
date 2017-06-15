@@ -32,14 +32,15 @@
     <div *ngFor="let contact of invite">
 
       <ion-row>
-        <ion-item>
-          <ion-col col-8>
-            {{contact?.nom}} {{contact?.prenom}}
-          </ion-col>
-          <ion-col>
-            <ion-checkbox item-end (click)="retirerContact(contact)"></ion-checkbox>
-          </ion-col>
-        </ion-item>
+        <!--  <ion-item> -->
+        <ion-col col-1>
+          <ion-checkbox item-end (click)="retirerContact(contact)" style="margin-top: 35%"></ion-checkbox>
+        </ion-col>
+        <ion-col col-8>
+          <ion-label style="color: white"> {{contact?.nom}} {{contact?.prenom}}</ion-label>
+        </ion-col>
+
+        <!-- </ion-item>-->
       </ion-row>
 
     </div>
@@ -50,14 +51,14 @@
     <div *ngFor="let tag of tagNonInvite">
 
       <ion-row>
-        <ion-item>
-          <ion-col col-8>
-            {{tag.libelle}}
-          </ion-col>
-          <ion-col>
-            <ion-checkbox item-end (click)="ajouterTag(tag)"></ion-checkbox>
-          </ion-col>
-        </ion-item>
+        <ion-col col-1>
+          <ion-checkbox item-end (click)="ajouterTag(tag)" style="margin-top: 35%"></ion-checkbox>
+        </ion-col>
+        <ion-col col-8>
+          <ion-label style="color: white"> {{tag.libelle}}</ion-label>
+        </ion-col>
+
+
       </ion-row>
 
     </div>
@@ -68,14 +69,15 @@
     <div *ngFor="let contact of contactNonInvite">
 
       <ion-row>
-        <ion-item>
-          <ion-col col-8>
-            {{contact?.nom}} {{contact?.prenom}}
-          </ion-col>
-          <ion-col>
-            <ion-checkbox item-end (click)="inviterContact(contact)"></ion-checkbox>
-          </ion-col>
-        </ion-item>
+
+        <ion-col col-1>
+          <ion-checkbox item-end (click)="inviterContact(contact)" style="margin-top: 35%"></ion-checkbox>
+        </ion-col>
+        <ion-col col-8>
+          <ion-label style="color: white"> {{contact?.nom}} {{contact?.prenom}}</ion-label>
+        </ion-col>
+
+
       </ion-row>
 
     </div>
