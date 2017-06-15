@@ -9,6 +9,7 @@ import { CreationEvenement } from '../creation-evenement-total/creation-evenemen
 //REST 
 import { AccueilProvider } from '../../providers/accueil-provider';
 import { ISubscription } from "rxjs/Subscription";
+import { Observable } from 'rxjs/Observable';
 
 // structure data
 import { userAccueil } from '../../dataStructure/userAccueil';
@@ -48,6 +49,11 @@ export class Accueil implements OnDestroy {
       err => console.log(err)
       );
     this.subs.push(x);
+
+    let timer = Observable.timer(2000, 15000);
+    timer.subscribe(t => {
+      this.loadData();
+    });
 
     // puis on récupère les évenements à venir 
     /*
