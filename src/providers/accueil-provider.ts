@@ -23,7 +23,7 @@ export class AccueilProvider {
    * Retourne les data des l'utilisateur courant 
    */
   getUserData(): Observable<userAccueil> {
-    return this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/utilisateur/afficherParametres?token=' + Number(localStorage.getItem('token')))
+    return this.http.get('http://2.6.10.86/Al2cServer-war/webresources/utilisateur/afficherParametres?token=' + Number(localStorage.getItem('token')))
       .map(res => {
         let user = new userAccueil();
         user.nom = res.json().nom;
@@ -40,14 +40,14 @@ export class AccueilProvider {
    * Prends en paramètres le token de l'utilisateur courant
    */
   getEventsAVenirData(): Observable<[EventAbstract]> {
-    return this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/getListeEvenementsA_Venir?token=' + Number(localStorage.getItem('token')))
+    return this.http.get('http://2.6.10.86/Al2cServer-war/webresources/evenements/getListeEvenementsA_Venir?token=' + Number(localStorage.getItem('token')))
       .map(res => { return res.json(); }
       , err => console.log(err)
       )
   }
 
   getListeEvenementEnPreparation() {
-    return this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/getListeEvenementsEnPreparation?token=' + Number(localStorage.getItem('token')))
+    return this.http.get('http://2.6.10.86/Al2cServer-war/webresources/evenements/getListeEvenementsEnPreparation?token=' + Number(localStorage.getItem('token')))
       .map(res => { return res.json(); }
       , err => console.log(err)
       )
@@ -55,10 +55,10 @@ export class AccueilProvider {
 
   getDatasEvent() {
     return Observable.forkJoin<[EventAbstract], [EventAbstract]>(
-      this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/getListeEvenementsAVenir?token=' + Number(localStorage.getItem('token')))
+      this.http.get('http://2.6.10.86/Al2cServer-war/webresources/evenements/getListeEvenementsAVenir?token=' + Number(localStorage.getItem('token')))
         .map(res => { return res.json(); }
         , err => console.log(err)),
-      this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/getListeEvenementsEnPreparation?token=' + Number(localStorage.getItem('token')))
+      this.http.get('http://2.6.10.86/Al2cServer-war/webresources/evenements/getListeEvenementsEnPreparation?token=' + Number(localStorage.getItem('token')))
         .map(res => { return res.json(); }
         , err => console.log(err))
     )
