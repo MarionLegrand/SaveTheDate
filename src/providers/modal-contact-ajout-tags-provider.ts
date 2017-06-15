@@ -23,12 +23,12 @@ export class ModalContactAjoutTagsProvider {
 
 
   getAllUserTags(): Observable<[Tag]> {
-    return this.http.get('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/tags/afficherTags?token=' + Number(localStorage.getItem('token')))
+    return this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/tags/afficherTags?token=' + Number(localStorage.getItem('token')))
       .map(res => { return res.json() })
   }
 
   affecterTagUser(idTag:number, idContact:number) : Observable<any>{
-    return this.http.post('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/tags/'+idTag+'/'+idContact+'/affecterTag?token=' + Number(localStorage.getItem('token')),null)
+    return this.http.post('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/tags/'+idTag+'/'+idContact+'/affecterTag?token=' + Number(localStorage.getItem('token')),null)
     .map( res => {console.log(res)});
   }
 

@@ -16,7 +16,7 @@
     <div>
       <form [formGroup]="fg" (ngSubmit)="valider()">
 
-        <h3  class="blanc"> Informations Générales </h3>
+        <h3 class="blanc"> Informations Générales </h3>
 
         <ion-item>
           <ion-label stacked>Intitulé :</ion-label>
@@ -33,7 +33,7 @@
           <ion-input type="number" formControlName="nombrePlace"></ion-input>
         </ion-item>
 
-        <h3  class="blanc"> Lieu </h3>
+        <h3 class="blanc"> Lieu </h3>
 
         <ion-item>
           <ion-label stacked>Adresse :</ion-label>
@@ -55,17 +55,17 @@
           <ion-input type="text" formControlName="cp"></ion-input>
         </ion-item>
 
-        <h3  class="blanc"> Date </h3>
+        <h3 class="blanc"> Date </h3>
 
         <ion-item>
           <ion-label>Date</ion-label>
           <ion-datetime formControlName="date" displayFormat="DD/M/YYYY H:m" min="2017" max="2020-12-31"></ion-datetime>
         </ion-item>
 
-        <button ion-button type="submit" class="creation-evenement-bout-on-ev"  [disabled]="!fg.valid"> Créer votre Evenement !</button>
-        <ion-label fixed class="info" (click)="annuler()" > Annuler</ion-label>     
-      
+        <button ion-button type="submit" class="creation-evenement-bout-on-ev" [disabled]="!fg.valid"> Créer votre Evenement !</button>
+        <!--<ion-label fixed class="info"  > Annuler</ion-label>  -->
       </form>
+      <button ion-button color="danger" (click)="annuler()"> Annuler</button>
     </div>
   </div>
 

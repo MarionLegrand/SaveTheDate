@@ -31,6 +31,6 @@
       <ion-input type="text" formControlName="tel"></ion-input>
     </ion-item>
     <button ion-button class="creer-contact-bouton" type="submit" [disabled]="!fg.valid">Valider</button>
-    <ion-label fixed class="info" (click)="annuler()">Annuler</ion-label>     
   </form>
+  <button ion-button color="danger" (click)="annuler()">Annuler</button>  
 </ion-content>

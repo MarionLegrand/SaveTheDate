@@ -58,10 +58,10 @@ export class CreationCompte implements OnDestroy {
       this.fg.get('password').value).subscribe(res => {
 
         // si c'est ok alert succes et retour home
-        if (res == true) {
+       // if (res == true) {
           this.showAlertSuccessCreationCompte();
           this.navCtrl.push(HomePage);
-        }
+        //}
       },
       err => {   // sinon alert avec erreur 
         this.showAlertErreurCreationCompte();
@@ -86,8 +86,6 @@ export class CreationCompte implements OnDestroy {
     });
     alert.present();
   }
-
-
 
   showAlertSuccessCreationCompte() {
     let alert = this.alertCtrl.create({

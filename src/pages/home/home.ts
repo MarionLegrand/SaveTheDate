@@ -31,7 +31,7 @@ export class HomePage implements OnDestroy {
     this.num = 0;
     this.subs = new Array<ISubscription>();
   }
-  
+
   ngOnDestroy() {
     this.subs.forEach(elem => {
       if (elem != null)
@@ -63,11 +63,10 @@ export class HomePage implements OnDestroy {
           // on le redirige vers la page de synchronisation 
           var y = this.provider.synchroniserContacts().subscribe(
             res => {
-              // if (res == true)
-              //   this.navCtrl.push(SynchroContact);
-              //   else
-              this.navCtrl.setRoot(Accueil)
-              //  this.navCtrl.push(Accueil);
+              if (res == true)
+                this.navCtrl.push(SynchroContact);
+              else
+                this.navCtrl.setRoot(Accueil)
             }, // retour true il y a des contact
             res => { alert(res) } // err pas de contact => go synchro        
           )

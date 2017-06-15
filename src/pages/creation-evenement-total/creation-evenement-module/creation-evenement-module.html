@@ -7,12 +7,64 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>TODO</ion-title>
+    <ion-title>Modules</ion-title>
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding class="base">
-  <button (click)="valider()">Valider </button>
+
+
+  <ion-item>
+    <ion-row>
+      <ion-col col-8>
+        <h2>Module liste d'achat </h2>
+      </ion-col>
+      <ion-col>
+        <button ion-item color="secondary" item-end (click)="activerModuleListe()"> Ouvrir </button>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+
+
+  <div *ngIf="moduleListe == true">
+    <h2> Ajouter un article </h2>
+
+    <form [formGroup]="fg" (ngSubmit)="ajouterArticle()">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label stacked class="label">Nom Produit :</ion-label>
+            <ion-input type="text" formControlName="produit"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked class="label">Quantité :</ion-label>
+            <ion-input type="text" formControlName="qte"></ion-input>
+          </ion-item>
+          <button ion-button type="submit" [disabled]="!fg.valid"> Ajouter </button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <!--Ici liste des articles ajoutés avec un button rouge retirer -->
+
+    <div *ngFor="let art of liste">
+      <ion-card>
+        <ion-row>
+          <ion-col col-8>
+            <ion-item>
+              <ion-label>
+                <h3> Produit :</h3> {{art.produit}}</ion-label>
+              <ion-label>
+                <h3> Quantité : </h3> {{art.qte}}</ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <button ion-button color="danger" (click)="retirerArticle(art)"> retirer</button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+  </div>
+
+  <button ion-button color="secondary" (click)="valider()">Valider </button>
 </ion-content>

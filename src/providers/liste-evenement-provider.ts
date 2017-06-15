@@ -23,7 +23,7 @@ export class ListeEvenementProvider {
   Renvoi la liste des événements passées ou annulés 
 */
 getListeEvenementPasser() : Observable<[EventAbstract]>{
-   return this.http.get('http://www.al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/getListeEvenements?token=' + Number(localStorage.getItem('token')))
+   return this.http.get('http://al2c.savethedate-al2c.fr/Al2cServer-war/webresources/evenements/getListeEvenements?token=' + Number(localStorage.getItem('token')))
       .map( res => { return res.json();}
       , err => console.log(err)
       )
