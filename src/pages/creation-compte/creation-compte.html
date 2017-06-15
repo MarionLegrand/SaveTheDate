@@ -2,36 +2,36 @@
   <h2 class="creation-compte-titre">Save THE Date</h2>
   <h3 class="creation-compte-h3">Création d'un compte</h3>
   <div>
-    <div class="creation-compte-div">
-      <form [formGroup]="fg" (ngSubmit)="validerCreationCompte()">
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label stacked class="label">Prénom * :</ion-label>
-              <ion-input type="text" formControlName="prenom"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label stacked class="label">Nom * :</ion-label>
-              <ion-input type="text" formControlName="nom"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label stacked class="label">Adresse mail * :</ion-label>
-              <ion-input type="email" formControlName="mail"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label stacked class="label">Mot de passe * :</ion-label>
-              <ion-input type="password" formControlName="password"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label stacked class="label">Confirmer le mot de passe * :</ion-label>
-              <ion-input type="password" formControlName="passwordBis"></ion-input>
-            </ion-item>
-            <button ion-button class="creation-compte-bouton" type="submit" [disabled]="!fg.valid"> Créer votre compte</button>
-            <ion-label fixed class="info" (click)="annuler()" >Annuler</ion-label>
-          </ion-col>
-        </ion-row>
-      </form>
-    </div>
+      <div class="creation-compte-div">
+        <form [formGroup]="fg" (ngSubmit)="validerCreationCompte()">
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label stacked class="label">Prénom * :</ion-label>
+                <ion-input type="text" formControlName="prenom"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label stacked class="label">Nom * :</ion-label>
+                <ion-input type="text" formControlName="nom"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label stacked class="label">Adresse mail * :</ion-label>
+                <ion-input type="email" formControlName="mail"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label stacked class="label">Mot de passe * :</ion-label>
+                <ion-input type="password" formControlName="password"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label stacked class="label">Confirmer le mot de passe * :</ion-label>
+                <ion-input type="password" formControlName="passwordBis"></ion-input>
+              </ion-item>
+              <button ion-button class="creation-compte-bouton" type="submit" [disabled]="!fg.valid"> Créer votre compte</button>
+              <ion-label fixed class="info" (click)="annuler()" >Annuler</ion-label>
+            </ion-col>
+          </ion-row>
+        </form>
+      </div>
   </div>
 </ion-content>
 <!--

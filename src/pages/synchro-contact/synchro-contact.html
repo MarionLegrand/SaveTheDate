@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>synchro de vos contacts</ion-title>
+    <ion-title>Synchronisation</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,11 +16,19 @@
 <ion-content padding class="base">
 
   
-  <h3>Bonjour et bienvenu dans Save the date ! </h3>
-  Dans l'optique de pouvoir joindre facilement vos invités,
-  nous avons besoins de vos contacts !
-  <button (click)="getUserPhoneContacts()"> ok, j'ai compris ! </button>   
-  <button (click)="Asupprimer()"> Pour nous => aller vers accueil </button>   
+  <h3 style="color: white">
+    Bonjour et bienvenue dans SaveTheDate !
+  </h3>
+  <p style="color: white; text-align: justify;">
+    Dans l'optique de pouvoir joindre facilement vos contacts, 
+    nous avons besoins de récupérer les contacts présents sur 
+    votre téléphone (nom, présnom, numéro de téléphone et adresse mail)
+  </p>
+  <div style="text-align: center">
+    <button ion-button (click)="getUserPhoneContacts()">Accepter</button>
+    <br>
+    <button ion-button (click)="Asupprimer()">Refuser</button>
+  </div>
 <!--
   <div *ngFor="let c of contactToSend" >
     <p> {{c.nom}} {{c.prenom}}</p>
