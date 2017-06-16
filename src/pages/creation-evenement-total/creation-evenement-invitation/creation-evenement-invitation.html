@@ -10,10 +10,10 @@
     <ion-title>Gestion des invitations</ion-title>
   </ion-navbar>
   <ion-row>
-    <ion-col>
+    <ion-col style="text-align: center;">
       <button ion-button (click)="validerInvitation()"> Inviter les contacts </button>
     </ion-col>
-    <ion-col>
+    <ion-col style="text-align: center;">
       <button ion-button (click)="valider()">Terminer la création !</button>
     </ion-col>
   </ion-row>
@@ -28,7 +28,7 @@
   </div>-->
   <!-- 3 listes , tag contact invité et non invité -->
   <div *ngIf="invite != undefined">
-    <h3> Liste des invités </h3>
+    <h3 class="blanc"> Liste des invités </h3>
     <div *ngFor="let contact of invite">
 
       <ion-row>
@@ -47,7 +47,7 @@
   </div>
 
   <div *ngIf="tagNonInvite != undefined">
-    <h3> Liste tags non invités </h3>
+    <h3 class="blanc"> Liste tags non invités </h3>
     <div *ngFor="let tag of tagNonInvite">
 
       <ion-row>
@@ -65,7 +65,7 @@
   </div>
 
   <div *ngIf="contactNonInvite != undefined">
-    <h3> Liste des contacts non Invités </h3>
+    <h3 class="blanc"> Liste des contacts non Invités </h3>
     <div *ngFor="let contact of contactNonInvite">
 
       <ion-row>

@@ -28,7 +28,7 @@
           <ion-input type="text" formControlName="description"></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item style="padding-bottom: 3px;">
           <ion-label stacked class="label">Nombre de places :</ion-label>
           <ion-input type="number" formControlName="nombrePlace"></ion-input>
         </ion-item>
@@ -50,22 +50,22 @@
           <ion-input type="text" formControlName="ville"></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item style="padding-bottom: 3px;">
           <ion-label stacked>Cp :</ion-label>
           <ion-input type="text" formControlName="cp"></ion-input>
         </ion-item>
 
         <h3 class="blanc"> Date </h3>
 
-        <ion-item>
-          <ion-label>Date</ion-label>
+        <ion-item style="padding-bottom: 3px;">
+          <ion-label class="label">Date</ion-label>
           <ion-datetime formControlName="date" displayFormat="DD/M/YYYY H:m" min="2017" max="2020-12-31"></ion-datetime>
         </ion-item>
 
         <button ion-button type="submit" class="creation-evenement-bout-on-ev" [disabled]="!fg.valid"> Créer votre Evenement !</button>
         <!--<ion-label fixed class="info"  > Annuler</ion-label>  -->
       </form>
-      <button ion-button color="danger" (click)="annuler()"> Annuler</button>
+      <button ion-button color="danger" style="margin-left: 30%; width: 40%;" (click)="annuler()"> Annuler</button>
     </div>
   </div>
 

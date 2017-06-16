@@ -14,21 +14,21 @@
 
 <ion-list *ngIf="currentContact.canaux != undefined" padding class="contact-list">
         <ion-list-header class="contact-header">
-            <h5 class="contact-title">Coordonnées</h5>
+            Coordonnées
         </ion-list-header>
         <ion-item *ngFor="let can of currentContact.canaux">
-             <ion-label class="contact-title"><h3>{{can.typeCanal}} : {{can.valeur}}</h3></ion-label>
+             <ion-label class="contact-title">{{can.typeCanal}} : {{can.valeur}}</ion-label>
         </ion-item>      
 </ion-list>
 <ion-list padding class="contact-list">
         <ion-list-header class="contact-header">
-             <h5 class="contact-title">TAGS du contact</h5>
+            TAGS du contact
         </ion-list-header>
         <button ion-button class="contact-bouton-add-tag" (click)="ajouterTag()">Ajouter un tag à ce contact</button>
         <div *ngIf="tagsContact != undefined">
             <div *ngFor="let tag of tagsContact">
             <ion-item>
-                   <ion-label class="contact-title"><h3>{{tag.libelle}}</h3></ion-label>
+                   <ion-label class="contact-title">{{tag.libelle}}</ion-label>
             </ion-item>
                 <button ion-button class="contact-bouton-delete-tag" (click)="supprimerTag(tag.id)"> Retirer le tag </button>
             </div>

@@ -7,20 +7,20 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Vos Tags ! </ion-title>
+    <ion-title>Gestion des tags</ion-title>
   </ion-navbar>
 
 </ion-header>
 <ion-content padding class="base">
 
   <!-- bouton ajouter ici -->
-  <h3 class="blanc"> Creer un tag </h3>
+  <h3 class="blanc"> Créer un tag </h3>
   <ion-item>
     <ion-label> libelle : </ion-label>
     <ion-input type="text" #libelle > </ion-input>
   </ion-item>
 
-  <button  ion-button (click)="creerTag(libelle.value)" > Creer un nouveau Tag </button>
+  <button style="margin-left: 15%; width: 70%" ion-button (click)="creerTag(libelle.value)" > Creer un nouveau Tag </button>
   
   <!-- liste des tags ici avec bouton modifier ou supprimer à coté -->
   <div *ngIf="lesTags == undefined">

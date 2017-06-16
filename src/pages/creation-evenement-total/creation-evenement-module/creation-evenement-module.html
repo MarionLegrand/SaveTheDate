@@ -26,8 +26,8 @@
   </ion-item>
 
 
-  <div *ngIf="moduleListe == true">
-    <h2> Ajouter un article </h2>
+  <div *ngIf="moduleListe == true" style ="margin-top: 7px;">
+    <h2 class="white"> Ajouter un article </h2>
 
     <form [formGroup]="fg" (ngSubmit)="ajouterArticle()">
       <ion-row>
@@ -36,11 +36,11 @@
             <ion-label stacked class="label">Nom Produit :</ion-label>
             <ion-input type="text" formControlName="produit"></ion-input>
           </ion-item>
-          <ion-item>
+          <ion-item style="padding-bottom: 3px;">
             <ion-label stacked class="label">Quantité :</ion-label>
-            <ion-input type="text" formControlName="qte"></ion-input>
+            <ion-input type="number" formControlName="qte"></ion-input>
           </ion-item>
-          <button ion-button type="submit" [disabled]="!fg.valid"> Ajouter </button>
+          <button style="width: 30%; margin-left: 35%; margin-top: 10px;" ion-button type="submit" [disabled]="!fg.valid"> Ajouter </button>
         </ion-col>
       </ion-row>
     </form>
@@ -53,9 +53,11 @@
           <ion-col col-8>
             <ion-item>
               <ion-label>
-                <h3> Produit :</h3> {{art.produit}}</ion-label>
+                Produit : {{art.produit}}
+              </ion-label>
               <ion-label>
-                <h3> Quantité : </h3> {{art.quantite}}</ion-label>
+                Quantité : {{art.quantite}}
+              </ion-label>
             </ion-item>
           </ion-col>
           <ion-col>
@@ -64,9 +66,10 @@
         </ion-row>
       </ion-card>
     </div>
+
+    <button ion-button color="secondary" style="width: 30%; margin-left: 35%; margin-top: 10px;" (click)="valider()">Valider </button>
   </div>
 
-  <button ion-button color="secondary" (click)="valider()">Valider </button>
+  
 
-  <h1> Ici viendront les modules complémentaires tel que la cagnotte leetchi</h1>
 </ion-content>

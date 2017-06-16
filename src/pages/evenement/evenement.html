@@ -17,10 +17,7 @@
   <div>
     <div *ngIf="event != undefined">
 
-      <h3 class="blanc"> Informations Générales </h3>
-
       <form [formGroup]="fg" (ngSubmit)="validerModification()">
-
 
         <div *ngIf="modifier == true">
           <button ion-button class="evenement-bouton-add-tag" (click)="activerModification()">Activer la modification</button>
@@ -29,6 +26,8 @@
           <button ion-button class="evenement-bouton-desactivate" (click)="desactiverModification()">Desactiver la modification</button>
         </div>
 
+        <h3 class="blanc"> Informations Générales </h3>
+
         <ion-card>
 
           <ion-item>
@@ -36,7 +35,7 @@
             <ion-input type="text" disabled="{{modifier}}" value="{{event.intitule}}" formControlName="intitule"></ion-input>
           </ion-item>
 
-          <ion-item>
+          <ion-item style="padding-bottom: 3px;">
             <ion-label stacked class="label">Description :</ion-label>
             <ion-input type="text" disabled="{{modifier}}" value="{{event.description}}" formControlName="description"></ion-input>
           </ion-item>
@@ -60,7 +59,7 @@
             <ion-input type="text" value="{{event.ville}}" disabled="{{modifier}}" formControlName="ville"></ion-input>
           </ion-item>
 
-          <ion-item>
+          <ion-item style="padding-bottom: 3px;">
             <ion-label stacked class="label">Cp :</ion-label>
             <ion-input type="text" value="{{event.codePostal}}" disabled="{{modifier}}" formControlName="cp"></ion-input>
           </ion-item>
@@ -74,7 +73,7 @@
           <ion-card>
             <ion-item>
               <!--<ion-label stacked class="label">Date</ion-label>-->
-              <h3>{{event.dateDebut | date:'dd/MM/yyyy H:m' }}</h3>
+              <h3 class="label">{{event.dateDebut | date:'dd/MM/yyyy H:m' }}</h3>
             </ion-item>
           </ion-card>
         </div>
@@ -85,7 +84,7 @@
           <ion-card>
             <ion-item>
               <!--<ion-label  stacked class="label">Date</ion-label>-->
-              <ion-datetime displayFormat="DD/M/YYYY H:m" min="2017" max="2020-12-31" formControlName="date"></ion-datetime>
+              <ion-datetime class="label" displayFormat="DD/M/YYYY H:m" min="2017" max="2020-12-31" formControlName="date"></ion-datetime>
             </ion-item>
           </ion-card>
         </div>
@@ -107,16 +106,6 @@
             <ion-label class="label">Nombre de réponses : </ion-label>
             <ion-input type="text" value="{{event.nbPresents}}" disabled="true"></ion-input>
           </ion-item>
-
-          <ion-item>
-            <ion-label class="label">Message d'invitations : </ion-label>
-            <!--<ion-input type="text"  value="{{event.message}}"  disabled="true" formControlName="message"></ion-input>!-->
-          </ion-item>
-          <ion-item>
-            <div class="message">
-              <h3>{{event.message}}</h3>
-            </div>
-          </ion-item>
         </ion-card>
 
         <div *ngIf="modifier== false">
@@ -125,16 +114,18 @@
       </form>
 
       <div *ngIf="liste.length > 0">
-        <h3 class="blanc">Liste de l'événement</h3>
+        <h3 class="blanc">Liste de produits</h3>
         <div *ngFor="let art of liste">
           <ion-card>
             <ion-row>
               <ion-col col-8>
                 <ion-item>
                   <ion-label>
-                    <h3> Produit :</h3> {{art.produit}}</ion-label>
-                  <ion-label>
-                    <h3> Quantité : </h3> {{art.quantite}}</ion-label>
+                    Produit : {{art.produit}}
+                  </ion-label>
+                  <ion-label class="label">
+                    Quantité : {{art.quantite}}
+                  </ion-label>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -153,7 +144,7 @@
           </ion-card>
         </div>
 
-        <h4 class="gris"> Absents </h4>
+        <h4 class="blanc"> Absents </h4>
         <div *ngFor="let contact of absents">
           <ion-card>
             <ion-item>
@@ -165,24 +156,22 @@
 
       <!-- si on est en préparation, les contacts n'ont pas encore répondu donc c'est la liste des invités -->
       <div *ngIf="event.etat =='EN_PREPARATION'">
-        <h4 class="gris"> Liste des Invités</h4>
+        <h4 class="blanc"> Liste des Invités</h4>
       </div>
       <div *ngIf="event.etat !='EN_PREPARATION'">
-        <h4 class="gris"> N'ayant pas répondu </h4>
+        <h4 class="blanc"> N'ayant pas répondu </h4>
       </div>
       <div *ngFor="let contact of sansReponses">
         <ion-card>
           <ion-row>
             <ion-col col-8>
               <ion-item>
-                <ion-label>
-                  <h3>{{contact?.nom}} {{contact?.prenom}}</h3>
-                </ion-label>
+                <ion-label>{{contact?.nom}} {{contact?.prenom}}</ion-label>
               </ion-item>
             </ion-col>
             <div *ngIf="event.etat =='EN_PREPARATION'">
               <ion-col>
-                <button ion-button class="evenement-bouton-anul-invit" small (click)="annulerInvitation(contact)"> Retirer </button>
+                <button ion-button class="evenement-bouton-anul-invit" style="margin-top: 5px;" small (click)="annulerInvitation(contact)"> Retirer </button>
               </ion-col>
             </div>
           </ion-row>
